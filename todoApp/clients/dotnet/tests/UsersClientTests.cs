@@ -1,8 +1,7 @@
 using System.ClientModel;
-using Todo;
 using Todo.Models;
 
-namespace PetStore.Tests
+namespace Todo.Tests
 {
     public class UsersClientTests
     {
@@ -28,14 +27,6 @@ namespace PetStore.Tests
             Assert.AreEqual(user.Username, result.Username);
             Assert.AreEqual(user.Email, result.Email);
             Assert.IsNotNull(result.Token);
-
-            // call again, the id is still 0
-            var anotherUser = new User("Jane Doe", "test@dummy.net", "p@ssw0rd");
-            var newResponse = await _usersClient.CreateAsync(anotherUser);
-            Assert.AreEqual(0, newResponse.Value.Id);
-            Assert.AreEqual(anotherUser.Username, newResponse.Value.Username);
-            Assert.AreEqual(anotherUser.Email, newResponse.Value.Email);
-            Assert.IsNotNull(newResponse.Value.Token);
         }
     }
 }

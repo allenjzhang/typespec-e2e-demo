@@ -15,7 +15,7 @@ The spec contains three parts:
 
 All operations are implemented with internal memory storage.
 
-For create operations, the server will echo your request back and update the internal storage with an id created with it.
+For create operations, the server will echo your request back and update the internal storage with an id `0` (see the next section for details).
 
 For get and list operations, the server will query the internal storage and give back the results.
 
