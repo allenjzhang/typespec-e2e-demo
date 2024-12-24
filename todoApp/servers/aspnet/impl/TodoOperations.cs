@@ -9,7 +9,7 @@ namespace Todo.Service.Impl
 {
     public class TodoOperations : ITodoItemsOperations
     {
-        public TodoOperations( IResourceStore<long, TodoItem> todos, IResourceStore<long, List<TodoAttachment>> attachments)
+        public TodoOperations(IResourceStore<long, TodoItem> todos, IResourceStore<long, List<TodoAttachment>> attachments)
         {
             _attachmentStore = attachments;
             _todoStore = todos;
@@ -89,7 +89,7 @@ namespace Todo.Service.Impl
 
         public async Task<TodoPage> ListAsync(int? limit, int? offset)
         {
-           var result = new TodoPage();
+            var result = new TodoPage();
             result.Items = await _todoStore.ListAsync(offset, limit);
             return result;
         }
@@ -103,7 +103,7 @@ namespace Todo.Service.Impl
             }
             result.Title = patch.Title ?? result.Title;
             result.Status = patch.Status ?? result.Status;
-            result.AssignedTo = patch.AssignedTo;      
+            result.AssignedTo = patch.AssignedTo;
             result.Description = patch.Description ?? result.Description;
             result.UpdatedAt = DateTimeOffset.UtcNow;
             await _todoStore.UpdateAsync(id, result);
