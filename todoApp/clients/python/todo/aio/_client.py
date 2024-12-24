@@ -10,8 +10,9 @@ from corehttp.rest import AsyncHttpResponse, HttpRequest
 from corehttp.runtime import AsyncPipelineClient, policies
 
 from .._serialization import Deserializer, Serializer
+from ..todoitems.aio.operations import TodoItemsOperations
+from ..users.aio.operations import UsersOperations
 from ._configuration import TodoClientConfiguration
-from .operations import TodoItemsOperations, UsersOperations
 
 
 class TodoClient:  # pylint: disable=client-accepts-api-version-keyword
