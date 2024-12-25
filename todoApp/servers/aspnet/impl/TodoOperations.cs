@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using Microsoft.AspNetCore.WebUtilities;
+using Todo.Exceptions;
 using Todo.Service.Common;
 using Todo.Service.Models;
 
@@ -74,7 +75,11 @@ namespace Todo.Service.Impl
 
         public async Task DeleteAsync(long id)
         {
-            await _todoStore.DeleteAsync(id);
+            var result = await _todoStore.DeleteAsync(id);
+            if (!result)
+            {
+                throw new NotFoundException(new NotFoundErrorResponse());
+            }
         }
 
         public async Task<TodoItem> GetAsync(long id)
@@ -82,7 +87,7 @@ namespace Todo.Service.Impl
             var result = await _todoStore.RetrieveAsync(id);
             if (result == null)
             {
-                throw new KeyNotFoundException($"{id} not found");
+                throw new NotFoundException(new NotFoundErrorResponse());
             }
             return result;
         }
@@ -99,7 +104,7 @@ namespace Todo.Service.Impl
             var result = await _todoStore.RetrieveAsync(id);
             if (result == null)
             {
-                throw new KeyNotFoundException($"{id} not found");
+                throw new NotFoundException(new NotFoundErrorResponse());
             }
             result.Title = patch.Title ?? result.Title;
             result.Status = patch.Status ?? result.Status;

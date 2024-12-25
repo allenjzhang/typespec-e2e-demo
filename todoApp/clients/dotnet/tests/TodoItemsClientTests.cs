@@ -1,5 +1,4 @@
 using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Todo.Models;
 
@@ -14,6 +13,16 @@ namespace Todo.Tests
         {
             var cred = new ApiKeyCredential("stub");
             _itemsClient = new TodoClient(new Uri("http://localhost:5244"), cred).GetTodoItemsClient();
+        }
+
+        [TearDown]
+        public async Task Cleanup()
+        {
+            try
+            {
+                await _itemsClient.DeleteAsync(0);
+            }
+            catch { }
         }
 
         [Test]
@@ -38,102 +47,92 @@ namespace Todo.Tests
         }
 
         [Test]
-        public async Task CreateForm()
+        public async Task Get()
+        {
+            // get when not exist we should get a 404
+            var exception = Assert.ThrowsAsync<ClientResultException>(async () => await _itemsClient.GetAsync(0));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(404, exception.GetRawResponse().Status);
+
+            // create one and then get
+            var item = new TodoItem("Buy milk", TodoItemStatus.NotStarted)
+            {
+                AssignedTo = 1,
+                Description = "Need to buy milk from the store",
+            };
+            var createResponse = await _itemsClient.CreateJsonAsync(item);
+
+            var response = await _itemsClient.GetAsync(createResponse.Value.Id);
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+
+            Assert.AreEqual(createResponse.Value.Id, response.Value.Id);
+            Assert.AreEqual(item.Title, response.Value.Title);
+            Assert.AreEqual(item.Status, response.Value.Status);
+            Assert.AreEqual(item.AssignedTo, response.Value.AssignedTo);
+            Assert.AreEqual(item.Description, response.Value.Description);
+        }
+
+        [Test]
+        public async Task Update()
         {
             var item = new TodoItem("Buy milk", TodoItemStatus.NotStarted)
             {
                 AssignedTo = 1,
                 Description = "Need to buy milk from the store",
             };
-            var response = await _itemsClient.CreateFormAsync(new TodoItemMultipartRequest(item).ToMultipartRequestContent(), "multipart/form-data");
+            var createResponse = await _itemsClient.CreateJsonAsync(item);
+            var patch = new
+            {
+                title = "Buy milk and eggs",
+                status = TodoItemStatus.InProgress.ToString(),
+                assignedTo = 2,
+                description = "Need to buy milk and eggs from the store",
+            };
+            var updateResponse = await _itemsClient.UpdateAsync(createResponse.Value.Id, BinaryContent.Create(BinaryData.FromObjectAsJson(patch)));
+            Assert.AreEqual(200, updateResponse.GetRawResponse().Status);
+            
+            using var document = JsonDocument.Parse(updateResponse.GetRawResponse().ContentStream!);
+            Assert.AreEqual(patch.title, document.RootElement.GetProperty("title").GetString());
+            Assert.AreEqual(patch.status, document.RootElement.GetProperty("status").GetString());
+            Assert.AreEqual(patch.assignedTo, document.RootElement.GetProperty("assignedTo").GetInt64());
+            Assert.AreEqual(patch.description, document.RootElement.GetProperty("description").GetString());
+        }
 
+        [Test]
+        public async Task Delete()
+        {
+            // delete when it does not exist should get a 404
+            var exception = Assert.ThrowsAsync<ClientResultException>(async () => await _itemsClient.DeleteAsync(0));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(404, exception.GetRawResponse().Status);
+
+            // create one and then delete
+            var item = new TodoItem("Buy milk", TodoItemStatus.NotStarted)
+            {
+                AssignedTo = 1,
+                Description = "Need to buy milk from the store",
+            };
+            var createResponse = await _itemsClient.CreateJsonAsync(item);
+
+            var response = await _itemsClient.DeleteAsync(createResponse.Value.Id);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
+        }
+
+        [Test]
+        public async Task List()
+        {
+            var response = await _itemsClient.ListAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-        }
-    }
-
-    internal class TodoItemMultipartRequest
-    {
-        public TodoItemMultipartRequest(TodoItem item)
-        {
-            Item = item;
-            Attachments = new List<MultipartFile>();
-        }
-
-        public TodoItem Item { get; set; }
-        public IList<MultipartFile> Attachments { get; }
-
-        private readonly ModelReaderWriterOptions _wire = new ModelReaderWriterOptions("W");
-
-        internal virtual MultipartFormDataRequestContent ToMultipartRequestContent()
-        {
-            MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
-            content.Add(ModelReaderWriter.Write(Item, _wire), "item");
-            foreach (var item in Attachments)
+            Assert.AreEqual(0, response.Value.Items.Count);
+            var item = new TodoItem("Buy milk", TodoItemStatus.NotStarted)
             {
-                content.Add(ModelReaderWriter.Write(item, _wire), "attachments");
-            }
-            return content;
-        }
-    }
-
-    internal class MultipartFile : IJsonModel<MultipartFile>
-    {
-        public string? ContentType { get; set; }
-        public string? Filename { get; set; }
-        public BinaryData? Contents { get; set; }
-
-        MultipartFile IJsonModel<MultipartFile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            throw new NotImplementedException();
-        }
-
-        MultipartFile IPersistableModel<MultipartFile>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            throw new NotImplementedException();
-        }
-
-        string IPersistableModel<MultipartFile>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
-
-        void IJsonModel<MultipartFile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
-            if (Optional.IsDefined(ContentType))
-            {
-                writer.WritePropertyName("contentType"u8);
-                writer.WriteStringValue(ContentType);
-            }
-            if (Optional.IsDefined(Filename))
-            {
-                writer.WritePropertyName("filename"u8);
-                writer.WriteStringValue(Filename);
-            }
-            writer.WritePropertyName("contents"u8);
-            writer.WriteBase64StringValue(Contents.ToArray());
-        }
-
-        BinaryData IPersistableModel<MultipartFile>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<MultipartFile>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new FormatException($"The model {nameof(MultipartFile)} does not support writing '{options.Format}' format.");
-            }
-        }
-    }
-
-    internal static class Optional
-    {
-        public static bool IsDefined<T>(T? value) where T : class
-        {
-            return value != null;
-        }
-
-        public static bool IsDefined<T>(T? value) where T : struct
-        {
-            return value.HasValue;
+                AssignedTo = 1,
+                Description = "Need to buy milk from the store",
+            };
+            await _itemsClient.CreateJsonAsync(item);
+            response = await _itemsClient.ListAsync();
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual(1, response.Value.Items.Count);
         }
     }
 }
