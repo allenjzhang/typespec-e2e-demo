@@ -92,14 +92,14 @@ The ultimate goal is to eliminate or significantly simplify these steps by enabl
 
 ### Overview of the extension
 
-The extension is focusing on improving the API/SDK producer’s experience in prototyping API using TypeSpec.  It supports IntelliSense for authoring TypeSpec and provides interactive guidance within VS Code IDE for:
+The extension is focusing on improving the API/SDK producer's experience in prototyping API using TypeSpec.  It supports IntelliSense for authoring TypeSpec and provides interactive guidance within VS Code IDE for:
 
 - Scaffolding TypeSpec projects using various templates
 - Generating OpenAPI 3.0 from TypeSpec
 - Generating client code from TypeSpec
 - Generating server stub from TypeSpec
 
-You can quickly start and explore TypeSpec’s full capabilities within TypeSpec extension for VS Code.
+You can quickly start and explore TypeSpec's full capabilities within TypeSpec extension for VS Code.
 
 ### Installation
 
@@ -115,7 +115,7 @@ You can quickly start and explore TypeSpec’s full capabilities within TypeSpec
 
 Note:
 
-- If TypeSpec Compiler is not installed globally or the version installed is outdated, users will be prompted to install the latest version when the extension is loaded upon opening a .tsp file, opening a TypeSpec project folder, or creating a TypeSpec project.
+- If TypeSpec Compiler is not installed or the version installed has reached its end of service, users will be prompted to install the latest version when the extension is loaded upon creating a TypeSpec project.
 - If `node --version` and `npm --version` don't run correctly in command prompt, indicating a problem with Node.js installation, it causes errors when installing TypeSpec Compiler.
 
 ### Project Scaffolding
