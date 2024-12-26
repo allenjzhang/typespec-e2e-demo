@@ -31,7 +31,7 @@ describe("TodoApp Samples", () => {
       username: "Harry Potter",
       email: "harry@email.com",
       password: "password",
-      id: 1,
+      id: 0,
     });
     assert.equal(user.id, 0);
     assert.equal(user.username, "Harry Potter");
