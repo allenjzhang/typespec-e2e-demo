@@ -43,13 +43,10 @@ describe("TodoApp Samples", () => {
   it("get when not exist we should get a 404", async function () {
     try {
       await client.todoItems.get(0);
-
     } catch (error) {
-      const result = JSON.parse(JSON.stringify(error))
       assert.isNotNull(error);
-      assert.equal(result.statusCode, 404);
-      assert.equal(result.code, "not-found");
-
+      assert.equal(error.statusCode, 404);
+      assert.equal(error.code, "not-found");
     }
   });
 
@@ -127,10 +124,9 @@ describe("TodoApp Samples", () => {
     try {
       await client.todoItems.delete(1);
     } catch (error) {
-      const result = JSON.parse(JSON.stringify(error))
       assert.isNotNull(error);
-      assert.equal(result.statusCode, 404);
-      assert.equal(result.code, "not-found");
+      assert.equal(error.statusCode, 404);
+      assert.equal(error.code, "not-found");
     }
   });
 });
