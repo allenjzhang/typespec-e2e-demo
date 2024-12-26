@@ -43,6 +43,7 @@ describe("TodoApp Samples", () => {
   it("get when not exist we should get a 404", async function () {
     try {
       await client.todoItems.get(0);
+      assert.fail("Expected error to be thrown,it does not exist should get a 404");
     } catch (error) {
       assert.isNotNull(error);
       assert.equal(error.statusCode, 404);
@@ -122,7 +123,8 @@ describe("TodoApp Samples", () => {
   // delete when it does not exist should get a 404
   it("delete when it does not exist should get a 404", async function () {
     try {
-      await client.todoItems.delete(1);
+      await client.todoItems.delete(0);
+      assert.fail("Expected error to be thrown,it does not exist should get a 404");
     } catch (error) {
       assert.isNotNull(error);
       assert.equal(error.statusCode, 404);
