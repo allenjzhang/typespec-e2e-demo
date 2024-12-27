@@ -35,7 +35,8 @@
     "lint": "eslint package.json api-extractor.json src",
     "lint:fix": "eslint package.json api-extractor.json src --fix --fix-type [problem,suggestion]",
     "build": "npm run clean && tshy && npm run extract-api",
-    "test": "npx vitest -c vitest.config.ts"
+    "test": "npx vitest -c vitest.config.ts",
+    "server": "dotnet run --project ../../servers/aspnet/Todo.csproj"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.40.3",

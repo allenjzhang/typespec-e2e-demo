@@ -41,7 +41,4 @@ export interface TodoItemsListOptionalParams extends OperationOptions {
 }
 
 /** Optional parameters. */
-export interface UsersCreateOptionalParams extends OperationOptions {
-  /** Body parameter's content type. Known values are application/json */
-  contentType?: "application/json";
-}
+export interface UsersCreateOptionalParams extends OperationOptions {}

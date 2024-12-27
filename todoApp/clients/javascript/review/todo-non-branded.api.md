@@ -242,7 +242,6 @@ export interface User {
 
 // @public
 export interface UsersCreateOptionalParams extends OperationOptions {
-    contentType?: "application/json";
 }
 
 // @public

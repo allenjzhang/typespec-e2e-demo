@@ -38,7 +38,10 @@ export function _createFileAttachmentSend(
     .post({
       ...operationOptionsToRequestParameters(options),
       contentType: "multipart/form-data",
-      headers: { accept: "application/json" },
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
       body: fileAttachmentMultipartRequestSerializer(body),
     });
 }
@@ -84,7 +87,10 @@ export function _createJsonAttachmentSend(
     .post({
       ...operationOptionsToRequestParameters(options),
       contentType: "application/json",
-      headers: { accept: "application/json" },
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
       body: todoAttachmentSerializer(contents),
     });
 }
@@ -126,7 +132,10 @@ export function _listSend(
     .path("/items/{itemId}/attachments", itemId)
     .get({
       ...operationOptionsToRequestParameters(options),
-      headers: { accept: "application/json" },
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
     });
 }
 

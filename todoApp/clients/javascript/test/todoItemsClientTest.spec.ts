@@ -1,8 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import { assert, beforeEach, it, describe } from "vitest";
-import { TodoClient } from "../src/todoClient.js";
-import { TodoItem } from "../src/models/models.js";
+import { TodoClient, TodoItem } from "@notabrand/todo-non-branded";
 
 describe("TodoApp Samples", () => {
   let client: TodoClient;
