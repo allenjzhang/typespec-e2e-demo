@@ -15,19 +15,14 @@ from ._models import (  # type: ignore
     CreateResponse,
     FileAttachmentMultipartRequest,
     GetResponse,
-    InvalidTodoItem,
-    InvalidUserResponse,
-    NotFoundErrorResponse,
     Standard4XXResponse,
     Standard5XXResponse,
     ToDoItemMultipartRequest,
     TodoAttachment,
     TodoItem,
-    TodoItemPatch,
     TodoLabelRecord,
     UpdateResponse,
     User,
-    UserExistsResponse,
 )
 from ._patch import __all__ as _patch_all
 from ._patch import *
@@ -40,19 +35,14 @@ __all__ = [
     "CreateResponse",
     "FileAttachmentMultipartRequest",
     "GetResponse",
-    "InvalidTodoItem",
-    "InvalidUserResponse",
-    "NotFoundErrorResponse",
     "Standard4XXResponse",
     "Standard5XXResponse",
     "ToDoItemMultipartRequest",
     "TodoAttachment",
     "TodoItem",
-    "TodoItemPatch",
     "TodoLabelRecord",
     "UpdateResponse",
     "User",
-    "UserExistsResponse",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore
 _patch_sdk()
