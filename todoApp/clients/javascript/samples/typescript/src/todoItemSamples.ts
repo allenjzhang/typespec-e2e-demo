@@ -13,12 +13,12 @@ const client = new TodoClient(endpoint,
 });
 
 async function main() {
-  const item: any = {
+  const item: TodoItem = {
     title: "Buy milk",
     assignedTo: 10,
     description: "Need to buy milk",
     status: "InProgress",
-  };
+  } as TodoItem;
 
   // create a user
   const user = await client.users.create({
