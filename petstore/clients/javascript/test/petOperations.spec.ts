@@ -78,6 +78,8 @@ describe("PetOperations Samples", () => {
     } catch (error) {
       assert.equal(error.code, 0);
       assert.equal(error.message, "Invalid petId");
+      assert.equal(error.details.code, 0);
+      assert.equal(error.details.message, "Invalid petId");
     }
   });
 
@@ -88,6 +90,8 @@ describe("PetOperations Samples", () => {
     } catch (error) {
       assert.equal(error.code, 1);
       assert.equal(error.message, "Pet not found");
+      assert.equal(error.details.code, 1);
+      assert.equal(error.details.message, "Pet not found");
     }
   });
 
@@ -104,6 +108,8 @@ describe("PetOperations Samples", () => {
     } catch (error) {
       assert.equal(error.code, 0);
       assert.equal(error.message, "Invalid petId");
+      assert.equal(error.details.code, 0);
+      assert.equal(error.details.message, "Invalid petId");
     }
   });
 
@@ -114,6 +120,8 @@ describe("PetOperations Samples", () => {
     } catch (error) {
       assert.equal(error.code, 1);
       assert.equal(error.message, "Pet not found");
+      assert.equal(error.details.code, 1);
+      assert.equal(error.details.message, "Pet not found");
     }
   });
 });

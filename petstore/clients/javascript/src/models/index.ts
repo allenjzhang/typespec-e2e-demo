@@ -2,6 +2,7 @@
 
 export {
   Insurance,
+  PetStoreError,
   InsuranceUpdate,
   CheckupUpdate,
   Checkup,
