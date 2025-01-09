@@ -18,9 +18,7 @@ def client():
 
 
 def test_users_create(client):
-    user = client.users.create(
-        User(username="John Doe", email="test@example.com", password="p@ssw0rd")
-    )
+    user = client.users.create(User(username="John Doe", email="test@example.com", password="p@ssw0rd"))
     assert user.username == "John Doe"
     assert user.email == "test@example.com"
 
@@ -33,34 +31,8 @@ def test_todo_items_create_json(client):
             assigned_to=10,
             description="Need to buy milk",
         ),
-        attachments=[
-            TodoAttachment(
-                filename="test.jpg", media_type="image/jpeg", contents=b"test"
-            )
-        ],
+        attachments=[TodoAttachment(filename="test.jpg", media_type="image/jpeg", contents=b"test")],
     )
-    assert todo_item.title == "Buy milk"
-    assert todo_item.status == "InProgress"
-    assert todo_item.assigned_to == 10
-    assert todo_item.description == "Need to buy milk"
-
-
-@pytest.mark.skip
-def test_todo_items_create_form(client):
-    current_file_path = os.path.dirname(__file__)
-    image_path = os.path.join(current_file_path, "image.jpg")
-    todo_item = client.todo_items.create_form(
-        ToDoItemMultipartRequest(
-            item=TodoItem(
-                title="Feed pet",
-                status="InProgress",
-                assigned_to=10,
-                description="Need to feed pet",
-            ),
-            attachments=[open(image_path, "rb")],
-        )
-    )
-    print(f"Todo item {todo_item.id} created")
     assert todo_item.title == "Buy milk"
     assert todo_item.status == "InProgress"
     assert todo_item.assigned_to == 10
@@ -100,3 +72,32 @@ def test_todo_item_list(client):
 
 def test_todo_item_delete(client):
     client.todo_items.delete(0)
+
+
+def test_todo_items_create_form(client):
+    current_file_path = os.path.dirname(__file__)
+    image_path = os.path.join(current_file_path, "image.jpg")
+    todo_item = client.todo_items.create_form(
+        ToDoItemMultipartRequest(
+            item=TodoItem(
+                title="Feed pet",
+                status="InProgress",
+                assigned_to=10,
+                description="Need to feed pet",
+            ),
+            attachments=[open(image_path, "rb")],
+        )
+    )
+    print(f"Todo item {todo_item.id} created")
+    assert todo_item.title == "Buy milk"
+    assert todo_item.status == "InProgress"
+    assert todo_item.assigned_to == 10
+    assert todo_item.description == "Need to buy milk"
+
+    attachment_items = client.todo_items.attachments.list(0)
+    for item in attachment_items:
+        print(f"Attachment {item.id} created")
+        assert item.filename == "image.jpg"
+        assert item.media_type == "image/jpeg"
+        assert item.contents == b"test"
+    assert len(list(attachment_items)) == 1
