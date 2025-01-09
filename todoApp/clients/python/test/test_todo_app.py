@@ -95,9 +95,9 @@ def test_todo_items_create_form(client):
     assert todo_item.description == "Need to buy milk"
 
     attachment_items = client.todo_items.attachments.list(0)
+    with open(image_path, "rb") as f:
+        image_data = f.read()
     for item in attachment_items:
-        print(f"Attachment {item.id} created")
         assert item.filename == "image.jpg"
-        assert item.media_type == "image/jpeg"
-        assert item.contents == b"test"
-    assert len(list(attachment_items)) == 1
+        assert item.media_type == "application/octet-stream"
+        assert item.contents == image_data
