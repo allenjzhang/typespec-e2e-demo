@@ -4,10 +4,10 @@ from todo import TodoClient
 from todo.models import (
     User,
     TodoItem,
-    TodoItemPatch,
     TodoAttachment,
     ToDoItemMultipartRequest,
 )
+from todo.todoitems.models import TodoItemPatch
 from corehttp.exceptions import ResourceNotFoundError
 import os
 
@@ -18,9 +18,7 @@ def client():
 
 
 def test_users_create(client):
-    user = client.users.create(
-        User(username="John Doe", email="test@example.com", password="p@ssw0rd")
-    )
+    user = client.users.create(User(username="John Doe", email="test@example.com", password="p@ssw0rd"))
     assert user.username == "John Doe"
     assert user.email == "test@example.com"
 
@@ -33,11 +31,7 @@ def test_todo_items_create_json(client):
             assigned_to=10,
             description="Need to buy milk",
         ),
-        attachments=[
-            TodoAttachment(
-                filename="test.jpg", media_type="image/jpeg", contents=b"test"
-            )
-        ],
+        attachments=[TodoAttachment(filename="test.jpg", media_type="image/jpeg", contents=b"test")],
     )
     assert todo_item.title == "Buy milk"
     assert todo_item.status == "InProgress"

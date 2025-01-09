@@ -13,9 +13,7 @@ import os
 todoClient = TodoClient("http://localhost:5244", ServiceKeyCredential("dummy"))
 
 # create a user
-user = todoClient.users.create(
-    User(username="John Doe", email="test@example.com", password="p@ssw0rd")
-)
+user = todoClient.users.create(User(username="John Doe", email="test@example.com", password="p@ssw0rd"))
 print(f"created user: {user}")
 
 # try to get a non-existent todo item
@@ -33,9 +31,7 @@ todo_item = todoClient.todo_items.create_json(
         assigned_to=10,
         description="Need to buy milk",
     ),
-    attachments=[
-        TodoAttachment(filename="test.jpg", media_type="image/jpeg", contents=b"test")
-    ],
+    attachments=[TodoAttachment(filename="test.jpg", media_type="image/jpeg", contents=b"test")],
 )
 print(f"Todo item {todo_item.id} created")
 
