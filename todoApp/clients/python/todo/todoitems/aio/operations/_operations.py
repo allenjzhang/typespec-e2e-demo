@@ -20,8 +20,8 @@ from corehttp.rest import AsyncHttpResponse, HttpRequest
 from corehttp.runtime.pipeline import PipelineResponse
 from corehttp.utils import case_insensitive_dict
 
-from ... import models as _models
-from .... import _model_base, models as _models
+from ... import models as _models2
+from .... import _model_base, models as _models3
 from ...._model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from ...._vendor import prepare_multipart_form_data
 from ...attachments.aio.operations._operations import TodoItemsAttachmentsOperations
@@ -67,7 +67,7 @@ class TodoItemsOperations:
 
     def list(
         self, *, limit: Optional[int] = None, offset: Optional[int] = None, **kwargs: Any
-    ) -> AsyncIterable["_models.TodoItem"]:
+    ) -> AsyncIterable["_models3.TodoItem"]:
         """list.
 
         :keyword limit: The limit to the number of items. Default value is None.
@@ -81,7 +81,7 @@ class TodoItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[List[_models.TodoItem]] = kwargs.pop("cls", None)
+        cls: ClsType[List[_models3.TodoItem]] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
             304: ResourceNotModifiedError,
@@ -117,7 +117,7 @@ class TodoItemsOperations:
 
         async def extract_data(pipeline_response):
             deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.TodoItem], deserialized["items"])
+            list_of_elem = _deserialize(List[_models3.TodoItem], deserialized["items"])
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.get("nextLink") or None, AsyncList(list_of_elem)
@@ -133,9 +133,9 @@ class TodoItemsOperations:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
                 error = None
                 if 400 <= response.status_code <= 499:
-                    error = _failsafe_deserialize(_models.Standard4XXResponse, response.json())
+                    error = _failsafe_deserialize(_models3.Standard4XXResponse, response.json())
                 elif 500 <= response.status_code <= 599:
-                    error = _failsafe_deserialize(_models.Standard5XXResponse, response.json())
+                    error = _failsafe_deserialize(_models3.Standard5XXResponse, response.json())
                 raise HttpResponseError(response=response, model=error)
 
             return pipeline_response
@@ -145,7 +145,7 @@ class TodoItemsOperations:
     @overload
     async def create_json(
         self, body: JSON, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.CreateJsonResponse:
+    ) -> _models3.CreateJsonResponse:
         """create_json.
 
         :param body: Required.
@@ -162,11 +162,11 @@ class TodoItemsOperations:
     async def create_json(
         self,
         *,
-        item: _models.TodoItem,
+        item: _models3.TodoItem,
         content_type: str = "application/json",
-        attachments: Optional[List[_models.TodoAttachment]] = None,
+        attachments: Optional[List[_models3.TodoAttachment]] = None,
         **kwargs: Any
-    ) -> _models.CreateJsonResponse:
+    ) -> _models3.CreateJsonResponse:
         """create_json.
 
         :keyword item: Required.
@@ -184,7 +184,7 @@ class TodoItemsOperations:
     @overload
     async def create_json(
         self, body: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.CreateJsonResponse:
+    ) -> _models3.CreateJsonResponse:
         """create_json.
 
         :param body: Required.
@@ -201,10 +201,10 @@ class TodoItemsOperations:
         self,
         body: Union[JSON, IO[bytes]] = _Unset,
         *,
-        item: _models.TodoItem = _Unset,
-        attachments: Optional[List[_models.TodoAttachment]] = None,
+        item: _models3.TodoItem = _Unset,
+        attachments: Optional[List[_models3.TodoAttachment]] = None,
         **kwargs: Any
-    ) -> _models.CreateJsonResponse:
+    ) -> _models3.CreateJsonResponse:
         """create_json.
 
         :param body: Is either a JSON type or a IO[bytes] type. Required.
@@ -226,7 +226,7 @@ class TodoItemsOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("content-type", None))
-        cls: ClsType[_models.CreateJsonResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models3.CreateJsonResponse] = kwargs.pop("cls", None)
 
         if body is _Unset:
             if item is _Unset:
@@ -265,17 +265,17 @@ class TodoItemsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = None
             if response.status_code == 422:
-                error = _failsafe_deserialize(_models.InvalidTodoItem, response.json())
+                error = _failsafe_deserialize(_models2.InvalidTodoItem, response.json())
             elif 400 <= response.status_code <= 499:
-                error = _failsafe_deserialize(_models.Standard4XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
-                error = _failsafe_deserialize(_models.Standard5XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard5XXResponse, response.json())
             raise HttpResponseError(response=response, model=error)
 
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.CreateJsonResponse, response.json())
+            deserialized = _deserialize(_models3.CreateJsonResponse, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -283,7 +283,7 @@ class TodoItemsOperations:
         return deserialized  # type: ignore
 
     @overload
-    async def create_form(self, body: _models.ToDoItemMultipartRequest, **kwargs: Any) -> _models.CreateFormResponse:
+    async def create_form(self, body: _models3.ToDoItemMultipartRequest, **kwargs: Any) -> _models3.CreateFormResponse:
         """create_form.
 
         :param body: Required.
@@ -294,7 +294,7 @@ class TodoItemsOperations:
         """
 
     @overload
-    async def create_form(self, body: JSON, **kwargs: Any) -> _models.CreateFormResponse:
+    async def create_form(self, body: JSON, **kwargs: Any) -> _models3.CreateFormResponse:
         """create_form.
 
         :param body: Required.
@@ -305,8 +305,8 @@ class TodoItemsOperations:
         """
 
     async def create_form(
-        self, body: Union[_models.ToDoItemMultipartRequest, JSON], **kwargs: Any
-    ) -> _models.CreateFormResponse:
+        self, body: Union[_models3.ToDoItemMultipartRequest, JSON], **kwargs: Any
+    ) -> _models3.CreateFormResponse:
         """create_form.
 
         :param body: Is either a ToDoItemMultipartRequest type or a JSON type. Required.
@@ -323,7 +323,7 @@ class TodoItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[_models.CreateFormResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models3.CreateFormResponse] = kwargs.pop("cls", None)
 
         _body = body.as_dict() if isinstance(body, _model_base.Model) else body
         _file_fields: List[str] = ["attachments"]
@@ -355,24 +355,24 @@ class TodoItemsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = None
             if response.status_code == 422:
-                error = _failsafe_deserialize(_models.InvalidTodoItem, response.json())
+                error = _failsafe_deserialize(_models2.InvalidTodoItem, response.json())
             elif 400 <= response.status_code <= 499:
-                error = _failsafe_deserialize(_models.Standard4XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
-                error = _failsafe_deserialize(_models.Standard5XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard5XXResponse, response.json())
             raise HttpResponseError(response=response, model=error)
 
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.CreateFormResponse, response.json())
+            deserialized = _deserialize(_models3.CreateFormResponse, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
 
         return deserialized  # type: ignore
 
-    async def get(self, id: int, **kwargs: Any) -> _models.GetResponse:
+    async def get(self, id: int, **kwargs: Any) -> _models3.GetResponse:
         """get.
 
         :param id: Required.
@@ -391,7 +391,7 @@ class TodoItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[_models.GetResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models3.GetResponse] = kwargs.pop("cls", None)
 
         _request = build_todo_items_get_request(
             id=id,
@@ -417,14 +417,14 @@ class TodoItemsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = None
             if response.status_code == 404:
-                error = _failsafe_deserialize(_models.NotFoundErrorResponse, response.json())
+                error = _failsafe_deserialize(_models2.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
             raise HttpResponseError(response=response, model=error)
 
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.GetResponse, response.json())
+            deserialized = _deserialize(_models3.GetResponse, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -435,11 +435,11 @@ class TodoItemsOperations:
     async def update(
         self,
         id: int,
-        patch: _models.TodoItemPatch,
+        patch: _models2.TodoItemPatch,
         *,
         content_type: str = "application/merge-patch+json",
         **kwargs: Any
-    ) -> _models.UpdateResponse:
+    ) -> _models3.UpdateResponse:
         """update.
 
         :param id: Required.
@@ -457,7 +457,7 @@ class TodoItemsOperations:
     @overload
     async def update(
         self, id: int, patch: JSON, *, content_type: str = "application/merge-patch+json", **kwargs: Any
-    ) -> _models.UpdateResponse:
+    ) -> _models3.UpdateResponse:
         """update.
 
         :param id: Required.
@@ -475,7 +475,7 @@ class TodoItemsOperations:
     @overload
     async def update(
         self, id: int, patch: IO[bytes], *, content_type: str = "application/merge-patch+json", **kwargs: Any
-    ) -> _models.UpdateResponse:
+    ) -> _models3.UpdateResponse:
         """update.
 
         :param id: Required.
@@ -491,8 +491,8 @@ class TodoItemsOperations:
         """
 
     async def update(
-        self, id: int, patch: Union[_models.TodoItemPatch, JSON, IO[bytes]], **kwargs: Any
-    ) -> _models.UpdateResponse:
+        self, id: int, patch: Union[_models2.TodoItemPatch, JSON, IO[bytes]], **kwargs: Any
+    ) -> _models3.UpdateResponse:
         """update.
 
         :param id: Required.
@@ -515,7 +515,7 @@ class TodoItemsOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("content-type", None))
-        cls: ClsType[_models.UpdateResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models3.UpdateResponse] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/merge-patch+json"
         _content = None
@@ -553,7 +553,7 @@ class TodoItemsOperations:
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.UpdateResponse, response.json())
+            deserialized = _deserialize(_models3.UpdateResponse, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -598,12 +598,12 @@ class TodoItemsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = None
             if response.status_code == 404:
-                error = _failsafe_deserialize(_models.NotFoundErrorResponse, response.json())
+                error = _failsafe_deserialize(_models2.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
             elif 400 <= response.status_code <= 499:
-                error = _failsafe_deserialize(_models.Standard4XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
-                error = _failsafe_deserialize(_models.Standard5XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard5XXResponse, response.json())
             raise HttpResponseError(response=response, model=error)
 
         if cls:

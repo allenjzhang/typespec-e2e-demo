@@ -19,8 +19,8 @@ from corehttp.rest import HttpRequest, HttpResponse
 from corehttp.runtime.pipeline import PipelineResponse
 from corehttp.utils import case_insensitive_dict
 
-from .. import models as _models
-from ... import models as _models
+from .. import models as _models1
+from ... import models as _models2
 from ..._model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from ..._serialization import Serializer
 
@@ -72,8 +72,8 @@ class UsersOperations:
 
     @overload
     def create(
-        self, user: _models.User, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.CreateResponse:
+        self, user: _models2.User, *, content_type: str = "application/json", **kwargs: Any
+    ) -> _models2.CreateResponse:
         """create.
 
         :param user: Required.
@@ -87,7 +87,7 @@ class UsersOperations:
         """
 
     @overload
-    def create(self, user: JSON, *, content_type: str = "application/json", **kwargs: Any) -> _models.CreateResponse:
+    def create(self, user: JSON, *, content_type: str = "application/json", **kwargs: Any) -> _models2.CreateResponse:
         """create.
 
         :param user: Required.
@@ -103,7 +103,7 @@ class UsersOperations:
     @overload
     def create(
         self, user: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models.CreateResponse:
+    ) -> _models2.CreateResponse:
         """create.
 
         :param user: Required.
@@ -116,7 +116,7 @@ class UsersOperations:
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
-    def create(self, user: Union[_models.User, JSON, IO[bytes]], **kwargs: Any) -> _models.CreateResponse:
+    def create(self, user: Union[_models2.User, JSON, IO[bytes]], **kwargs: Any) -> _models2.CreateResponse:
         """create.
 
         :param user: Is one of the following types: User, JSON, IO[bytes] Required.
@@ -134,7 +134,7 @@ class UsersOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.CreateResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models2.CreateResponse] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _content = None
@@ -168,20 +168,20 @@ class UsersOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = None
             if response.status_code == 409:
-                error = _failsafe_deserialize(_models.UserExistsResponse, response.json())
+                error = _failsafe_deserialize(_models1.UserExistsResponse, response.json())
                 raise ResourceExistsError(response=response, model=error)
             elif response.status_code == 422:
-                error = _failsafe_deserialize(_models.InvalidUserResponse, response.json())
+                error = _failsafe_deserialize(_models1.InvalidUserResponse, response.json())
             elif 400 <= response.status_code <= 499:
-                error = _failsafe_deserialize(_models.Standard4XXResponse, response.json())
+                error = _failsafe_deserialize(_models2.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
-                error = _failsafe_deserialize(_models.Standard5XXResponse, response.json())
+                error = _failsafe_deserialize(_models2.Standard5XXResponse, response.json())
             raise HttpResponseError(response=response, model=error)
 
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.CreateResponse, response.json())
+            deserialized = _deserialize(_models2.CreateResponse, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore

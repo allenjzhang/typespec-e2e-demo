@@ -18,8 +18,8 @@ from corehttp.rest import HttpRequest, HttpResponse
 from corehttp.runtime.pipeline import PipelineResponse
 from corehttp.utils import case_insensitive_dict
 
-from ... import models as _models
-from .... import _model_base, models as _models
+from ... import models as _models2
+from .... import _model_base, models as _models3
 from ...._model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from ...._serialization import Serializer
 from ...._vendor import prepare_multipart_form_data
@@ -119,7 +119,7 @@ class TodoItemsAttachmentsOperations:
         self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    def list(self, item_id: int, **kwargs: Any) -> Iterable["_models.TodoAttachment"]:
+    def list(self, item_id: int, **kwargs: Any) -> Iterable["_models3.TodoAttachment"]:
         """list.
 
         :param item_id: Required.
@@ -131,7 +131,7 @@ class TodoItemsAttachmentsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[List[_models.TodoAttachment]] = kwargs.pop("cls", None)
+        cls: ClsType[List[_models3.TodoAttachment]] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
             304: ResourceNotModifiedError,
@@ -166,7 +166,7 @@ class TodoItemsAttachmentsOperations:
 
         def extract_data(pipeline_response):
             deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.TodoAttachment], deserialized["items"])
+            list_of_elem = _deserialize(List[_models3.TodoAttachment], deserialized["items"])
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
             return None, iter(list_of_elem)
@@ -182,12 +182,12 @@ class TodoItemsAttachmentsOperations:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
                 error = None
                 if response.status_code == 404:
-                    error = _failsafe_deserialize(_models.NotFoundErrorResponse, response.json())
+                    error = _failsafe_deserialize(_models2.NotFoundErrorResponse, response.json())
                     raise ResourceNotFoundError(response=response, model=error)
                 elif 400 <= response.status_code <= 499:
-                    error = _failsafe_deserialize(_models.Standard4XXResponse, response.json())
+                    error = _failsafe_deserialize(_models3.Standard4XXResponse, response.json())
                 elif 500 <= response.status_code <= 599:
-                    error = _failsafe_deserialize(_models.Standard5XXResponse, response.json())
+                    error = _failsafe_deserialize(_models3.Standard5XXResponse, response.json())
                 raise HttpResponseError(response=response, model=error)
 
             return pipeline_response
@@ -196,7 +196,7 @@ class TodoItemsAttachmentsOperations:
 
     @overload
     def create_json_attachment(
-        self, item_id: int, contents: _models.TodoAttachment, *, content_type: str = "application/json", **kwargs: Any
+        self, item_id: int, contents: _models3.TodoAttachment, *, content_type: str = "application/json", **kwargs: Any
     ) -> None:
         """create_json_attachment.
 
@@ -249,7 +249,7 @@ class TodoItemsAttachmentsOperations:
         """
 
     def create_json_attachment(  # pylint: disable=inconsistent-return-statements
-        self, item_id: int, contents: Union[_models.TodoAttachment, JSON, IO[bytes]], **kwargs: Any
+        self, item_id: int, contents: Union[_models3.TodoAttachment, JSON, IO[bytes]], **kwargs: Any
     ) -> None:
         """create_json_attachment.
 
@@ -300,19 +300,21 @@ class TodoItemsAttachmentsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = None
             if response.status_code == 404:
-                error = _failsafe_deserialize(_models.NotFoundErrorResponse, response.json())
+                error = _failsafe_deserialize(_models2.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
             elif 400 <= response.status_code <= 499:
-                error = _failsafe_deserialize(_models.Standard4XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
-                error = _failsafe_deserialize(_models.Standard5XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard5XXResponse, response.json())
             raise HttpResponseError(response=response, model=error)
 
         if cls:
             return cls(pipeline_response, None, {})  # type: ignore
 
     @overload
-    def create_file_attachment(self, item_id: int, body: _models.FileAttachmentMultipartRequest, **kwargs: Any) -> None:
+    def create_file_attachment(
+        self, item_id: int, body: _models3.FileAttachmentMultipartRequest, **kwargs: Any
+    ) -> None:
         """create_file_attachment.
 
         :param item_id: Required.
@@ -338,7 +340,7 @@ class TodoItemsAttachmentsOperations:
         """
 
     def create_file_attachment(  # pylint: disable=inconsistent-return-statements
-        self, item_id: int, body: Union[_models.FileAttachmentMultipartRequest, JSON], **kwargs: Any
+        self, item_id: int, body: Union[_models3.FileAttachmentMultipartRequest, JSON], **kwargs: Any
     ) -> None:
         """create_file_attachment.
 
@@ -386,12 +388,12 @@ class TodoItemsAttachmentsOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = None
             if response.status_code == 404:
-                error = _failsafe_deserialize(_models.NotFoundErrorResponse, response.json())
+                error = _failsafe_deserialize(_models2.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
             elif 400 <= response.status_code <= 499:
-                error = _failsafe_deserialize(_models.Standard4XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
-                error = _failsafe_deserialize(_models.Standard5XXResponse, response.json())
+                error = _failsafe_deserialize(_models3.Standard5XXResponse, response.json())
             raise HttpResponseError(response=response, model=error)
 
         if cls:
