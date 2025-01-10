@@ -4,12 +4,14 @@ from todo import TodoClient
 from todo.models import (
     User,
     TodoItem,
-    TodoItemPatch,
     TodoAttachment,
     ToDoItemMultipartRequest,
 )
+from todo.todoitems.models import TodoItemPatch
 from corehttp.exceptions import ResourceNotFoundError
 import os
+
+IMAGE_PATH = os.path.join(os.path.dirname(__file__), "image.jpg")
 
 
 @pytest.fixture
@@ -17,10 +19,14 @@ def client():
     return TodoClient("http://localhost:5244", ServiceKeyCredential("dummy"))
 
 
+@pytest.fixture
+def image_data():
+    with open(IMAGE_PATH, "rb") as f:
+        return f.read()
+
+
 def test_users_create(client):
-    user = client.users.create(
-        User(username="John Doe", email="test@example.com", password="p@ssw0rd")
-    )
+    user = client.users.create(User(username="John Doe", email="test@example.com", password="p@ssw0rd"))
     assert user.username == "John Doe"
     assert user.email == "test@example.com"
 
@@ -33,34 +39,8 @@ def test_todo_items_create_json(client):
             assigned_to=10,
             description="Need to buy milk",
         ),
-        attachments=[
-            TodoAttachment(
-                filename="test.jpg", media_type="image/jpeg", contents=b"test"
-            )
-        ],
+        attachments=[TodoAttachment(filename="test.jpg", media_type="image/jpeg", contents=b"test")],
     )
-    assert todo_item.title == "Buy milk"
-    assert todo_item.status == "InProgress"
-    assert todo_item.assigned_to == 10
-    assert todo_item.description == "Need to buy milk"
-
-
-@pytest.mark.skip
-def test_todo_items_create_form(client):
-    current_file_path = os.path.dirname(__file__)
-    image_path = os.path.join(current_file_path, "image.jpg")
-    todo_item = client.todo_items.create_form(
-        ToDoItemMultipartRequest(
-            item=TodoItem(
-                title="Feed pet",
-                status="InProgress",
-                assigned_to=10,
-                description="Need to feed pet",
-            ),
-            attachments=[open(image_path, "rb")],
-        )
-    )
-    print(f"Todo item {todo_item.id} created")
     assert todo_item.title == "Buy milk"
     assert todo_item.status == "InProgress"
     assert todo_item.assigned_to == 10
@@ -100,3 +80,30 @@ def test_todo_item_list(client):
 
 def test_todo_item_delete(client):
     client.todo_items.delete(0)
+
+
+def test_todo_items_create_form_and_attachments_list(client, image_data):
+    todo_item = client.todo_items.create_form(
+        ToDoItemMultipartRequest(
+            item=TodoItem(
+                title="Feed pet",
+                status="InProgress",
+                assigned_to=10,
+                description="Need to feed pet",
+            ),
+            attachments=[open(IMAGE_PATH, "rb")],
+        )
+    )
+    print(f"Todo item {todo_item.id} created")
+    assert todo_item.title == "Feed pet"
+    assert todo_item.status == "InProgress"
+    assert todo_item.assigned_to == 10
+    assert todo_item.description == "Need to feed pet"
+
+    attachment_items = client.todo_items.attachments.list(0)
+    result = list(attachment_items)
+    assert len(result) == 1
+    for item in result:
+        assert item.filename == "image.jpg"
+        assert item.media_type == "application/octet-stream"
+        assert item.contents == image_data
