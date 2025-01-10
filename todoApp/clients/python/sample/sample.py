@@ -36,10 +36,15 @@ todo_item = todoClient.todo_items.create_json(
 print(f"Todo item {todo_item.id} created")
 
 # # create a todo item with multi part
-# current_file_path = os.path.dirname(__file__)
-# image_path = os.path.join(current_file_path, "image.jpg")
-# todo_item = todoClient.todo_items.create_form(ToDoItemMultipartRequest(item=TodoItem(title="Feed pet", status="InProgress", assigned_to=10, description="Need to feed pet"), attachments=[open(image_path, "rb")]))
-# print(f"Todo item {todo_item.id} created")
+current_file_path = os.path.dirname(__file__)
+image_path = os.path.join(current_file_path, "image.jpg")
+todo_item = todoClient.todo_items.create_form(
+    ToDoItemMultipartRequest(
+        item=TodoItem(title="Feed pet", status="InProgress", assigned_to=10, description="Need to feed pet"),
+        attachments=[open(image_path, "rb")],
+    )
+)
+print(f"Todo item {todo_item.id} created")
 
 # get the todo item
 retrieved_item = todoClient.todo_items.get(todo_item.id)
