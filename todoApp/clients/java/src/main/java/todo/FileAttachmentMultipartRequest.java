@@ -4,7 +4,6 @@ package todo;
 
 import io.clientcore.core.annotation.Metadata;
 import io.clientcore.core.annotation.TypeConditions;
-import typespec.http.FileDetails;
 
 /**
  * The FileAttachmentMultipartRequest model.

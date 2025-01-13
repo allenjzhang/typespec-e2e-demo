@@ -30,6 +30,17 @@ public final class OwnersClient {
 
     /**
      * Gets an instance of the resource.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     * }
+     * }
+     * </pre>
      * 
      * @param ownerId The ownerId parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -50,6 +61,18 @@ public final class OwnersClient {
      * {
      *     name: String (Optional)
      *     age: Integer (Optional)
+     * }
+     * }
+     * </pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     name: String (Required)
+     *     age: int (Required)
      * }
      * }
      * </pre>
@@ -91,6 +114,18 @@ public final class OwnersClient {
      * }
      * </pre>
      * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     * }
+     * }
+     * </pre>
+     * 
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.
@@ -103,6 +138,22 @@ public final class OwnersClient {
 
     /**
      * Lists all instances of the resource.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     value (Required): [
+     *          (Required){
+     *             id: long (Required)
+     *             name: String (Required)
+     *             age: int (Required)
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.

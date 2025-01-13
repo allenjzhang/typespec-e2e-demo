@@ -700,6 +700,21 @@ public final class TodoItemsAttachmentsImpl {
 
     /**
      * The list operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     items (Required): [
+     *          (Required){
+     *             filename: String (Required)
+     *             mediaType: String (Required)
+     *             contents: byte[] (Required)
+     *         }
+     *     ]
+     * }
+     * }
+     * </pre>
      * 
      * @param itemId The itemId parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

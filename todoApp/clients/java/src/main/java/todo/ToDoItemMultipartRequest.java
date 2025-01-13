@@ -5,7 +5,6 @@ package todo;
 import io.clientcore.core.annotation.Metadata;
 import io.clientcore.core.annotation.TypeConditions;
 import java.util.List;
-import typespec.http.FileDetails;
 
 /**
  * The ToDoItemMultipartRequest model.

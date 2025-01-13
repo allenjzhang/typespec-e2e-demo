@@ -30,6 +30,19 @@ public final class PetsClient {
 
     /**
      * Gets an instance of the resource.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     tag: String (Optional)
+     *     age: int (Required)
+     *     ownerId: long (Required)
+     * }
+     * }
+     * </pre>
      * 
      * @param petId The petId parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -52,6 +65,20 @@ public final class PetsClient {
      *     tag: String (Optional)
      *     age: Integer (Optional)
      *     ownerId: Long (Optional)
+     * }
+     * }
+     * </pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     tag: String (Optional)
+     *     age: int (Required)
+     *     ownerId: long (Required)
      * }
      * }
      * </pre>
@@ -95,6 +122,20 @@ public final class PetsClient {
      * }
      * </pre>
      * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: int (Required)
+     *     name: String (Required)
+     *     tag: String (Optional)
+     *     age: int (Required)
+     *     ownerId: long (Required)
+     * }
+     * }
+     * </pre>
+     * 
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.
@@ -107,6 +148,24 @@ public final class PetsClient {
 
     /**
      * Lists all instances of the resource.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     value (Required): [
+     *          (Required){
+     *             id: int (Required)
+     *             name: String (Required)
+     *             tag: String (Optional)
+     *             age: int (Required)
+     *             ownerId: long (Required)
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.

@@ -8,7 +8,6 @@ import io.clientcore.core.http.exception.HttpResponseException;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
 import io.clientcore.core.util.binarydata.BinaryData;
-import java.util.Objects;
 import todo.implementation.MultipartFormDataHelper;
 import todo.implementation.TodoItemsAttachmentsImpl;
 import todo.todoitems.PageTodoAttachment;
@@ -33,6 +32,21 @@ public final class TodoItemsAttachmentsClient {
 
     /**
      * The list operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     items (Required): [
+     *          (Required){
+     *             filename: String (Required)
+     *             mediaType: String (Required)
+     *             contents: byte[] (Required)
+     *         }
+     *     ]
+     * }
+     * }
+     * </pre>
      * 
      * @param itemId The itemId parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -132,10 +146,8 @@ public final class TodoItemsAttachmentsClient {
         // Generated convenience method for createFileAttachmentWithResponse
         RequestOptions requestOptions = new RequestOptions();
         createFileAttachmentWithResponse(itemId,
-            new MultipartFormDataHelper(requestOptions)
-                .serializeTextField("contents", Objects.toString(body.getContents()))
-                .end()
-                .getRequestBody(),
+            new MultipartFormDataHelper(requestOptions).serializeFileField("contents", body.getContents().getContent(),
+                body.getContents().getContentType(), body.getContents().getFilename()).end().getRequestBody(),
             requestOptions).getValue();
     }
 }

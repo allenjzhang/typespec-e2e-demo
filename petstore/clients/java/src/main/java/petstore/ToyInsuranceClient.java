@@ -30,6 +30,17 @@ public final class ToyInsuranceClient {
 
     /**
      * Gets the singleton resource.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     provider: String (Required)
+     *     premium: int (Required)
+     *     deductible: int (Required)
+     * }
+     * }
+     * </pre>
      * 
      * @param petId The petId parameter.
      * @param toyId The toyId parameter.
@@ -52,6 +63,18 @@ public final class ToyInsuranceClient {
      *     provider: String (Optional)
      *     premium: Integer (Optional)
      *     deductible: Integer (Optional)
+     * }
+     * }
+     * </pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     provider: String (Required)
+     *     premium: int (Required)
+     *     deductible: int (Required)
      * }
      * }
      * </pre>

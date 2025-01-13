@@ -43,6 +43,19 @@ public final class UsersClient {
      * }
      * </pre>
      * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     username: String (Required)
+     *     email: String (Required)
+     *     token: String (Required)
+     * }
+     * }
+     * </pre>
+     * 
      * @param user The user parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.
