@@ -926,6 +926,33 @@ public final class TodoItemsImpl {
      * <tr><td>offset</td><td>Integer</td><td>No</td><td>The offset to start paginating at</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     items (Required): [
+     *          (Required){
+     *             id: long (Required)
+     *             title: String (Required)
+     *             createdBy: long (Required)
+     *             assignedTo: Long (Optional)
+     *             description: String (Optional)
+     *             status: String(NotStarted/InProgress/Completed) (Required)
+     *             createdAt: OffsetDateTime (Required)
+     *             updatedAt: OffsetDateTime (Required)
+     *             completedAt: OffsetDateTime (Optional)
+     *             labels: BinaryData (Optional)
+     *             _dummy: String (Optional)
+     *         }
+     *     ]
+     *     pageSize: int (Required)
+     *     totalSize: int (Required)
+     *     prevLink: String (Optional)
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.
@@ -967,6 +994,25 @@ public final class TodoItemsImpl {
      * }
      * </pre>
      * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     createdBy: long (Required)
+     *     assignedTo: Long (Optional)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     labels: BinaryData (Optional)
+     * }
+     * }
+     * </pre>
+     * 
      * @param createJsonRequest The createJsonRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.
@@ -982,6 +1028,24 @@ public final class TodoItemsImpl {
 
     /**
      * The createForm operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     createdBy: long (Required)
+     *     assignedTo: Long (Optional)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     labels: BinaryData (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -996,6 +1060,24 @@ public final class TodoItemsImpl {
 
     /**
      * The get operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     createdBy: long (Required)
+     *     assignedTo: Long (Optional)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     labels: BinaryData (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param id The id parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1018,6 +1100,25 @@ public final class TodoItemsImpl {
      *     assignedTo: Long (Optional)
      *     description: String (Optional)
      *     status: String(NotStarted/InProgress/Completed) (Optional)
+     * }
+     * }
+     * </pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     createdBy: long (Required)
+     *     assignedTo: Long (Optional)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     labels: BinaryData (Optional)
      * }
      * }
      * </pre>
