@@ -9,6 +9,7 @@ import {
   OwnersUpdateOptionalParams,
 } from "../index.js";
 import {
+  petStoreErrorDeserializer,
   Owner,
   ownerDeserializer,
   OwnerUpdate,
@@ -25,71 +26,82 @@ import {
   operationOptionsToRequestParameters,
 } from "@typespec/ts-http-runtime";
 
-export function _getSend(
+export function _listSend(
   context: Client,
-  ownerId: number,
-  options: OwnersGetOptionalParams = { requestOptions: {} },
+  options: OwnersListOptionalParams = { requestOptions: {} },
 ): StreamableMethod {
   return context
-    .path("/owners/{ownerId}", ownerId)
-    .get({ ...operationOptionsToRequestParameters(options) });
-}
-
-export async function _getDeserialize(
-  result: PathUncheckedResponse,
-): Promise<Owner> {
-  const expectedStatuses = ["200"];
-  if (!expectedStatuses.includes(result.status)) {
-    throw createRestError(result);
-  }
-
-  return ownerDeserializer(result.body);
-}
-
-/** Gets an instance of the resource. */
-export async function get(
-  context: Client,
-  ownerId: number,
-  options: OwnersGetOptionalParams = { requestOptions: {} },
-): Promise<Owner> {
-  const result = await _getSend(context, ownerId, options);
-  return _getDeserialize(result);
-}
-
-export function _updateSend(
-  context: Client,
-  ownerId: number,
-  properties: OwnerUpdate,
-  options: OwnersUpdateOptionalParams = { requestOptions: {} },
-): StreamableMethod {
-  return context
-    .path("/owners/{ownerId}", ownerId)
-    .patch({
+    .path("/owners")
+    .get({
       ...operationOptionsToRequestParameters(options),
-      body: ownerUpdateSerializer(properties),
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
     });
 }
 
-export async function _updateDeserialize(
+export async function _listDeserialize(
   result: PathUncheckedResponse,
-): Promise<Owner> {
+): Promise<OwnerCollectionWithNextLink> {
   const expectedStatuses = ["200"];
   if (!expectedStatuses.includes(result.status)) {
-    throw createRestError(result);
+    const error = createRestError(result);
+    error.details = petStoreErrorDeserializer(result.body);
+    throw error;
+  }
+
+  return ownerCollectionWithNextLinkDeserializer(result.body);
+}
+
+/** Lists all instances of the resource. */
+export async function list(
+  context: Client,
+  options: OwnersListOptionalParams = { requestOptions: {} },
+): Promise<OwnerCollectionWithNextLink> {
+  const result = await _listSend(context, options);
+  return _listDeserialize(result);
+}
+
+export function _createSend(
+  context: Client,
+  resource: OwnerCreate,
+  options: OwnersCreateOptionalParams = { requestOptions: {} },
+): StreamableMethod {
+  return context
+    .path("/owners")
+    .post({
+      ...operationOptionsToRequestParameters(options),
+      contentType: "application/json",
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
+      body: ownerCreateSerializer(resource),
+    });
+}
+
+export async function _createDeserialize(
+  result: PathUncheckedResponse,
+): Promise<Owner> {
+  const expectedStatuses = ["200", "201"];
+  if (!expectedStatuses.includes(result.status)) {
+    const error = createRestError(result);
+    error.details = petStoreErrorDeserializer(result.body);
+    throw error;
   }
 
   return ownerDeserializer(result.body);
 }
 
-/** Updates an existing instance of the resource. */
-export async function update(
+/** Creates a new instance of the resource. */
+export async function create(
   context: Client,
-  ownerId: number,
-  properties: OwnerUpdate,
-  options: OwnersUpdateOptionalParams = { requestOptions: {} },
+  resource: OwnerCreate,
+  options: OwnersCreateOptionalParams = { requestOptions: {} },
 ): Promise<Owner> {
-  const result = await _updateSend(context, ownerId, properties, options);
-  return _updateDeserialize(result);
+  const result = await _createSend(context, resource, options);
+  return _createDeserialize(result);
 }
 
 export function _$deleteSend(
@@ -99,7 +111,13 @@ export function _$deleteSend(
 ): StreamableMethod {
   return context
     .path("/owners/{ownerId}", ownerId)
-    .delete({ ...operationOptionsToRequestParameters(options) });
+    .delete({
+      ...operationOptionsToRequestParameters(options),
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
+    });
 }
 
 export async function _$deleteDeserialize(
@@ -107,7 +125,9 @@ export async function _$deleteDeserialize(
 ): Promise<void> {
   const expectedStatuses = ["200"];
   if (!expectedStatuses.includes(result.status)) {
-    throw createRestError(result);
+    const error = createRestError(result);
+    error.details = petStoreErrorDeserializer(result.body);
+    throw error;
   }
 
   return;
@@ -128,65 +148,84 @@ export async function $delete(
   return _$deleteDeserialize(result);
 }
 
-export function _createSend(
+export function _updateSend(
   context: Client,
-  resource: OwnerCreate,
-  options: OwnersCreateOptionalParams = { requestOptions: {} },
+  ownerId: number,
+  properties: OwnerUpdate,
+  options: OwnersUpdateOptionalParams = { requestOptions: {} },
 ): StreamableMethod {
   return context
-    .path("/owners")
-    .post({
+    .path("/owners/{ownerId}", ownerId)
+    .patch({
       ...operationOptionsToRequestParameters(options),
-      body: ownerCreateSerializer(resource),
+      contentType: "application/json",
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
+      body: ownerUpdateSerializer(properties),
     });
 }
 
-export async function _createDeserialize(
+export async function _updateDeserialize(
   result: PathUncheckedResponse,
 ): Promise<Owner> {
-  const expectedStatuses = ["200", "201"];
+  const expectedStatuses = ["200"];
   if (!expectedStatuses.includes(result.status)) {
-    throw createRestError(result);
+    const error = createRestError(result);
+    error.details = petStoreErrorDeserializer(result.body);
+    throw error;
   }
 
   return ownerDeserializer(result.body);
 }
 
-/** Creates a new instance of the resource. */
-export async function create(
+/** Updates an existing instance of the resource. */
+export async function update(
   context: Client,
-  resource: OwnerCreate,
-  options: OwnersCreateOptionalParams = { requestOptions: {} },
+  ownerId: number,
+  properties: OwnerUpdate,
+  options: OwnersUpdateOptionalParams = { requestOptions: {} },
 ): Promise<Owner> {
-  const result = await _createSend(context, resource, options);
-  return _createDeserialize(result);
+  const result = await _updateSend(context, ownerId, properties, options);
+  return _updateDeserialize(result);
 }
 
-export function _listSend(
+export function _getSend(
   context: Client,
-  options: OwnersListOptionalParams = { requestOptions: {} },
+  ownerId: number,
+  options: OwnersGetOptionalParams = { requestOptions: {} },
 ): StreamableMethod {
   return context
-    .path("/owners")
-    .get({ ...operationOptionsToRequestParameters(options) });
+    .path("/owners/{ownerId}", ownerId)
+    .get({
+      ...operationOptionsToRequestParameters(options),
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
+    });
 }
 
-export async function _listDeserialize(
+export async function _getDeserialize(
   result: PathUncheckedResponse,
-): Promise<OwnerCollectionWithNextLink> {
+): Promise<Owner> {
   const expectedStatuses = ["200"];
   if (!expectedStatuses.includes(result.status)) {
-    throw createRestError(result);
+    const error = createRestError(result);
+    error.details = petStoreErrorDeserializer(result.body);
+    throw error;
   }
 
-  return ownerCollectionWithNextLinkDeserializer(result.body);
+  return ownerDeserializer(result.body);
 }
 
-/** Lists all instances of the resource. */
-export async function list(
+/** Gets an instance of the resource. */
+export async function get(
   context: Client,
-  options: OwnersListOptionalParams = { requestOptions: {} },
-): Promise<OwnerCollectionWithNextLink> {
-  const result = await _listSend(context, options);
-  return _listDeserialize(result);
+  ownerId: number,
+  options: OwnersGetOptionalParams = { requestOptions: {} },
+): Promise<Owner> {
+  const result = await _getSend(context, ownerId, options);
+  return _getDeserialize(result);
 }

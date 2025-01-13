@@ -260,6 +260,14 @@ export interface PetStoreClientOptionalParams extends ClientOptions {
 }
 
 // @public
+export interface PetStoreError {
+    // (undocumented)
+    code: number;
+    // (undocumented)
+    message: string;
+}
+
+// @public
 export interface PetsUpdateOptionalParams extends OperationOptions {
 }
 

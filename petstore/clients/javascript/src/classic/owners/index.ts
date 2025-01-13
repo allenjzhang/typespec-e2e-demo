@@ -1,7 +1,7 @@
 // Licensed under the MIT License.
 
 import { PetStoreContext } from "../../api/petStoreContext.js";
-import { get, update, $delete, create, list } from "../../api/owners/index.js";
+import { list, create, $delete, update, get } from "../../api/owners/index.js";
 import {
   Owner,
   OwnerUpdate,
@@ -9,22 +9,23 @@ import {
   OwnerCollectionWithNextLink,
 } from "../../models/models.js";
 import {
-  OwnersGetOptionalParams,
-  OwnersUpdateOptionalParams,
-  OwnersDeleteOptionalParams,
-  OwnersCreateOptionalParams,
   OwnersListOptionalParams,
+  OwnersCreateOptionalParams,
+  OwnersDeleteOptionalParams,
+  OwnersUpdateOptionalParams,
+  OwnersGetOptionalParams,
 } from "../../api/options.js";
 
 /** Interface representing a Owners operations. */
 export interface OwnersOperations {
-  /** Gets an instance of the resource. */
-  get: (ownerId: number, options?: OwnersGetOptionalParams) => Promise<Owner>;
-  /** Updates an existing instance of the resource. */
-  update: (
-    ownerId: number,
-    properties: OwnerUpdate,
-    options?: OwnersUpdateOptionalParams,
+  /** Lists all instances of the resource. */
+  list: (
+    options?: OwnersListOptionalParams,
+  ) => Promise<OwnerCollectionWithNextLink>;
+  /** Creates a new instance of the resource. */
+  create: (
+    resource: OwnerCreate,
+    options?: OwnersCreateOptionalParams,
   ) => Promise<Owner>;
   /** Deletes an existing instance of the resource. */
   /**
@@ -36,31 +37,30 @@ export interface OwnersOperations {
     ownerId: number,
     options?: OwnersDeleteOptionalParams,
   ) => Promise<void>;
-  /** Creates a new instance of the resource. */
-  create: (
-    resource: OwnerCreate,
-    options?: OwnersCreateOptionalParams,
+  /** Updates an existing instance of the resource. */
+  update: (
+    ownerId: number,
+    properties: OwnerUpdate,
+    options?: OwnersUpdateOptionalParams,
   ) => Promise<Owner>;
-  /** Lists all instances of the resource. */
-  list: (
-    options?: OwnersListOptionalParams,
-  ) => Promise<OwnerCollectionWithNextLink>;
+  /** Gets an instance of the resource. */
+  get: (ownerId: number, options?: OwnersGetOptionalParams) => Promise<Owner>;
 }
 
 export function getOwners(context: PetStoreContext) {
   return {
-    get: (ownerId: number, options?: OwnersGetOptionalParams) =>
-      get(context, ownerId, options),
+    list: (options?: OwnersListOptionalParams) => list(context, options),
+    create: (resource: OwnerCreate, options?: OwnersCreateOptionalParams) =>
+      create(context, resource, options),
+    delete: (ownerId: number, options?: OwnersDeleteOptionalParams) =>
+      $delete(context, ownerId, options),
     update: (
       ownerId: number,
       properties: OwnerUpdate,
       options?: OwnersUpdateOptionalParams,
     ) => update(context, ownerId, properties, options),
-    delete: (ownerId: number, options?: OwnersDeleteOptionalParams) =>
-      $delete(context, ownerId, options),
-    create: (resource: OwnerCreate, options?: OwnersCreateOptionalParams) =>
-      create(context, resource, options),
-    list: (options?: OwnersListOptionalParams) => list(context, options),
+    get: (ownerId: number, options?: OwnersGetOptionalParams) =>
+      get(context, ownerId, options),
   };
 }
 

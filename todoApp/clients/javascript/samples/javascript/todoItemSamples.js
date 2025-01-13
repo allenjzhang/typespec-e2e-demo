@@ -14,13 +14,9 @@ const client = new TodoClient(
 async function main() {
   const item = {
     title: "Buy milk",
-    createdBy: 1,
     assignedTo: 10,
     description: "Need to buy milk",
     status: "InProgress",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    id: 1
   };
 
   // create a user
@@ -28,7 +24,6 @@ async function main() {
     username: "Harry Potter",
     email: "harry@email.com",
     password: "password",
-    id: 0,
   });
   console.log(user);
 

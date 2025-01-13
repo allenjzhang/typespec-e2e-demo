@@ -11,6 +11,7 @@ export function createPetStore(
   endpointParam: string,
   options: PetStoreClientOptionalParams = {},
 ): PetStoreContext {
+  const endpointUrl = options.endpoint ?? String(endpointParam);
   const prefixFromOptions = options?.userAgentOptions?.userAgentPrefix;
   const userAgentInfo = `azsdk-js-petstore/1.0.0-beta.1`;
   const userAgentPrefix = prefixFromOptions
@@ -20,11 +21,7 @@ export function createPetStore(
     ...options,
     userAgentOptions: { userAgentPrefix },
   };
-  const clientContext = getClient(
-    options.endpoint ?? String(endpointParam),
-    undefined,
-    updatedOptions,
-  );
+  const clientContext = getClient(endpointUrl, undefined, updatedOptions);
   clientContext.pipeline.removePolicy({ name: "ApiVersionPolicy" });
   if (options.apiVersion) {
     console.warn(

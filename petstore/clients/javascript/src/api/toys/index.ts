@@ -6,6 +6,7 @@ import {
   ToysListOptionalParams,
 } from "../index.js";
 import {
+  petStoreErrorDeserializer,
   Toy,
   toyDeserializer,
   ToyCollectionWithNextLink,
@@ -18,6 +19,47 @@ import {
   operationOptionsToRequestParameters,
 } from "@typespec/ts-http-runtime";
 
+export function _listSend(
+  context: Client,
+  petId: number,
+  nameFilter: string,
+  options: ToysListOptionalParams = { requestOptions: {} },
+): StreamableMethod {
+  return context
+    .path("/pets/{petId}/toys", petId)
+    .get({
+      ...operationOptionsToRequestParameters(options),
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
+      queryParameters: { nameFilter: nameFilter },
+    });
+}
+
+export async function _listDeserialize(
+  result: PathUncheckedResponse,
+): Promise<ToyCollectionWithNextLink> {
+  const expectedStatuses = ["200"];
+  if (!expectedStatuses.includes(result.status)) {
+    const error = createRestError(result);
+    error.details = petStoreErrorDeserializer(result.body);
+    throw error;
+  }
+
+  return toyCollectionWithNextLinkDeserializer(result.body);
+}
+
+export async function list(
+  context: Client,
+  petId: number,
+  nameFilter: string,
+  options: ToysListOptionalParams = { requestOptions: {} },
+): Promise<ToyCollectionWithNextLink> {
+  const result = await _listSend(context, petId, nameFilter, options);
+  return _listDeserialize(result);
+}
+
 export function _getSend(
   context: Client,
   petId: number,
@@ -26,7 +68,13 @@ export function _getSend(
 ): StreamableMethod {
   return context
     .path("/pets/{petId}/toys/{toyId}", petId, toyId)
-    .get({ ...operationOptionsToRequestParameters(options) });
+    .get({
+      ...operationOptionsToRequestParameters(options),
+      headers: {
+        accept: "application/json",
+        ...options.requestOptions?.headers,
+      },
+    });
 }
 
 export async function _getDeserialize(
@@ -34,7 +82,9 @@ export async function _getDeserialize(
 ): Promise<Toy> {
   const expectedStatuses = ["200"];
   if (!expectedStatuses.includes(result.status)) {
-    throw createRestError(result);
+    const error = createRestError(result);
+    error.details = petStoreErrorDeserializer(result.body);
+    throw error;
   }
 
   return toyDeserializer(result.body);
@@ -49,39 +99,4 @@ export async function get(
 ): Promise<Toy> {
   const result = await _getSend(context, petId, toyId, options);
   return _getDeserialize(result);
-}
-
-export function _listSend(
-  context: Client,
-  petId: number,
-  nameFilter: string,
-  options: ToysListOptionalParams = { requestOptions: {} },
-): StreamableMethod {
-  return context
-    .path("/pets/{petId}/toys", petId)
-    .get({
-      ...operationOptionsToRequestParameters(options),
-      queryParameters: { nameFilter: nameFilter },
-    });
-}
-
-export async function _listDeserialize(
-  result: PathUncheckedResponse,
-): Promise<ToyCollectionWithNextLink> {
-  const expectedStatuses = ["200"];
-  if (!expectedStatuses.includes(result.status)) {
-    throw createRestError(result);
-  }
-
-  return toyCollectionWithNextLinkDeserializer(result.body);
-}
-
-export async function list(
-  context: Client,
-  petId: number,
-  nameFilter: string,
-  options: ToysListOptionalParams = { requestOptions: {} },
-): Promise<ToyCollectionWithNextLink> {
-  const result = await _listSend(context, petId, nameFilter, options);
-  return _listDeserialize(result);
 }
