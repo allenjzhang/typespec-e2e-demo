@@ -8,7 +8,7 @@
     <groupId>io.clientcore</groupId>
     <artifactId>todo-aggregate</artifactId>
     <version>1.0.0</version>
-    <relativePath>../../pom.xml</relativePath>
+    <relativePath>../../samples/pom.xml</relativePath>
   </parent>
 
   <groupId>io.clientcore</groupId>
@@ -78,33 +78,6 @@
               <file>${project.basedir}/../../../eng/scripts/java/eclipse-format-azure-sdk-for-java.xml</file>
             </eclipse>
           </java>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.6.0</version>
-        <executions>
-          <execution>
-            <id>add-source</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${basedir}/src/samples/java</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.5.0</version>
-        <configuration>
-          <mainClass>todo.TodoSample</mainClass>
         </configuration>
       </plugin>
     </plugins>

@@ -16,7 +16,7 @@ Run `mvn clean package -DskipTests -f <RepoRoot>/todoApp/clients/java/pom.xml`.
 
 ## Run TodoApp Java sample
 
-Run `mvn -f <RepoRoot>/todoApp/pom.xml clean package -DskipTests exec:java -pl io.clientcore:todo-sample -am`.
+Run `mvn -f <RepoRoot>/todoApp/samples/pom.xml clean package -DskipTests exec:java -pl io.clientcore:todo-sample -am`.
 
 Output be like
 ```

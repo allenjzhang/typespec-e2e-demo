@@ -8,8 +8,8 @@
   <version>1.0.0</version>
 
   <modules>
-    <module>clients/java</module>
-    <module>samples/java</module>
+    <module>../clients/java</module>
+    <module>java</module>
   </modules>
 
   <build>
