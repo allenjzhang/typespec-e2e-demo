@@ -13,9 +13,9 @@ Pop-Location
 
 # Build (currently require a local install of io.clientcore:core)
 Push-Location ./petstore/clients/java
-mvn package -DskipTests
+mvn clean spotless:apply package -DskipTests
 Pop-Location
 
 Push-Location ./todoApp/clients/java
-mvn package -DskipTests
+mvn clean spotless:apply package -DskipTests
 Pop-Location

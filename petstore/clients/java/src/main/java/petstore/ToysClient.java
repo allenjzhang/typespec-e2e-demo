@@ -29,6 +29,17 @@ public final class ToysClient {
 
     /**
      * Gets an instance of the resource.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     petId: long (Required)
+     *     name: String (Required)
+     * }
+     * }
+     * </pre>
      * 
      * @param petId The petId parameter.
      * @param toyId The toyId parameter.
@@ -43,6 +54,22 @@ public final class ToysClient {
 
     /**
      * The list operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     value (Required): [
+     *          (Required){
+     *             id: long (Required)
+     *             petId: long (Required)
+     *             name: String (Required)
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param petId The petId parameter.
      * @param nameFilter The nameFilter parameter.
