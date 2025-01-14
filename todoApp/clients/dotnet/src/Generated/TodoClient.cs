@@ -15,7 +15,8 @@ namespace Todo
         private readonly Uri _endpoint;
         /// <summary> A credential used to authenticate to the service. </summary>
         private readonly ApiKeyCredential _keyCredential;
-        private const string AuthorizationHeader = "session-id";
+        private const string AuthorizationHeader = "Authorization";
+        private const string AuthorizationApiKeyPrefix = "Bearer";
         private Users _cachedUsers;
         private TodoItems _cachedTodoItems;
 
@@ -46,7 +47,7 @@ namespace Todo
 
             _endpoint = endpoint;
             _keyCredential = keyCredential;
-            Pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<PipelinePolicy>());
+            Pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader, AuthorizationApiKeyPrefix) }, Array.Empty<PipelinePolicy>());
         }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
@@ -55,13 +56,13 @@ namespace Todo
         /// <summary> Initializes a new instance of Users. </summary>
         public virtual Users GetUsersClient()
         {
-            return Volatile.Read(ref _cachedUsers) ?? Interlocked.CompareExchange(ref _cachedUsers, new Users(Pipeline, _keyCredential, _endpoint), null) ?? _cachedUsers;
+            return Volatile.Read(ref _cachedUsers) ?? Interlocked.CompareExchange(ref _cachedUsers, new Users(Pipeline, _endpoint), null) ?? _cachedUsers;
         }
 
         /// <summary> Initializes a new instance of TodoItems. </summary>
         public virtual TodoItems GetTodoItemsClient()
         {
-            return Volatile.Read(ref _cachedTodoItems) ?? Interlocked.CompareExchange(ref _cachedTodoItems, new TodoItems(Pipeline, _keyCredential, _endpoint), null) ?? _cachedTodoItems;
+            return Volatile.Read(ref _cachedTodoItems) ?? Interlocked.CompareExchange(ref _cachedTodoItems, new TodoItems(Pipeline, _endpoint), null) ?? _cachedTodoItems;
         }
     }
 }
