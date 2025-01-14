@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-	  <ProjectReference Include="../src/Todo.csproj" />
+	  <ProjectReference Include="../../clients/dotnet/src/Todo.csproj" />
     <PackageReference Include="System.ClientModel" Version="1.1.0-beta.4" />
   </ItemGroup>
 
