@@ -1,13 +1,19 @@
 # client library samples for JavaScript 
 
 These sample programs show how to use the JavaScript client libraries for in some common scenarios.
+The operations include:
+
+- create a pet
+- get a pet from id
+- update the update by id
+- list all available pets
+- delete the pet by id
 
 ## Prerequisites
 
 - The sample programs are compatible with [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule).
 
 - [.NET SDK 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) - for server
-
 
 ## Setup
 
@@ -38,4 +44,3 @@ dotnet run --project <RepoRoot>/petstore/servers/aspnet/petstore.csproj
 ```bash
 npm run sample
 ```
-

@@ -9,7 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@unbranded/petstore": "../..",
+    "@unbranded/petstore": "../../client/javascript",
     "dotenv": "latest"
   }
 }

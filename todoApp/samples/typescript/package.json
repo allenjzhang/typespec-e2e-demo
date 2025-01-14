@@ -1,0 +1,23 @@
+{
+  "name": "samples",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "prebuild": "rimraf dist/",
+    "sample": "node dist/todoItemSamples.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@notabrand/todo-non-branded": "../../client/typescript",
+    "dotenv": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "~5.6.2",
+    "rimraf": "5.0.5"
+    
+  }
+}
