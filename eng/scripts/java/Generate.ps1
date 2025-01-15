@@ -25,9 +25,9 @@ Pop-Location
 
 # Build samples
 Push-Location ./petstore/samples/java
-mvn clean spotless:apply package -DskipTests
+mvn clean spotless:apply package
 Pop-Location
 
 Push-Location ./todoApp/samples/java
-mvn clean spotless:apply package -DskipTests
+mvn clean spotless:apply package
 Pop-Location
