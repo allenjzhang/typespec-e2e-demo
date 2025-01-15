@@ -11,7 +11,8 @@ from corehttp.runtime import PipelineClient, policies
 
 from ._configuration import TodoClientConfiguration
 from ._serialization import Deserializer, Serializer
-from .operations import TodoItemsOperations, UsersOperations
+from .todoitems.operations import TodoItemsOperations
+from .users.operations import UsersOperations
 
 
 class TodoClient:  # pylint: disable=client-accepts-api-version-keyword

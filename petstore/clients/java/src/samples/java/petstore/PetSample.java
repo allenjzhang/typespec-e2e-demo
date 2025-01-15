@@ -5,9 +5,7 @@ public final class PetSample {
     public static void main(String... args) {
 
         // client
-        PetsClient client = new PetStoreClientBuilder()
-                .endpoint("http://localhost:5118/")
-                .buildPetsClient();
+        PetsClient client = new PetStoreClientBuilder().endpoint("http://localhost:5118/").buildPetsClient();
 
         // create pet
         Pet pet = client.create(new PetCreate("MyPet", 7, 7L));

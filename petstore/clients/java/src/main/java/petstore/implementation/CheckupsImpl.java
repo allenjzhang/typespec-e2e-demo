@@ -78,6 +78,18 @@ public final class CheckupsImpl {
      * }
      * </pre>
      * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: int (Required)
+     *     vetName: String (Required)
+     *     notes: String (Required)
+     * }
+     * }
+     * </pre>
+     * 
      * @param checkupId The checkupId parameter.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -94,6 +106,22 @@ public final class CheckupsImpl {
 
     /**
      * Lists all instances of the resource.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     value (Required): [
+     *          (Required){
+     *             id: int (Required)
+     *             vetName: String (Required)
+     *             notes: String (Required)
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.

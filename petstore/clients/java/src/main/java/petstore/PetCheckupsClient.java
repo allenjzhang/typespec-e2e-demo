@@ -41,6 +41,18 @@ public final class PetCheckupsClient {
      * }
      * </pre>
      * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: int (Required)
+     *     vetName: String (Required)
+     *     notes: String (Required)
+     * }
+     * }
+     * </pre>
+     * 
      * @param petId The petId parameter.
      * @param checkupId The checkupId parameter.
      * @param resource The resource parameter.
@@ -56,6 +68,22 @@ public final class PetCheckupsClient {
 
     /**
      * Lists all instances of the extension resource.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     value (Required): [
+     *          (Required){
+     *             id: int (Required)
+     *             vetName: String (Required)
+     *             notes: String (Required)
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param petId The petId parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
