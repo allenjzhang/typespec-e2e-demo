@@ -9,7 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@notabrand/todo-non-branded": "../../client/javascript",
+    "@notabrand/todo-non-branded": "../../clients/javascript",
     "dotenv": "latest"
   }
 }
