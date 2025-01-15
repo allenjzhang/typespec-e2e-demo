@@ -1,6 +1,13 @@
 # client library samples for TypeScript 
 
 These sample programs show how to use the TypeScript client libraries for in some common scenarios.
+The operations include:
+
+- create a pet
+- get a pet from id
+- update the update by id
+- list all available pets
+- delete the pet by id
 
 ## Prerequisites
 

@@ -1,6 +1,14 @@
 # client library samples for TypeScript 
 
 These sample programs show how to use the TypeScript client libraries for in some common scenarios.
+The operations include:
+
+- create a user
+- get a non-exist todo item
+- create a todo item
+- get the created todo item
+- list all available todo items
+- delete the todo item
 
 ## Prerequisites
 
