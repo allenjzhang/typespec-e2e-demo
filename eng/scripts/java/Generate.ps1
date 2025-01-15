@@ -11,11 +11,20 @@ Push-Location ./todoApp/spec
 npx --no-install tsp compile . --emit "@typespec/http-client-java"
 Pop-Location
 
-# Build (currently require a local install of io.clientcore:core)
+# Build and install SDK
 Push-Location ./petstore/clients/java
-mvn clean spotless:apply package -DskipTests
+mvn clean spotless:apply install -DskipTests
 Pop-Location
 
 Push-Location ./todoApp/clients/java
+mvn clean spotless:apply install -DskipTests
+Pop-Location
+
+# Build samples
+Push-Location ./petstore/samples/java
+mvn clean spotless:apply package -DskipTests
+Pop-Location
+
+Push-Location ./todoApp/samples/java
 mvn clean spotless:apply package -DskipTests
 Pop-Location
