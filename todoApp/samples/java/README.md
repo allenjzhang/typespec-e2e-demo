@@ -12,11 +12,11 @@ Run `dotnet run --project <RepoRoot>/todoApp/servers/aspnet/Todo.csproj`.
 
 ## Build TodoApp Java SDK
 
-Run `mvn clean package -DskipTests -f <RepoRoot>/todoApp/clients/java/pom.xml`.
+Run `mvn clean install -DskipTests -f <RepoRoot>/todoApp/clients/java/pom.xml`.
 
 ## Run TodoApp Java sample
 
-Run `mvn -f <RepoRoot>/todoApp/samples/pom.xml clean package -DskipTests exec:java -pl io.clientcore:todo-sample -am`.
+Run `mvn clean package exec:java -f <RepoRoot>/todoApp/samples/java/pom.xml`.
 
 Output be like
 ```

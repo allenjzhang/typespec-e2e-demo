@@ -4,13 +4,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>io.clientcore</groupId>
-    <artifactId>todo-aggregate</artifactId>
-    <version>1.0.0</version>
-    <relativePath>../../samples/pom.xml</relativePath>
-  </parent>
-
   <groupId>io.clientcore</groupId>
   <artifactId>todo</artifactId>
   <version>1.0.0-beta.1</version> <!-- {x-version-update;io.clientcore:todo;current} -->
@@ -66,19 +59,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.diffplug.spotless</groupId>
-        <artifactId>spotless-maven-plugin</artifactId>
-        <version>2.30.0</version>
-        <configuration>
-          <java>
-            <eclipse>
-              <version>4.21.0</version>
-              <file>${project.basedir}/../../../eng/scripts/java/eclipse-format-azure-sdk-for-java.xml</file>
-            </eclipse>
-          </java>
-        </configuration>
       </plugin>
     </plugins>
   </build>
