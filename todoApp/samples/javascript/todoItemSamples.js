@@ -12,23 +12,11 @@ const client = new TodoClient(
 );
 
 async function main() {
-  const item = {
-    title: "Buy milk",
-    createdBy: 1,
-    assignedTo: 10,
-    description: "Need to buy milk",
-    status: "InProgress",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    id: 1
-  };
-
   // create a user
   const user = await client.users.create({
     username: "Harry Potter",
     email: "harry@email.com",
-    password: "password",
-    id: 0,
+    password: "password"
   });
   console.log(user);
 
@@ -40,9 +28,15 @@ async function main() {
   }
 
   // - create a todo item
+  const item = {
+    title: "Buy milk",
+    assignedTo: 10,
+    description: "Need to buy milk",
+    status: "InProgress"
+  };
   const createdTodoItem = await client.todoItems.createJson(item);
   console.log(createdTodoItem);
-
+  
   // - get the created todo item
   const getTodoItem = await client.todoItems.get(createdTodoItem.id);
   console.log(getTodoItem);
