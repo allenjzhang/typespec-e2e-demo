@@ -11,7 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@notabrand/todo-non-branded": "../../client/typescript",
+    "@notabrand/todo-non-branded": "../../clients/javascript",
     "dotenv": "latest"
   },
   "devDependencies": {

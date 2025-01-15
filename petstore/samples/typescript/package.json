@@ -11,7 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@unbranded/petstore": "../../client/typescript",
+    "@unbranded/petstore": "../../clients/javascript",
     "dotenv": "latest"
   },
   "devDependencies": {
