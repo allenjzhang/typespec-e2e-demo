@@ -26,6 +26,6 @@ python setup.py install
 
 Then, run the following command to start the client in the current directory:
 ```
-cd <RepoRoot>/petstore/clients/python/sample
+cd <RepoRoot>/petstore/samples/python
 python sample.py
 ```
