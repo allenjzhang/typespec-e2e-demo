@@ -2,14 +2,14 @@
   "name": "samples",
   "version": "1.0.0",
   "scripts": {
-    "sample": "node petOperations.js"
+    "sample": "node todoItemSamples.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@unbranded/petstore": "../..",
+    "@notabrand/todo-non-branded": "../../clients/javascript",
     "dotenv": "latest"
   }
 }

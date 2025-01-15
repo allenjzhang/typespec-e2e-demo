@@ -4,10 +4,10 @@ from corehttp.exceptions import ResourceNotFoundError
 from todo.models import (
     User,
     TodoItem,
-    TodoItemPatch,
     TodoAttachment,
     ToDoItemMultipartRequest,
 )
+from todo.todoitems.models import TodoItemPatch
 import os
 
 todoClient = TodoClient("http://localhost:5244", ServiceKeyCredential("dummy"))
