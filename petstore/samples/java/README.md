@@ -12,11 +12,11 @@ Run `dotnet run --project <RepoRoot>/petstore/servers/aspnet/petstore.csproj`.
 
 ## Build PetStore Java SDK
 
-Run `mvn clean package -DskipTests -f <RepoRoot>/petstore/clients/java/pom.xml`.
+Run `mvn clean install -DskipTests -f <RepoRoot>/petstore/clients/java/pom.xml`.
 
 ## Run PetStore Java sample
 
-Run `mvn exec:java -f <RepoRoot>/petstore/clients/java/pom.xml`.
+Run `mvn clean package exec:java -f <RepoRoot>/petstore/samples/java/pom.xml`.
 
 Output be like
 ```
