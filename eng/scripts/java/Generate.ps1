@@ -1,5 +1,8 @@
 Set-Location (Resolve-Path (Join-Path $PSScriptRoot '..' '..' '..'))
 
+# Make sure everything is up-to-date
+npm ci
+
 # Generate
 Remove-Item ./petstore/clients/java/src/main -Recurse -Force
 Push-Location ./petstore/spec

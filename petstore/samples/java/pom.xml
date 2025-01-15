@@ -6,8 +6,8 @@
   <version>1.0.0-beta.1</version>
   <packaging>jar</packaging>
 
-  <name>Sample for Todo</name>
-  <description>This package contains Sample for Todo client library.</description>
+  <name>Sample for PetStore</name>
+  <description>This package contains Sample for PetStore client library.</description>
 
   <licenses>
     <license>
