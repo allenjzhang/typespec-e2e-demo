@@ -38,8 +38,7 @@
         "description": "Client: generate Python client",
         "options": {
           "emitter-output-dir": "{project-root}/clients/python"
-        },
-        "message": "Please ensure Python has been installed. Download from https://test.python.org/downloads/"
+        }
       },
       "@typespec/http-server-csharp": {
         "description": "Server: generate ASP.NET Core server",
