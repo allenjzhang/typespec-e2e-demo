@@ -57,6 +57,7 @@ public final class TodoSample {
         long todoItemId2 = createTodoItemFormResponse.getId();
         System.out.println("todo item created via multipart/form-data, id=" + todoItemId2);
 
+        // create attachment via multipart/form-data
         try {
             todoItemsAttachmentsClient.createFileAttachment(todoItemId2,
                 new FileAttachmentMultipartRequest(
