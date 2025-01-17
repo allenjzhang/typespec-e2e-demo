@@ -60,20 +60,24 @@ async function main() {
   console.log(result);
 
   // - create a new todo item via multipart/form-data operation
-  const createdTodoItem2 = await client.todoItems.attachments.createFileAttachment(1, {
-    contents:{ filename:"note1.txt", contentType:"application/octet-stream", contents:Buffer.from("../note1.txt")} }
-  );
+  const createdTodoItem2 = await client.todoItems.createForm({item:item, 
+    attachments:[{ contents: Buffer.from("../note1.txt"), contentType: "application/octet-stream", filename: "note1.txt" }]
+  });
   console.log(createdTodoItem2);
 
   // - upload a local file as the attachment of the created todo item
-  const attachment = await client.todoItems.attachments.createJsonAttachment(2, { filename:"note2.txt", mediaType:"application/json", contents:Buffer.from("../note2.txt") });
-  console.log(attachment);
+  const createdTodoItem3 = await client.todoItems.createForm({item:item, 
+    attachments:[{ contents: Buffer.from("../note2.txt"), contentType: "application/json", filename: "note2.txt" }]
+  });
+  console.log(createdTodoItem3);
 
   // - list all existing attachments
-  const attachments = await client.todoItems.attachments.list(2);
+  const attachments = await client.todoItems.list({limit: 1, offset: 0});
+  const result2 = [];
   for await (const attachment of attachments) {
-    console.log(attachment);
+    result2.push(attachment);
   }
+  console.log(result2);
 
   // - delete the todo item
   const deleteTodoItem = await client.todoItems.delete(createdTodoItem.id);
