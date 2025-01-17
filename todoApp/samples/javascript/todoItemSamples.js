@@ -3,7 +3,7 @@ const { readFile } = require("fs/promises");
 // Load the .env file if it exists
 require("dotenv").config();
 
-const endpoint = process.env["ENDPOINT"] || "http://localhost:5244";
+const endpoint = process.env["ENDPOINT"] || "<endpoint>";
 
 const client = new TodoClient(
   endpoint,
@@ -63,19 +63,19 @@ async function main() {
 
   // - upload a local file as the attachment of the created todo item
   const file1 = await readFile("./note1.txt");
-  const createdTodoItem3 = await client.todoItems.attachments.createJsonAttachment(1, {
+  const createdTodoItem3 = await client.todoItems.attachments.createJsonAttachment(createdTodoItem2.id, {
      contents: file1, mediaType: "application/octet-stream", filename: "note1.txt"
   });
   console.log(createdTodoItem3);
 
   const file2 = await readFile("./note2.txt");
-  const createdTodoItem4 = await client.todoItems.attachments.createFileAttachment(1, {contents:{
-    contents: file2, contentType: "application/json", filename: "note2.txt"
+  const createdTodoItem4 = await client.todoItems.attachments.createFileAttachment(createdTodoItem2.id, {contents:{
+    contents: file2, filename: "note2.txt"
   }});
   console.log(createdTodoItem4);
 
   // - list all existing attachments
-  const attachments = await client.todoItems.attachments.list(1);
+  const attachments = await client.todoItems.attachments.list(createdTodoItem2.id);
   const result2 = [];
   for await (const attachment of attachments) {
     result2.push(attachment);
