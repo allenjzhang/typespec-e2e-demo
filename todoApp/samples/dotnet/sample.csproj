@@ -12,4 +12,13 @@
     <PackageReference Include="System.ClientModel" Version="1.1.0-beta.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="note1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="note2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
