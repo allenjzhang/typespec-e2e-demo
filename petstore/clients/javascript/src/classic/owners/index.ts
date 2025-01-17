@@ -2,12 +2,12 @@
 
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, create, $delete, update, get } from "../../api/owners/index.js";
+import { Owner } from "../../models/models.js";
 import {
-  Owner,
   OwnerUpdate,
   OwnerCreate,
   OwnerCollectionWithNextLink,
-} from "../../models/models.js";
+} from "../../models/typeSpec/rest/resource/models.js";
 import {
   OwnersListOptionalParams,
   OwnersCreateOptionalParams,
@@ -47,7 +47,7 @@ export interface OwnersOperations {
   get: (ownerId: number, options?: OwnersGetOptionalParams) => Promise<Owner>;
 }
 
-export function getOwners(context: PetStoreContext) {
+function _getOwners(context: PetStoreContext) {
   return {
     list: (options?: OwnersListOptionalParams) => list(context, options),
     create: (resource: OwnerCreate, options?: OwnersCreateOptionalParams) =>
@@ -64,10 +64,10 @@ export function getOwners(context: PetStoreContext) {
   };
 }
 
-export function getOwnersOperations(
+export function _getOwnersOperations(
   context: PetStoreContext,
 ): OwnersOperations {
   return {
-    ...getOwners(context),
+    ..._getOwners(context),
   };
 }

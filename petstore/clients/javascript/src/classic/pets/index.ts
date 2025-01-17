@@ -9,12 +9,12 @@ import {
 } from "../../api/options.js";
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, create, $delete, update, get } from "../../api/pets/index.js";
+import { Pet } from "../../models/models.js";
 import {
-  Pet,
   PetUpdate,
   PetCreate,
   PetCollectionWithNextLink,
-} from "../../models/models.js";
+} from "../../models/typeSpec/rest/resource/models.js";
 
 /** Interface representing a Pets operations. */
 export interface PetsOperations {
@@ -44,7 +44,7 @@ export interface PetsOperations {
   get: (petId: number, options?: PetsGetOptionalParams) => Promise<Pet>;
 }
 
-export function getPets(context: PetStoreContext) {
+function _getPets(context: PetStoreContext) {
   return {
     list: (options?: PetsListOptionalParams) => list(context, options),
     create: (resource: PetCreate, options?: PetsCreateOptionalParams) =>
@@ -61,8 +61,8 @@ export function getPets(context: PetStoreContext) {
   };
 }
 
-export function getPetsOperations(context: PetStoreContext): PetsOperations {
+export function _getPetsOperations(context: PetStoreContext): PetsOperations {
   return {
-    ...getPets(context),
+    ..._getPets(context),
   };
 }

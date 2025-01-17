@@ -12,13 +12,15 @@ import {
   petStoreErrorDeserializer,
   Pet,
   petDeserializer,
+} from "../../models/models.js";
+import {
   PetUpdate,
   petUpdateSerializer,
   PetCreate,
   petCreateSerializer,
   PetCollectionWithNextLink,
   petCollectionWithNextLinkDeserializer,
-} from "../../models/models.js";
+} from "../../models/typeSpec/rest/resource/models.js";
 import {
   StreamableMethod,
   PathUncheckedResponse,

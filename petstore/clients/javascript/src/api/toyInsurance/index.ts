@@ -9,9 +9,11 @@ import {
   Insurance,
   insuranceDeserializer,
   petStoreErrorDeserializer,
+} from "../../models/models.js";
+import {
   InsuranceUpdate,
   insuranceUpdateSerializer,
-} from "../../models/models.js";
+} from "../../models/typeSpec/rest/resource/models.js";
 import {
   StreamableMethod,
   PathUncheckedResponse,

@@ -2,7 +2,8 @@
 
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { update, get } from "../../api/petInsurance/index.js";
-import { Insurance, InsuranceUpdate } from "../../models/models.js";
+import { Insurance } from "../../models/models.js";
+import { InsuranceUpdate } from "../../models/typeSpec/rest/resource/models.js";
 import {
   PetInsuranceUpdateOptionalParams,
   PetInsuranceGetOptionalParams,
@@ -23,7 +24,7 @@ export interface PetInsuranceOperations {
   ) => Promise<Insurance>;
 }
 
-export function getPetInsurance(context: PetStoreContext) {
+function _getPetInsurance(context: PetStoreContext) {
   return {
     update: (
       petId: number,
@@ -35,10 +36,10 @@ export function getPetInsurance(context: PetStoreContext) {
   };
 }
 
-export function getPetInsuranceOperations(
+export function _getPetInsuranceOperations(
   context: PetStoreContext,
 ): PetInsuranceOperations {
   return {
-    ...getPetInsurance(context),
+    ..._getPetInsurance(context),
   };
 }

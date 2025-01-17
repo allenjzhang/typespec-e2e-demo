@@ -6,7 +6,8 @@ import {
 } from "../../api/options.js";
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, get } from "../../api/toys/index.js";
-import { Toy, ToyCollectionWithNextLink } from "../../models/models.js";
+import { Toy } from "../../models/models.js";
+import { ToyCollectionWithNextLink } from "../../models/typeSpec/rest/resource/models.js";
 
 /** Interface representing a Toys operations. */
 export interface ToysOperations {
@@ -23,7 +24,7 @@ export interface ToysOperations {
   ) => Promise<Toy>;
 }
 
-export function getToys(context: PetStoreContext) {
+function _getToys(context: PetStoreContext) {
   return {
     list: (
       petId: number,
@@ -35,8 +36,8 @@ export function getToys(context: PetStoreContext) {
   };
 }
 
-export function getToysOperations(context: PetStoreContext): ToysOperations {
+export function _getToysOperations(context: PetStoreContext): ToysOperations {
   return {
-    ...getToys(context),
+    ..._getToys(context),
   };
 }

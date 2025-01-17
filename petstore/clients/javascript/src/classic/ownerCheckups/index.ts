@@ -2,11 +2,11 @@
 
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, createOrUpdate } from "../../api/ownerCheckups/index.js";
+import { Checkup } from "../../models/models.js";
 import {
   CheckupUpdate,
-  Checkup,
   CheckupCollectionWithNextLink,
-} from "../../models/models.js";
+} from "../../models/typeSpec/rest/resource/models.js";
 import {
   OwnerCheckupsListOptionalParams,
   OwnerCheckupsCreateOrUpdateOptionalParams,
@@ -28,7 +28,7 @@ export interface OwnerCheckupsOperations {
   ) => Promise<Checkup>;
 }
 
-export function getOwnerCheckups(context: PetStoreContext) {
+function _getOwnerCheckups(context: PetStoreContext) {
   return {
     list: (ownerId: number, options?: OwnerCheckupsListOptionalParams) =>
       list(context, ownerId, options),
@@ -41,10 +41,10 @@ export function getOwnerCheckups(context: PetStoreContext) {
   };
 }
 
-export function getOwnerCheckupsOperations(
+export function _getOwnerCheckupsOperations(
   context: PetStoreContext,
 ): OwnerCheckupsOperations {
   return {
-    ...getOwnerCheckups(context),
+    ..._getOwnerCheckups(context),
   };
 }

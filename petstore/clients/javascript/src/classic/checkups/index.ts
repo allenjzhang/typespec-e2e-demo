@@ -2,11 +2,11 @@
 
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, createOrUpdate } from "../../api/checkups/index.js";
+import { Checkup } from "../../models/models.js";
 import {
   CheckupUpdate,
-  Checkup,
   CheckupCollectionWithNextLink,
-} from "../../models/models.js";
+} from "../../models/typeSpec/rest/resource/models.js";
 import {
   CheckupsListOptionalParams,
   CheckupsCreateOrUpdateOptionalParams,
@@ -26,7 +26,7 @@ export interface CheckupsOperations {
   ) => Promise<Checkup>;
 }
 
-export function getCheckups(context: PetStoreContext) {
+function _getCheckups(context: PetStoreContext) {
   return {
     list: (options?: CheckupsListOptionalParams) => list(context, options),
     createOrUpdate: (
@@ -37,10 +37,10 @@ export function getCheckups(context: PetStoreContext) {
   };
 }
 
-export function getCheckupsOperations(
+export function _getCheckupsOperations(
   context: PetStoreContext,
 ): CheckupsOperations {
   return {
-    ...getCheckups(context),
+    ..._getCheckups(context),
   };
 }

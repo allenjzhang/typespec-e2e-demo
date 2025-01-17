@@ -9,9 +9,11 @@ import {
   petStoreErrorDeserializer,
   Toy,
   toyDeserializer,
+} from "../../models/models.js";
+import {
   ToyCollectionWithNextLink,
   toyCollectionWithNextLinkDeserializer,
-} from "../../models/models.js";
+} from "../../models/typeSpec/rest/resource/models.js";
 import {
   StreamableMethod,
   PathUncheckedResponse,
