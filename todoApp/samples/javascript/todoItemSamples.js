@@ -1,5 +1,5 @@
 const { TodoClient } = require("@notabrand/todo-non-branded");
-
+const { readFile } = require("fs/promises");
 // Load the .env file if it exists
 require("dotenv").config();
 
@@ -58,19 +58,24 @@ async function main() {
   console.log(result);
 
   // - create a new todo item via multipart/form-data operation
-  const createdTodoItem2 = await client.todoItems.createForm({item:item, 
-    attachments:[{ contents: Buffer.from("../note1.txt"), contentType: "application/octet-stream", filename: "note1.txt" }]
-  });
+  const createdTodoItem2 = await client.todoItems.createForm({item:item});
   console.log(createdTodoItem2);
 
   // - upload a local file as the attachment of the created todo item
-  const createdTodoItem3 = await client.todoItems.createForm({item:item, 
-    attachments:[{ contents: Buffer.from("../note2.txt"), contentType: "application/json", filename: "note2.txt" }]
+  const file1 = await readFile("./note1.txt");
+  const createdTodoItem3 = await client.todoItems.attachments.createJsonAttachment(1, {
+     contents: file1, mediaType: "application/octet-stream", filename: "note1.txt"
   });
   console.log(createdTodoItem3);
 
+  const file2 = await readFile("./note2.txt");
+  const createdTodoItem4 = await client.todoItems.attachments.createFileAttachment(1, {contents:{
+    contents: file2, contentType: "application/json", filename: "note2.txt"
+  }});
+  console.log(createdTodoItem4);
+
   // - list all existing attachments
-  const attachments = await client.todoItems.list({limit: 1, offset: 0});
+  const attachments = await client.todoItems.attachments.list(1);
   const result2 = [];
   for await (const attachment of attachments) {
     result2.push(attachment);
