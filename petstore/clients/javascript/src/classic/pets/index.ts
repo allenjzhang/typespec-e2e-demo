@@ -9,12 +9,12 @@ import {
 } from "../../api/options.js";
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, create, $delete, update, get } from "../../api/pets/index.js";
-import { Pet } from "../../models/models.js";
 import {
+  Pet,
   PetUpdate,
   PetCreate,
   PetCollectionWithNextLink,
-} from "../../models/typeSpec/rest/resource/models.js";
+} from "../../models/models.js";
 
 /** Interface representing a Pets operations. */
 export interface PetsOperations {

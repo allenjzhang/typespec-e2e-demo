@@ -7,15 +7,13 @@ import {
 } from "../index.js";
 import {
   petStoreErrorDeserializer,
-  Checkup,
-  checkupDeserializer,
-} from "../../models/models.js";
-import {
   CheckupUpdate,
   checkupUpdateSerializer,
+  Checkup,
+  checkupDeserializer,
   CheckupCollectionWithNextLink,
   checkupCollectionWithNextLinkDeserializer,
-} from "../../models/typeSpec/rest/resource/models.js";
+} from "../../models/models.js";
 import {
   StreamableMethod,
   PathUncheckedResponse,

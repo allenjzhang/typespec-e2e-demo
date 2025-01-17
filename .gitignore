@@ -420,4 +420,4 @@ target
 *.iml
 
 # typescript samples bulid output
-**/samples/typescript/dist/
+**/samples/typescript/dist

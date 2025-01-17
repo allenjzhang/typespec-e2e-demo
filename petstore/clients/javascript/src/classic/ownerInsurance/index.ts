@@ -2,8 +2,7 @@
 
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { update, get } from "../../api/ownerInsurance/index.js";
-import { Insurance } from "../../models/models.js";
-import { InsuranceUpdate } from "../../models/typeSpec/rest/resource/models.js";
+import { Insurance, InsuranceUpdate } from "../../models/models.js";
 import {
   OwnerInsuranceUpdateOptionalParams,
   OwnerInsuranceGetOptionalParams,

@@ -6,8 +6,7 @@ import {
 } from "../../api/options.js";
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, get } from "../../api/toys/index.js";
-import { Toy } from "../../models/models.js";
-import { ToyCollectionWithNextLink } from "../../models/typeSpec/rest/resource/models.js";
+import { Toy, ToyCollectionWithNextLink } from "../../models/models.js";
 
 /** Interface representing a Toys operations. */
 export interface ToysOperations {

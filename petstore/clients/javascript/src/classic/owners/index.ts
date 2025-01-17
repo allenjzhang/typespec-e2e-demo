@@ -2,12 +2,12 @@
 
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, create, $delete, update, get } from "../../api/owners/index.js";
-import { Owner } from "../../models/models.js";
 import {
+  Owner,
   OwnerUpdate,
   OwnerCreate,
   OwnerCollectionWithNextLink,
-} from "../../models/typeSpec/rest/resource/models.js";
+} from "../../models/models.js";
 import {
   OwnersListOptionalParams,
   OwnersCreateOptionalParams,

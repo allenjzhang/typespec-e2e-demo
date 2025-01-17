@@ -2,11 +2,11 @@
 
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { list, createOrUpdate } from "../../api/ownerCheckups/index.js";
-import { Checkup } from "../../models/models.js";
 import {
   CheckupUpdate,
+  Checkup,
   CheckupCollectionWithNextLink,
-} from "../../models/typeSpec/rest/resource/models.js";
+} from "../../models/models.js";
 import {
   OwnerCheckupsListOptionalParams,
   OwnerCheckupsCreateOrUpdateOptionalParams,

@@ -12,15 +12,13 @@ import {
   petStoreErrorDeserializer,
   Owner,
   ownerDeserializer,
-} from "../../models/models.js";
-import {
   OwnerUpdate,
   ownerUpdateSerializer,
   OwnerCreate,
   ownerCreateSerializer,
   OwnerCollectionWithNextLink,
   ownerCollectionWithNextLinkDeserializer,
-} from "../../models/typeSpec/rest/resource/models.js";
+} from "../../models/models.js";
 import {
   StreamableMethod,
   PathUncheckedResponse,

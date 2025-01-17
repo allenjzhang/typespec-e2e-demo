@@ -6,8 +6,7 @@ import {
 } from "../../api/options.js";
 import { PetStoreContext } from "../../api/petStoreContext.js";
 import { update, get } from "../../api/toyInsurance/index.js";
-import { Insurance } from "../../models/models.js";
-import { InsuranceUpdate } from "../../models/typeSpec/rest/resource/models.js";
+import { Insurance, InsuranceUpdate } from "../../models/models.js";
 
 /** Interface representing a ToyInsurance operations. */
 export interface ToyInsuranceOperations {
