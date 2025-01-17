@@ -9,6 +9,29 @@ import {
 
 export { TodoClient } from "./todoClient.js";
 export {
+  TodoItem,
+  TodoLabels,
+  TodoLabelRecord,
+  Standard4XXResponse,
+  ApiError,
+  Standard5XXResponse,
+  TodoAttachment,
+  ToDoItemMultipartRequest,
+  FileAttachmentMultipartRequest,
+  User,
+} from "./models/index.js";
+export {
+  TodoPage,
+  InvalidTodoItem,
+  NotFoundErrorResponse,
+  TodoItemPatch,
+  PageTodoAttachment,
+} from "./models/todoItems/index.js";
+export {
+  UserExistsResponse,
+  InvalidUserResponse,
+} from "./models/users/index.js";
+export {
   TodoItemsAttachmentsCreateFileAttachmentOptionalParams,
   TodoItemsAttachmentsCreateJsonAttachmentOptionalParams,
   TodoItemsAttachmentsListOptionalParams,

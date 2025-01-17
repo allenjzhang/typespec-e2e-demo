@@ -10,12 +10,44 @@ import { OperationOptions } from '@typespec/ts-http-runtime';
 import { Pipeline } from '@typespec/ts-http-runtime';
 
 // @public
+export interface ApiError {
+    code: string;
+    message: string;
+}
+
+// @public
 export type ContinuablePage<TElement, TPage = TElement[]> = TPage & {
     continuationToken?: string;
 };
 
 // @public
+export interface FileAttachmentMultipartRequest {
+    // (undocumented)
+    contents: FileContents | {
+        contents: FileContents;
+        contentType?: string;
+        filename?: string;
+    };
+}
+
+// @public
 export type FileContents = string | NodeJS.ReadableStream | ReadableStream<Uint8Array> | Uint8Array | Blob;
+
+// @public
+export interface InvalidTodoItem extends ApiError {
+}
+
+// @public
+export interface InvalidUserResponse extends ApiError {
+    // (undocumented)
+    code: "invalid-user";
+}
+
+// @public
+export interface NotFoundErrorResponse {
+    // (undocumented)
+    code: "not-found";
+}
 
 // @public
 export interface PagedAsyncIterableIterator<TElement, TPage = TElement[], TPageSettings extends PageSettings = PageSettings> {
@@ -29,6 +61,27 @@ export interface PageSettings {
     continuationToken?: string;
 }
 
+// @public
+export interface PageTodoAttachment {
+    // (undocumented)
+    items: TodoAttachment[];
+}
+
+// @public
+export interface Standard4XXResponse extends ApiError {
+}
+
+// @public
+export interface Standard5XXResponse extends ApiError {
+}
+
+// @public
+export interface TodoAttachment {
+    contents: Uint8Array;
+    filename: string;
+    mediaType: string;
+}
+
 // @public (undocumented)
 export class TodoClient {
     constructor(endpointParam: string, credential: KeyCredential, options?: TodoClientOptionalParams);
@@ -39,6 +92,43 @@ export class TodoClient {
 
 // @public
 export interface TodoClientOptionalParams extends ClientOptions {
+}
+
+// @public
+export interface TodoItem {
+    assignedTo?: number;
+    readonly completedAt?: Date;
+    readonly createdAt: Date;
+    readonly createdBy: number;
+    description?: string;
+    // (undocumented)
+    dummy?: string;
+    readonly id: number;
+    // (undocumented)
+    labels?: TodoLabels;
+    status: "NotStarted" | "InProgress" | "Completed";
+    title: string;
+    readonly updatedAt: Date;
+}
+
+// @public
+export interface ToDoItemMultipartRequest {
+    // (undocumented)
+    attachments?: Array<FileContents | {
+        contents: FileContents;
+        contentType?: string;
+        filename?: string;
+    }>;
+    // (undocumented)
+    item: TodoItem;
+}
+
+// @public
+export interface TodoItemPatch {
+    assignedTo?: number | null;
+    description?: string | null;
+    status?: "NotStarted" | "InProgress" | "Completed";
+    title?: string;
 }
 
 // @public
@@ -55,12 +145,8 @@ export interface TodoItemsAttachmentsListOptionalParams extends OperationOptions
 
 // @public
 export interface TodoItemsAttachmentsOperations {
-    // Warning: (ae-forgotten-export) The symbol "FileAttachmentMultipartRequest" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     createFileAttachment: (itemId: number, body: FileAttachmentMultipartRequest, options?: TodoItemsAttachmentsCreateFileAttachmentOptionalParams) => Promise<void>;
-    // Warning: (ae-forgotten-export) The symbol "TodoAttachment" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     createJsonAttachment: (itemId: number, contents: TodoAttachment, options?: TodoItemsAttachmentsCreateJsonAttachmentOptionalParams) => Promise<void>;
     // (undocumented)
@@ -95,8 +181,6 @@ export interface TodoItemsListOptionalParams extends OperationOptions {
 export interface TodoItemsOperations {
     // (undocumented)
     attachments: TodoItemsAttachmentsOperations;
-    // Warning: (ae-forgotten-export) The symbol "ToDoItemMultipartRequest" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     createForm: (body: ToDoItemMultipartRequest, options?: TodoItemsCreateFormOptionalParams) => Promise<{
         id: number;
@@ -110,8 +194,6 @@ export interface TodoItemsOperations {
         completedAt?: Date;
         labels?: TodoLabels;
     }>;
-    // Warning: (ae-forgotten-export) The symbol "TodoItem" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     createJson: (item: TodoItem, options?: TodoItemsCreateJsonOptionalParams) => Promise<{
         id: number;
@@ -141,8 +223,6 @@ export interface TodoItemsOperations {
     }>;
     // (undocumented)
     list: (options?: TodoItemsListOptionalParams) => PagedAsyncIterableIterator<TodoItem>;
-    // Warning: (ae-forgotten-export) The symbol "TodoItemPatch" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     update: (id: number, patch: TodoItemPatch, options?: TodoItemsUpdateOptionalParams) => Promise<{
         id: number;
@@ -163,13 +243,45 @@ export interface TodoItemsUpdateOptionalParams extends OperationOptions {
 }
 
 // @public
+export interface TodoLabelRecord {
+    // (undocumented)
+    color?: string;
+    // (undocumented)
+    name: string;
+}
+
+// @public
+export type TodoLabels = string | string[] | TodoLabelRecord | TodoLabelRecord[];
+
+// @public
+export interface TodoPage {
+    items: TodoItem[];
+    nextLink?: string;
+    pageSize: number;
+    prevLink?: string;
+    totalSize: number;
+}
+
+// @public
+export interface User {
+    email: string;
+    readonly id: number;
+    password: string;
+    username: string;
+}
+
+// @public
+export interface UserExistsResponse extends ApiError {
+    // (undocumented)
+    code: "user-exists";
+}
+
+// @public
 export interface UsersCreateOptionalParams extends OperationOptions {
 }
 
 // @public
 export interface UsersOperations {
-    // Warning: (ae-forgotten-export) The symbol "User" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     create: (user: User, options?: UsersCreateOptionalParams) => Promise<{
         id: number;
@@ -178,10 +290,6 @@ export interface UsersOperations {
         token: string;
     }>;
 }
-
-// Warnings were encountered during analysis:
-//
-// src/classic/todoItems/index.ts:57:5 - (ae-forgotten-export) The symbol "TodoLabels" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

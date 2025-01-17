@@ -2,6 +2,26 @@
 
 export { PetStoreClient } from "./petStoreClient.js";
 export {
+  Insurance,
+  PetStoreError,
+  Checkup,
+  Owner,
+  Toy,
+  Pet,
+} from "./models/index.js";
+export {
+  InsuranceUpdate,
+  CheckupUpdate,
+  CheckupCollectionWithNextLink,
+  OwnerUpdate,
+  OwnerCreate,
+  OwnerCollectionWithNextLink,
+  ToyCollectionWithNextLink,
+  PetUpdate,
+  PetCreate,
+  PetCollectionWithNextLink,
+} from "./models/typeSpec/rest/resource/index.js";
+export {
   OwnerInsuranceUpdateOptionalParams,
   OwnerInsuranceGetOptionalParams,
   OwnerCheckupsListOptionalParams,

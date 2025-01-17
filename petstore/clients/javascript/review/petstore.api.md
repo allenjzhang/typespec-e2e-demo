@@ -9,6 +9,22 @@ import { OperationOptions } from '@typespec/ts-http-runtime';
 import { Pipeline } from '@typespec/ts-http-runtime';
 
 // @public
+export interface Checkup {
+    // (undocumented)
+    id: number;
+    // (undocumented)
+    notes: string;
+    // (undocumented)
+    vetName: string;
+}
+
+// @public
+export interface CheckupCollectionWithNextLink {
+    nextLink?: string;
+    value: Checkup[];
+}
+
+// @public
 export interface CheckupsCreateOrUpdateOptionalParams extends OperationOptions {
 }
 
@@ -18,11 +34,46 @@ export interface CheckupsListOptionalParams extends OperationOptions {
 
 // @public
 export interface CheckupsOperations {
-    // Warning: (ae-forgotten-export) The symbol "CheckupUpdate" needs to be exported by the entry point index.d.ts
-    // Warning: (ae-forgotten-export) The symbol "Checkup" needs to be exported by the entry point index.d.ts
     createOrUpdate: (checkupId: number, resource: CheckupUpdate, options?: CheckupsCreateOrUpdateOptionalParams) => Promise<Checkup>;
-    // Warning: (ae-forgotten-export) The symbol "CheckupCollectionWithNextLink" needs to be exported by the entry point index.d.ts
     list: (options?: CheckupsListOptionalParams) => Promise<CheckupCollectionWithNextLink>;
+}
+
+// @public
+export interface CheckupUpdate {
+    // (undocumented)
+    notes?: string;
+    // (undocumented)
+    vetName?: string;
+}
+
+// @public
+export interface Insurance {
+    // (undocumented)
+    deductible: number;
+    // (undocumented)
+    premium: number;
+    // (undocumented)
+    provider: string;
+}
+
+// @public
+export interface InsuranceUpdate {
+    // (undocumented)
+    deductible?: number;
+    // (undocumented)
+    premium?: number;
+    // (undocumented)
+    provider?: string;
+}
+
+// @public
+export interface Owner {
+    // (undocumented)
+    age: number;
+    // (undocumented)
+    id: number;
+    // (undocumented)
+    name: string;
 }
 
 // @public
@@ -40,14 +91,26 @@ export interface OwnerCheckupsOperations {
 }
 
 // @public
+export interface OwnerCollectionWithNextLink {
+    nextLink?: string;
+    value: Owner[];
+}
+
+// @public
+export interface OwnerCreate {
+    // (undocumented)
+    age: number;
+    // (undocumented)
+    name: string;
+}
+
+// @public
 export interface OwnerInsuranceGetOptionalParams extends OperationOptions {
 }
 
 // @public
 export interface OwnerInsuranceOperations {
     get: (ownerId: number, options?: OwnerInsuranceGetOptionalParams) => Promise<Insurance>;
-    // Warning: (ae-forgotten-export) The symbol "InsuranceUpdate" needs to be exported by the entry point index.d.ts
-    // Warning: (ae-forgotten-export) The symbol "Insurance" needs to be exported by the entry point index.d.ts
     update: (ownerId: number, properties: InsuranceUpdate, options?: OwnerInsuranceUpdateOptionalParams) => Promise<Insurance>;
 }
 
@@ -73,19 +136,37 @@ export interface OwnersListOptionalParams extends OperationOptions {
 
 // @public
 export interface OwnersOperations {
-    // Warning: (ae-forgotten-export) The symbol "OwnerCreate" needs to be exported by the entry point index.d.ts
-    // Warning: (ae-forgotten-export) The symbol "Owner" needs to be exported by the entry point index.d.ts
     create: (resource: OwnerCreate, options?: OwnersCreateOptionalParams) => Promise<Owner>;
     delete: (ownerId: number, options?: OwnersDeleteOptionalParams) => Promise<void>;
     get: (ownerId: number, options?: OwnersGetOptionalParams) => Promise<Owner>;
-    // Warning: (ae-forgotten-export) The symbol "OwnerCollectionWithNextLink" needs to be exported by the entry point index.d.ts
     list: (options?: OwnersListOptionalParams) => Promise<OwnerCollectionWithNextLink>;
-    // Warning: (ae-forgotten-export) The symbol "OwnerUpdate" needs to be exported by the entry point index.d.ts
     update: (ownerId: number, properties: OwnerUpdate, options?: OwnersUpdateOptionalParams) => Promise<Owner>;
 }
 
 // @public
 export interface OwnersUpdateOptionalParams extends OperationOptions {
+}
+
+// @public
+export interface OwnerUpdate {
+    // (undocumented)
+    age?: number;
+    // (undocumented)
+    name?: string;
+}
+
+// @public
+export interface Pet {
+    // (undocumented)
+    age: number;
+    // (undocumented)
+    id: number;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    ownerId: number;
+    // (undocumented)
+    tag?: string;
 }
 
 // @public
@@ -100,6 +181,24 @@ export interface PetCheckupsListOptionalParams extends OperationOptions {
 export interface PetCheckupsOperations {
     createOrUpdate: (petId: number, checkupId: number, resource: CheckupUpdate, options?: PetCheckupsCreateOrUpdateOptionalParams) => Promise<Checkup>;
     list: (petId: number, options?: PetCheckupsListOptionalParams) => Promise<CheckupCollectionWithNextLink>;
+}
+
+// @public
+export interface PetCollectionWithNextLink {
+    nextLink?: string;
+    value: Pet[];
+}
+
+// @public
+export interface PetCreate {
+    // (undocumented)
+    age: number;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    ownerId: number;
+    // (undocumented)
+    tag?: string;
 }
 
 // @public
@@ -134,14 +233,10 @@ export interface PetsListOptionalParams extends OperationOptions {
 
 // @public
 export interface PetsOperations {
-    // Warning: (ae-forgotten-export) The symbol "PetCreate" needs to be exported by the entry point index.d.ts
-    // Warning: (ae-forgotten-export) The symbol "Pet" needs to be exported by the entry point index.d.ts
     create: (resource: PetCreate, options?: PetsCreateOptionalParams) => Promise<Pet>;
     delete: (petId: number, options?: PetsDeleteOptionalParams) => Promise<void>;
     get: (petId: number, options?: PetsGetOptionalParams) => Promise<Pet>;
-    // Warning: (ae-forgotten-export) The symbol "PetCollectionWithNextLink" needs to be exported by the entry point index.d.ts
     list: (options?: PetsListOptionalParams) => Promise<PetCollectionWithNextLink>;
-    // Warning: (ae-forgotten-export) The symbol "PetUpdate" needs to be exported by the entry point index.d.ts
     update: (petId: number, properties: PetUpdate, options?: PetsUpdateOptionalParams) => Promise<Pet>;
 }
 
@@ -165,7 +260,43 @@ export interface PetStoreClientOptionalParams extends ClientOptions {
 }
 
 // @public
+export interface PetStoreError {
+    // (undocumented)
+    code: number;
+    // (undocumented)
+    message: string;
+}
+
+// @public
 export interface PetsUpdateOptionalParams extends OperationOptions {
+}
+
+// @public
+export interface PetUpdate {
+    // (undocumented)
+    age?: number;
+    // (undocumented)
+    name?: string;
+    // (undocumented)
+    ownerId?: number;
+    // (undocumented)
+    tag?: string;
+}
+
+// @public
+export interface Toy {
+    // (undocumented)
+    id: number;
+    // (undocumented)
+    name: string;
+    // (undocumented)
+    petId: number;
+}
+
+// @public
+export interface ToyCollectionWithNextLink {
+    nextLink?: string;
+    value: Toy[];
 }
 
 // @public
@@ -192,10 +323,7 @@ export interface ToysListOptionalParams extends OperationOptions {
 
 // @public
 export interface ToysOperations {
-    // Warning: (ae-forgotten-export) The symbol "Toy" needs to be exported by the entry point index.d.ts
     get: (petId: number, toyId: number, options?: ToysGetOptionalParams) => Promise<Toy>;
-    // Warning: (ae-forgotten-export) The symbol "ToyCollectionWithNextLink" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     list: (petId: number, nameFilter: string, options?: ToysListOptionalParams) => Promise<ToyCollectionWithNextLink>;
 }
