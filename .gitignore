@@ -418,3 +418,6 @@ temp/
 target
 .idea
 *.iml
+
+# typescript samples bulid output
+**/samples/typescript/dist/

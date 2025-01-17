@@ -21,7 +21,6 @@ options:
   "@typespec/http-client-python":
     emitter-output-dir: "{project-root}/../clients/python"
   "@azure-tools/typespec-ts":
-    isModularLibrary: true
     "emitter-output-dir": "{project-root}/../clients/javascript"
     packageDetails:
       name: "@notabrand/todo-non-branded"
