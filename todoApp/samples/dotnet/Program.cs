@@ -1,5 +1,8 @@
-﻿using System.ClientModel;
+﻿using sample;
+using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Globalization;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using Todo;
 using Todo.Models;
@@ -54,6 +57,24 @@ var listResponse = await todoItemsClient.ListAsync();
 foreach (var i in listResponse.Value.Items)
 {
     Console.WriteLine($"Item title: {i.Title}, status: {i.Status}");
+}
+
+// upload an attachment
+var attachmentClient = todoItemsClient.GetTodoItemsAttachmentsClient();
+Console.WriteLine("upload attachment");
+const string filepath = "./image.jpg";
+using var imageStream = File.OpenRead(filepath);
+using var content = new MultiPartFormDataBinaryContent();
+content.Add(imageStream, "contents", filename: "image.jpg", contentType: "application/octet-stream");
+await attachmentClient.CreateFileAttachmentAsync(getResponse.Value.Id, content, content.ContentType);
+
+// list the attachments
+Console.WriteLine("list the attachments");
+var listAttachmentsResponse = await attachmentClient.ListAsync(getResponse.Value.Id);
+foreach (var i in listAttachmentsResponse.Value.Items)
+{
+    Console.WriteLine($"Attachment filename: {i.Filename}, media type: {i.MediaType}");
+    Console.WriteLine($"Length of the attachment: {i.Contents.ToArray().Length}");
 }
 
 Console.WriteLine("delete item");

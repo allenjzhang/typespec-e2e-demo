@@ -17,13 +17,15 @@ from corehttp.exceptions import (
 )
 from corehttp.paging import ItemPaged
 from corehttp.rest import HttpRequest, HttpResponse
+from corehttp.runtime import PipelineClient
 from corehttp.runtime.pipeline import PipelineResponse
 from corehttp.utils import case_insensitive_dict
 
 from .. import models as _models1
 from ... import _model_base, models as _models2
+from ..._configuration import TodoClientConfiguration
 from ..._model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
-from ..._serialization import Serializer
+from ..._serialization import Deserializer, Serializer
 from ..._vendor import prepare_multipart_form_data
 from ..attachments.operations._operations import TodoItemsAttachmentsOperations
 
@@ -166,10 +168,10 @@ class TodoItemsOperations:
 
     def __init__(self, *args, **kwargs):
         input_args = list(args)
-        self._client = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config: TodoClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
         self.attachments = TodoItemsAttachmentsOperations(
             self._client, self._config, self._serialize, self._deserialize

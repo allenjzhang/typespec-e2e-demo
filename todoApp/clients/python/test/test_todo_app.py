@@ -6,6 +6,7 @@ from todo.models import (
     TodoItem,
     TodoAttachment,
     ToDoItemMultipartRequest,
+    FileAttachmentMultipartRequest,
 )
 from todo.todoitems.models import TodoItemPatch
 from corehttp.exceptions import ResourceNotFoundError
@@ -82,6 +83,15 @@ def test_todo_item_delete(client):
     client.todo_items.delete(0)
 
 
+def assert_attachment_item(client, item_id, item_num, image_data):
+    result = list(client.todo_items.attachments.list(item_id))
+    assert len(result) >= item_num
+    for item in result:
+        assert item.filename == "image.jpg"
+        assert item.media_type == "application/octet-stream"
+        assert item.contents == image_data
+
+
 def test_todo_items_create_form_and_attachments_list(client, image_data):
     todo_item = client.todo_items.create_form(
         ToDoItemMultipartRequest(
@@ -100,10 +110,28 @@ def test_todo_items_create_form_and_attachments_list(client, image_data):
     assert todo_item.assigned_to == 10
     assert todo_item.description == "Need to feed pet"
 
-    attachment_items = client.todo_items.attachments.list(0)
-    result = list(attachment_items)
-    assert len(result) == 1
-    for item in result:
-        assert item.filename == "image.jpg"
-        assert item.media_type == "application/octet-stream"
-        assert item.contents == image_data
+    assert_attachment_item(client, todo_item.id, 1, image_data)
+
+
+def test_create_json_attachmets(client, image_data):
+    client.todo_items.attachments.create_json_attachment(
+        item_id=0,
+        contents=TodoAttachment(filename="image.jpg", media_type="application/octet-stream", contents=image_data),
+    )
+    assert_attachment_item(client, 0, 2, image_data)
+
+
+def test_create_json_attachmets(client, image_data):
+    client.todo_items.attachments.create_json_attachment(
+        item_id=0,
+        contents=TodoAttachment(filename="image.jpg", media_type="application/octet-stream", contents=image_data),
+    )
+    assert_attachment_item(client, 0, 2, image_data)
+
+
+def test_create_form_attachmets(client, image_data):
+    client.todo_items.attachments.create_file_attachment(
+        item_id=0,
+        body=FileAttachmentMultipartRequest(contents=open(IMAGE_PATH, "rb")),
+    )
+    assert_attachment_item(client, 0, 3, image_data)
