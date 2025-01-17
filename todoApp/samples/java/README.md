@@ -28,7 +28,7 @@ todo item in list, title=Buy milk, status=Completed
 todo item deleted, id=0
 todo item created via multipart/form-data, id=0
 todo item attachment created via multipart/form-data
-todo item attachment in list, filename=code1.java, content=public class Main {}
-todo item attachment in list, filename=code2.java, content=public class Main { private int i = 1; }
+todo item attachment in list, filename=code1.java, mediaType=text/java, content=public class Main {}
+todo item attachment in list, filename=code2.java, mediaType=text/java, content=public class Main { private int i = 1; }
 todo item deleted, id=0
 ```
