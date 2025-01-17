@@ -1,8 +1,10 @@
 ﻿using sample;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http.Headers;
+using System.Net.Mail;
 using System.Text.Json;
 using Todo;
 using Todo.Models;
@@ -59,22 +61,32 @@ foreach (var i in listResponse.Value.Items)
     Console.WriteLine($"Item title: {i.Title}, status: {i.Status}");
 }
 
-// upload an attachment
-var attachmentClient = todoItemsClient.GetTodoItemsAttachmentsClient();
-Console.WriteLine("upload attachment");
-const string filepath = "./image.jpg";
-using var imageStream = File.OpenRead(filepath);
-using var content = new MultiPartFormDataBinaryContent();
-content.Add(imageStream, "contents", filename: "image.jpg", contentType: "application/octet-stream");
-await attachmentClient.CreateFileAttachmentAsync(getResponse.Value.Id, content, content.ContentType);
+// create item via multipart/form-data
+using var todoItemsContent = new MultiPartFormDataBinaryContent();
+var newItem = new TodoItem("Read code", TodoItemStatus.NotStarted);
+todoItemsContent.Add(ModelReaderWriter.Write(newItem), "items", contentType: "application/json");
+const string codeFilename = "note1.txt";
+await using var codeFileStream = File.OpenRead(codeFilename);
+todoItemsContent.Add(codeFileStream, "attachments", filename: codeFilename, contentType: "application/octet-stream");
+var createTodoItemFormResponse = await todoItemsClient.CreateFormAsync(todoItemsContent, todoItemsContent.ContentType);
+var todoItem2 = ModelReaderWriter.Read<TodoItem>(createTodoItemFormResponse.GetRawResponse().Content);
+var todoItem2Id = todoItem2!.Id;
+Console.WriteLine($"todo item created via multipart/form-data, id: {todoItem2!.Id}");
+
+var attachmentsClient = todoItemsClient.GetTodoItemsAttachmentsClient();
+using var attachmentContent = new MultiPartFormDataBinaryContent();
+const string code2Filename = "note2.txt";
+await using var codeFileStream2 = File.OpenRead(code2Filename);
+attachmentContent.Add(codeFileStream2, "contents", filename: code2Filename, contentType: "application/octet-stream");
+await attachmentsClient.CreateFileAttachmentAsync(todoItem2!.Id, attachmentContent, attachmentContent.ContentType);
+Console.WriteLine("todo item attachment created via multipart/form-data");
 
 // list the attachments
 Console.WriteLine("list the attachments");
-var listAttachmentsResponse = await attachmentClient.ListAsync(getResponse.Value.Id);
+var listAttachmentsResponse = await attachmentsClient.ListAsync(getResponse.Value.Id);
 foreach (var i in listAttachmentsResponse.Value.Items)
 {
-    Console.WriteLine($"Attachment filename: {i.Filename}, media type: {i.MediaType}");
-    Console.WriteLine($"Length of the attachment: {i.Contents.ToArray().Length}");
+    Console.WriteLine($"Attachment filename: {i.Filename}, media type: {i.MediaType}, content: {i.Contents}");
 }
 
 Console.WriteLine("delete item");
