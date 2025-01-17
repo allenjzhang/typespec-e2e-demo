@@ -1,18 +1,19 @@
 package todo;
 
-import io.clientcore.core.http.exception.HttpResponseException;
 import io.clientcore.core.util.binarydata.BinaryData;
 import todo.todoitems.PageTodoAttachment;
 import todo.todoitems.TodoItemPatch;
 import todo.todoitems.TodoPage;
 
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Random;
 
 public final class TodoSample {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws URISyntaxException {
 
         // client
         TodoClientBuilder builder = new TodoClientBuilder().endpoint("http://localhost:5244/");
@@ -52,25 +53,28 @@ public final class TodoSample {
 
         // create item via multipart/form-data
         CreateFormResponse createTodoItemFormResponse = todoItemsClient.createForm(
-            new ToDoItemMultipartRequest(new TodoItem("Read code", TodoItemStatus.NOT_STARTED)).setAttachments(
-                List.of(new FileDetails(BinaryData.fromString("public class Main {}")).setFilename("code1.java"))));
+            new ToDoItemMultipartRequest(new TodoItem("Read code", TodoItemStatus.NOT_STARTED)).setAttachments(List
+                .of(new FileDetails(BinaryData.fromFile(Path.of(TodoSample.class.getResource("/code1.java").toURI())))
+                    .setFilename("code1.java")
+                    .setContentType("text/java"))));
         long todoItemId2 = createTodoItemFormResponse.getId();
         System.out.println("todo item created via multipart/form-data, id=" + todoItemId2);
 
         // create attachment via multipart/form-data
         todoItemsAttachmentsClient.createFileAttachment(todoItemId2,
             new FileAttachmentMultipartRequest(
-                new FileDetails(BinaryData.fromString("public class Main { private int i = 1; }"))
-                    .setFilename("code2.java")));
+                new FileDetails(BinaryData.fromFile(Path.of(TodoSample.class.getResource("/code2.java").toURI())))
+                    .setFilename("code2.java")
+                    .setContentType("text/java")));
         System.out.println("todo item attachment created via multipart/form-data");
 
         // list attachment
         PageTodoAttachment todoAttachments = todoItemsAttachmentsClient.list(todoItemId2);
         // TODO pageable
         todoAttachments.getItems()
-            .forEach(
-                attachment -> System.out.println("todo item attachment in list, filename=" + attachment.getFilename()
-                    + ", content=" + new String(attachment.getContents(), StandardCharsets.UTF_8)));
+            .forEach(attachment -> System.out.println("todo item attachment in list, filename="
+                + attachment.getFilename() + ", mediaType=" + attachment.getMediaType() + ", content="
+                + new String(attachment.getContents(), StandardCharsets.UTF_8)));
 
         // delete item
         todoItemsClient.delete(todoItemId2);
