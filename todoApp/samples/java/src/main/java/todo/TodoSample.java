@@ -57,14 +57,11 @@ public final class TodoSample {
         long todoItemId2 = createTodoItemFormResponse.getId();
         System.out.println("todo item created via multipart/form-data, id=" + todoItemId2);
 
-        try {
-            todoItemsAttachmentsClient.createFileAttachment(todoItemId2,
-                new FileAttachmentMultipartRequest(
-                    new FileDetails(BinaryData.fromString("public class Main { private int i = 1; }"))
-                        .setFilename("code2.java")));
-        } catch (HttpResponseException e) {
-            // server error, it should return 204, but presently returns 200
-        }
+        // create attachment via multipart/form-data
+        todoItemsAttachmentsClient.createFileAttachment(todoItemId2,
+            new FileAttachmentMultipartRequest(
+                new FileDetails(BinaryData.fromString("public class Main { private int i = 1; }"))
+                    .setFilename("code2.java")));
         System.out.println("todo item attachment created via multipart/form-data");
 
         // list attachment

@@ -1,6 +1,5 @@
 package todo;
 
-import io.clientcore.core.http.exception.HttpResponseException;
 import io.clientcore.core.util.binarydata.BinaryData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -54,12 +53,8 @@ public class TodoItemsTests {
                 .setAttachments(List.of(new FileDetails(javaFileContent).setFilename("code1.java"))));
         long todoItemId = createTodoItemResponse.getId();
 
-        try {
-            attachmentsClient.createFileAttachment(todoItemId,
-                new FileAttachmentMultipartRequest(new FileDetails(javaFileContent).setFilename("code2.java")));
-        } catch (HttpResponseException e) {
-            // server error, it should return 204, but presently returns 200
-        }
+        attachmentsClient.createFileAttachment(todoItemId,
+            new FileAttachmentMultipartRequest(new FileDetails(javaFileContent).setFilename("code2.java")));
 
         PageTodoAttachment attachments = attachmentsClient.list(todoItemId);
         Assertions.assertEquals(2, attachments.getItems().size());
