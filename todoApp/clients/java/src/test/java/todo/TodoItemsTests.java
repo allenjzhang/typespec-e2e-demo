@@ -1,11 +1,10 @@
 package todo;
 
+import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.util.binarydata.BinaryData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import todo.todoitems.PageTodoAttachment;
 import todo.todoitems.TodoItemPatch;
-import todo.todoitems.TodoPage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,9 +35,9 @@ public class TodoItemsTests {
 
         // TODO pageable
         // list items
-        TodoPage todoItemsPage = client.list();
-        Assertions.assertEquals(1L, todoItemsPage.getItems().size());
-        Assertions.assertEquals("Need to buy milk", todoItemsPage.getItems().get(0).getDescription());
+        PagedIterable<TodoItem> todoItems = client.list();
+        Assertions.assertEquals(1L, todoItems.stream().count());
+        Assertions.assertEquals("Need to buy milk", todoItems.iterator().next().getDescription());
 
         // delete item
         client.delete(todoItemId);
@@ -56,9 +55,9 @@ public class TodoItemsTests {
         attachmentsClient.createFileAttachment(todoItemId,
             new FileAttachmentMultipartRequest(new FileDetails(javaFileContent).setFilename("code2.java")));
 
-        PageTodoAttachment attachments = attachmentsClient.list(todoItemId);
-        Assertions.assertEquals(2, attachments.getItems().size());
+        PagedIterable<TodoAttachment> attachments = attachmentsClient.list(todoItemId);
+        Assertions.assertEquals(2, attachments.stream().count());
         Assertions.assertEquals(List.of("code1.java", "code2.java"),
-            attachments.getItems().stream().map(TodoAttachment::getFilename).toList());
+            attachments.stream().map(TodoAttachment::getFilename).toList());
     }
 }

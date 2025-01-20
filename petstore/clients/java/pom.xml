@@ -28,7 +28,7 @@
     <dependency>
       <groupId>io.clientcore</groupId>
       <artifactId>core</artifactId>
-      <version>1.0.0-beta.1</version> <!-- {x-version-update;io.clientcore:core;external_dependency} -->
+      <version>1.0.0-beta.2</version> <!-- {x-version-update;io.clientcore:core;external_dependency} -->
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>

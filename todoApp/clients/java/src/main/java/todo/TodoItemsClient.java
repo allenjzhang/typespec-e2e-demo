@@ -3,8 +3,11 @@
 package todo;
 
 import io.clientcore.core.annotation.Metadata;
+import io.clientcore.core.annotation.ReturnType;
 import io.clientcore.core.annotation.ServiceClient;
+import io.clientcore.core.annotation.ServiceMethod;
 import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
 import io.clientcore.core.util.binarydata.BinaryData;
@@ -15,7 +18,6 @@ import todo.implementation.JsonMergePatchHelper;
 import todo.implementation.MultipartFormDataHelper;
 import todo.implementation.TodoItemsImpl;
 import todo.todoitems.TodoItemPatch;
-import todo.todoitems.TodoPage;
 
 /**
  * Initializes a new instance of the synchronous TodoClient type.
@@ -78,8 +80,9 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public Response<TodoPage> listWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.listWithResponse(requestOptions);
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoItem> list(RequestOptions requestOptions) {
+        return this.serviceClient.list(requestOptions);
     }
 
     /**
@@ -276,8 +279,9 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public TodoPage list(Integer limit, Integer offset) {
-        // Generated convenience method for listWithResponse
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoItem> list(Integer limit, Integer offset) {
+        // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (limit != null) {
             requestOptions.addQueryParam("limit", String.valueOf(limit));
@@ -285,7 +289,7 @@ public final class TodoItemsClient {
         if (offset != null) {
             requestOptions.addQueryParam("offset", String.valueOf(offset));
         }
-        return listWithResponse(requestOptions).getValue();
+        return serviceClient.list(requestOptions);
     }
 
     /**
@@ -296,10 +300,11 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public TodoPage list() {
-        // Generated convenience method for listWithResponse
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoItem> list() {
+        // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return listWithResponse(requestOptions).getValue();
+        return serviceClient.list(requestOptions);
     }
 
     /**

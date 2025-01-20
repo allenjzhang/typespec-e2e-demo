@@ -1,9 +1,8 @@
 package todo;
 
+import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.util.binarydata.BinaryData;
-import todo.todoitems.PageTodoAttachment;
 import todo.todoitems.TodoItemPatch;
-import todo.todoitems.TodoPage;
 
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -41,12 +40,10 @@ public final class TodoSample {
             = todoItemsClient.update(todoItemId, new TodoItemPatch().setStatus(TodoItemPatchStatus.COMPLETED));
         System.out.println("todo item updated, status=" + updateTodoItemResponse.getStatus());
 
-        // TODO pageable
         // list items
-        TodoPage todoItemsPage = todoItemsClient.list();
-        todoItemsPage.getItems()
-            .forEach(item -> System.out
-                .println("todo item in list, title=" + item.getTitle() + ", status=" + item.getStatus()));
+        PagedIterable<TodoItem> todoItemsPage = todoItemsClient.list();
+        todoItemsPage.forEach(
+            item -> System.out.println("todo item in list, title=" + item.getTitle() + ", status=" + item.getStatus()));
 
         todoItemsClient.delete(todoItemId);
         System.out.println("todo item deleted, id=" + todoItemId);
@@ -69,12 +66,10 @@ public final class TodoSample {
         System.out.println("todo item attachment created via multipart/form-data");
 
         // list attachment
-        PageTodoAttachment todoAttachments = todoItemsAttachmentsClient.list(todoItemId2);
-        // TODO pageable
-        todoAttachments.getItems()
-            .forEach(attachment -> System.out.println("todo item attachment in list, filename="
-                + attachment.getFilename() + ", mediaType=" + attachment.getMediaType() + ", content="
-                + new String(attachment.getContents(), StandardCharsets.UTF_8)));
+        PagedIterable<TodoAttachment> todoAttachments = todoItemsAttachmentsClient.list(todoItemId2);
+        todoAttachments.forEach(attachment -> System.out.println("todo item attachment in list, filename="
+            + attachment.getFilename() + ", mediaType=" + attachment.getMediaType() + ", content="
+            + new String(attachment.getContents(), StandardCharsets.UTF_8)));
 
         // delete item
         todoItemsClient.delete(todoItemId2);
