@@ -10,25 +10,43 @@ import { OperationOptions } from '@typespec/ts-http-runtime';
 import { Pipeline } from '@typespec/ts-http-runtime';
 
 // @public
+export interface ApiError {
+    code: string;
+    message: string;
+}
+
+// @public
 export type ContinuablePage<TElement, TPage = TElement[]> = TPage & {
     continuationToken?: string;
 };
 
 // @public
-interface File_2 {
-    // (undocumented)
-    contents: Uint8Array;
-    // (undocumented)
-    contentType?: string;
-    // (undocumented)
-    filename?: string;
-}
-export { File_2 as File }
-
-// @public
 export interface FileAttachmentMultipartRequest {
     // (undocumented)
-    contents: File_2;
+    contents: FileContents | {
+        contents: FileContents;
+        contentType?: string;
+        filename?: string;
+    };
+}
+
+// @public
+export type FileContents = string | NodeJS.ReadableStream | ReadableStream<Uint8Array> | Uint8Array | Blob;
+
+// @public
+export interface InvalidTodoItem extends ApiError {
+}
+
+// @public
+export interface InvalidUserResponse extends ApiError {
+    // (undocumented)
+    code: "invalid-user";
+}
+
+// @public
+export interface NotFoundErrorResponse {
+    // (undocumented)
+    code: "not-found";
 }
 
 // @public
@@ -47,6 +65,14 @@ export interface PageSettings {
 export interface PageTodoAttachment {
     // (undocumented)
     items: TodoAttachment[];
+}
+
+// @public
+export interface Standard4XXResponse extends ApiError {
+}
+
+// @public
+export interface Standard5XXResponse extends ApiError {
 }
 
 // @public
@@ -88,7 +114,11 @@ export interface TodoItem {
 // @public
 export interface ToDoItemMultipartRequest {
     // (undocumented)
-    attachments?: File_2[];
+    attachments?: Array<FileContents | {
+        contents: FileContents;
+        contentType?: string;
+        filename?: string;
+    }>;
     // (undocumented)
     item: TodoItem;
 }
@@ -238,6 +268,12 @@ export interface User {
     readonly id: number;
     password: string;
     username: string;
+}
+
+// @public
+export interface UserExistsResponse extends ApiError {
+    // (undocumented)
+    code: "user-exists";
 }
 
 // @public

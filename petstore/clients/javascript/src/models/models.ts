@@ -15,6 +15,19 @@ export function insuranceDeserializer(item: any): Insurance {
   };
 }
 
+/** model interface PetStoreError */
+export interface PetStoreError {
+  code: number;
+  message: string;
+}
+
+export function petStoreErrorDeserializer(item: any): PetStoreError {
+  return {
+    code: item["code"],
+    message: item["message"],
+  };
+}
+
 /** Resource create or update operation model. */
 export interface InsuranceUpdate {
   provider?: string;

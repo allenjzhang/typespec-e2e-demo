@@ -23,8 +23,7 @@
       "@azure-tools/typespec-ts": {
         "description": "Client: generate TypeScript client",
         "options": {
-          "emitter-output-dir": "{project-root}/clients/javascript",
-          "isModularLibrary": true
+          "emitter-output-dir": "{project-root}/clients/javascript"
         }
       },
       "@typespec/http-client-java": {

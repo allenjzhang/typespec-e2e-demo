@@ -85,8 +85,8 @@ public final class TodoClientImpl {
      * @param endpoint Service host.
      */
     public TodoClientImpl(HttpPipeline httpPipeline, String endpoint) {
-        this.endpoint = endpoint;
         this.httpPipeline = httpPipeline;
+        this.endpoint = endpoint;
         this.users = new UsersImpl(this);
         this.todoItems = new TodoItemsImpl(this);
         this.todoItemsAttachments = new TodoItemsAttachmentsImpl(this);

@@ -169,8 +169,8 @@ public final class PetStoreClientImpl {
      * @param endpoint Service host.
      */
     public PetStoreClientImpl(HttpPipeline httpPipeline, String endpoint) {
-        this.endpoint = endpoint;
         this.httpPipeline = httpPipeline;
+        this.endpoint = endpoint;
         this.pets = new PetsImpl(this);
         this.petCheckups = new PetCheckupsImpl(this);
         this.petInsurances = new PetInsurancesImpl(this);

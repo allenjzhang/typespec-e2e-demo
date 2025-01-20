@@ -1,33 +1,13 @@
 // Licensed under the MIT License.
 
 import {
+  FileContents,
+  createFilePartDescriptor,
+} from "../static-helpers/multipartHelpers.js";
+import {
   uint8ArrayToString,
   stringToUint8Array,
 } from "@typespec/ts-http-runtime";
-
-/** model interface TodoPage */
-export interface TodoPage {
-  /** The items in the page */
-  items: TodoItem[];
-  /** The number of items returned in this page */
-  pageSize: number;
-  /** The total number of items */
-  totalSize: number;
-  /** A link to the previous page, if it exists */
-  prevLink?: string;
-  /** A link to the next page, if it exists */
-  nextLink?: string;
-}
-
-export function todoPageDeserializer(item: any): TodoPage {
-  return {
-    items: todoItemArrayDeserializer(item["items"]),
-    pageSize: item["pageSize"],
-    totalSize: item["totalSize"],
-    prevLink: item["prevLink"],
-    nextLink: item["nextLink"],
-  };
-}
 
 export function todoItemArraySerializer(result: Array<TodoItem>): any[] {
   return result.map((item) => {
@@ -146,6 +126,45 @@ export function todoLabelRecordArrayDeserializer(
   });
 }
 
+/** Something is wrong with you. */
+export interface Standard4XXResponse extends ApiError {}
+
+export function standard4XXResponseDeserializer(
+  item: any,
+): Standard4XXResponse {
+  return {
+    code: item["code"],
+    message: item["message"],
+  };
+}
+
+/** model interface ApiError */
+export interface ApiError {
+  /** A machine readable error code */
+  code: string;
+  /** A human readable message */
+  message: string;
+}
+
+export function apiErrorDeserializer(item: any): ApiError {
+  return {
+    code: item["code"],
+    message: item["message"],
+  };
+}
+
+/** Something is wrong with me. */
+export interface Standard5XXResponse extends ApiError {}
+
+export function standard5XXResponseDeserializer(
+  item: any,
+): Standard5XXResponse {
+  return {
+    code: item["code"],
+    message: item["message"],
+  };
+}
+
 /** model interface TodoAttachment */
 export interface TodoAttachment {
   /** The file name of the attachment */
@@ -238,39 +257,25 @@ export function _createJsonResponseDeserializer(
 /** model interface ToDoItemMultipartRequest */
 export interface ToDoItemMultipartRequest {
   item: TodoItem;
-  attachments?: File[];
+  attachments?: Array<
+    | FileContents
+    | { contents: FileContents; contentType?: string; filename?: string }
+  >;
 }
 
 export function toDoItemMultipartRequestSerializer(
   item: ToDoItemMultipartRequest,
 ): any {
-  return {
-    item: todoItemSerializer(item["item"]),
-    attachments: !item["attachments"]
-      ? item["attachments"]
-      : fileArraySerializer(item["attachments"]),
-  };
-}
-
-export function fileArraySerializer(result: Array<File>): any[] {
-  return result.map((item) => {
-    return fileSerializer(item);
-  });
-}
-
-/** model interface File */
-export interface File {
-  contentType?: string;
-  filename?: string;
-  contents: Uint8Array;
-}
-
-export function fileSerializer(item: File): any {
-  return {
-    contentType: item["contentType"],
-    filename: item["filename"],
-    contents: uint8ArrayToString(item["contents"], "base64"),
-  };
+  return [
+    { name: "item", body: todoItemSerializer(item["item"]) },
+    ...(item["attachments"] === undefined
+      ? []
+      : [
+          ...item["attachments"].map((x: unknown) =>
+            createFilePartDescriptor("attachments", x),
+          ),
+        ]),
+  ];
 }
 
 /** model interface _CreateFormResponse */
@@ -359,27 +364,6 @@ export function _getResponseDeserializer(item: any): _GetResponse {
   };
 }
 
-/** model interface TodoItemPatch */
-export interface TodoItemPatch {
-  /** The item's title */
-  title?: string;
-  /** User that the todo is assigned to */
-  assignedTo?: number | null;
-  /** A longer description of the todo item in markdown format */
-  description?: string | null;
-  /** The status of the todo item */
-  status?: "NotStarted" | "InProgress" | "Completed";
-}
-
-export function todoItemPatchSerializer(item: TodoItemPatch): any {
-  return {
-    title: item["title"],
-    assignedTo: item["assignedTo"],
-    description: item["description"],
-    status: item["status"],
-  };
-}
-
 /** model interface _UpdateResponse */
 export interface _UpdateResponse {
   /** The item's unique id */
@@ -422,26 +406,17 @@ export function _updateResponseDeserializer(item: any): _UpdateResponse {
   };
 }
 
-/** model interface PageTodoAttachment */
-export interface PageTodoAttachment {
-  items: TodoAttachment[];
-}
-
-export function pageTodoAttachmentDeserializer(item: any): PageTodoAttachment {
-  return {
-    items: todoAttachmentArrayDeserializer(item["items"]),
-  };
-}
-
 /** model interface FileAttachmentMultipartRequest */
 export interface FileAttachmentMultipartRequest {
-  contents: File;
+  contents:
+    | FileContents
+    | { contents: FileContents; contentType?: string; filename?: string };
 }
 
 export function fileAttachmentMultipartRequestSerializer(
   item: FileAttachmentMultipartRequest,
 ): any {
-  return { contents: fileSerializer(item["contents"]) };
+  return [createFilePartDescriptor("contents", item["contents"])];
 }
 
 /** model interface User */

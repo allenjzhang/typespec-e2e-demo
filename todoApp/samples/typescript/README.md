@@ -8,6 +8,9 @@ The operations include:
 - create a todo item
 - get the created todo item
 - list all available todo items
+- create a new todo item via multipart/form-data operation
+- upload a local file as the attachment of the created todo item
+- list all existing attachments
 - delete the todo item
 
 ## Prerequisites

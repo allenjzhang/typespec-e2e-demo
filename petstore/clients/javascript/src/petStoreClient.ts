@@ -1,35 +1,35 @@
 // Licensed under the MIT License.
 
-import { getPetsOperations, PetsOperations } from "./classic/pets/index.js";
 import {
-  getPetCheckupsOperations,
-  PetCheckupsOperations,
-} from "./classic/petCheckups/index.js";
+  _getOwnerInsuranceOperations,
+  OwnerInsuranceOperations,
+} from "./classic/ownerInsurance/index.js";
 import {
-  getPetInsuranceOperations,
-  PetInsuranceOperations,
-} from "./classic/petInsurance/index.js";
-import { getToysOperations, ToysOperations } from "./classic/toys/index.js";
-import {
-  getToyInsuranceOperations,
-  ToyInsuranceOperations,
-} from "./classic/toyInsurance/index.js";
-import {
-  getCheckupsOperations,
-  CheckupsOperations,
-} from "./classic/checkups/index.js";
-import {
-  getOwnersOperations,
-  OwnersOperations,
-} from "./classic/owners/index.js";
-import {
-  getOwnerCheckupsOperations,
+  _getOwnerCheckupsOperations,
   OwnerCheckupsOperations,
 } from "./classic/ownerCheckups/index.js";
 import {
-  getOwnerInsuranceOperations,
-  OwnerInsuranceOperations,
-} from "./classic/ownerInsurance/index.js";
+  _getOwnersOperations,
+  OwnersOperations,
+} from "./classic/owners/index.js";
+import {
+  _getCheckupsOperations,
+  CheckupsOperations,
+} from "./classic/checkups/index.js";
+import {
+  _getToyInsuranceOperations,
+  ToyInsuranceOperations,
+} from "./classic/toyInsurance/index.js";
+import { _getToysOperations, ToysOperations } from "./classic/toys/index.js";
+import {
+  _getPetInsuranceOperations,
+  PetInsuranceOperations,
+} from "./classic/petInsurance/index.js";
+import {
+  _getPetCheckupsOperations,
+  PetCheckupsOperations,
+} from "./classic/petCheckups/index.js";
+import { _getPetsOperations, PetsOperations } from "./classic/pets/index.js";
 import {
   createPetStore,
   PetStoreContext,
@@ -57,33 +57,33 @@ export class PetStoreClient {
       userAgentOptions: { userAgentPrefix },
     });
     this.pipeline = this._client.pipeline;
-    this.pets = getPetsOperations(this._client);
-    this.petCheckups = getPetCheckupsOperations(this._client);
-    this.petInsurance = getPetInsuranceOperations(this._client);
-    this.toys = getToysOperations(this._client);
-    this.toyInsurance = getToyInsuranceOperations(this._client);
-    this.checkups = getCheckupsOperations(this._client);
-    this.owners = getOwnersOperations(this._client);
-    this.ownerCheckups = getOwnerCheckupsOperations(this._client);
-    this.ownerInsurance = getOwnerInsuranceOperations(this._client);
+    this.ownerInsurance = _getOwnerInsuranceOperations(this._client);
+    this.ownerCheckups = _getOwnerCheckupsOperations(this._client);
+    this.owners = _getOwnersOperations(this._client);
+    this.checkups = _getCheckupsOperations(this._client);
+    this.toyInsurance = _getToyInsuranceOperations(this._client);
+    this.toys = _getToysOperations(this._client);
+    this.petInsurance = _getPetInsuranceOperations(this._client);
+    this.petCheckups = _getPetCheckupsOperations(this._client);
+    this.pets = _getPetsOperations(this._client);
   }
 
-  /** The operation groups for Pets */
-  public readonly pets: PetsOperations;
-  /** The operation groups for PetCheckups */
-  public readonly petCheckups: PetCheckupsOperations;
-  /** The operation groups for PetInsurance */
-  public readonly petInsurance: PetInsuranceOperations;
-  /** The operation groups for Toys */
-  public readonly toys: ToysOperations;
-  /** The operation groups for ToyInsurance */
-  public readonly toyInsurance: ToyInsuranceOperations;
-  /** The operation groups for Checkups */
-  public readonly checkups: CheckupsOperations;
-  /** The operation groups for Owners */
-  public readonly owners: OwnersOperations;
-  /** The operation groups for OwnerCheckups */
-  public readonly ownerCheckups: OwnerCheckupsOperations;
-  /** The operation groups for OwnerInsurance */
+  /** The operation groups for ownerInsurance */
   public readonly ownerInsurance: OwnerInsuranceOperations;
+  /** The operation groups for ownerCheckups */
+  public readonly ownerCheckups: OwnerCheckupsOperations;
+  /** The operation groups for owners */
+  public readonly owners: OwnersOperations;
+  /** The operation groups for checkups */
+  public readonly checkups: CheckupsOperations;
+  /** The operation groups for toyInsurance */
+  public readonly toyInsurance: ToyInsuranceOperations;
+  /** The operation groups for toys */
+  public readonly toys: ToysOperations;
+  /** The operation groups for petInsurance */
+  public readonly petInsurance: PetInsuranceOperations;
+  /** The operation groups for petCheckups */
+  public readonly petCheckups: PetCheckupsOperations;
+  /** The operation groups for pets */
+  public readonly pets: PetsOperations;
 }
