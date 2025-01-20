@@ -423,7 +423,7 @@ target
 **/samples/typescript/dist
 
 # Javascript client build
-**/clients/Javascript/dist
+**/clients/javascript/dist
 .tshy
 .tshy-build
-**/clients/Javascript/types
+**/clients/javascript/types
