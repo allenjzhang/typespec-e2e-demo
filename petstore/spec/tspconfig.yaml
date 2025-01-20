@@ -1,7 +1,7 @@
 emit:
   - "@typespec/http-server-csharp"
   - "@typespec/http-client-csharp"
-  - "@typespec/http-server-javascript"
+  # - "@typespec/http-server-javascript" # disabled until https://github.com/allenjzhang/typespec-e2e-demo/issues/91 is fixed
   - "@typespec/http-client-java"
   - "@azure-tools/typespec-ts"
   - "@typespec/http-client-python"
