@@ -11,17 +11,17 @@
     "exports": {
       "./package.json": "./package.json",
       ".": "./src/index.ts",
-      "./models": "./src/models/index.ts",
       "./api": "./src/api/index.ts",
-      "./api/pets": "./src/api/pets/index.ts",
-      "./api/petCheckups": "./src/api/petCheckups/index.ts",
-      "./api/petInsurance": "./src/api/petInsurance/index.ts",
-      "./api/toys": "./src/api/toys/index.ts",
-      "./api/toyInsurance": "./src/api/toyInsurance/index.ts",
-      "./api/checkups": "./src/api/checkups/index.ts",
-      "./api/owners": "./src/api/owners/index.ts",
+      "./api/ownerInsurance": "./src/api/ownerInsurance/index.ts",
       "./api/ownerCheckups": "./src/api/ownerCheckups/index.ts",
-      "./api/ownerInsurance": "./src/api/ownerInsurance/index.ts"
+      "./api/owners": "./src/api/owners/index.ts",
+      "./api/checkups": "./src/api/checkups/index.ts",
+      "./api/toyInsurance": "./src/api/toyInsurance/index.ts",
+      "./api/toys": "./src/api/toys/index.ts",
+      "./api/petInsurance": "./src/api/petInsurance/index.ts",
+      "./api/petCheckups": "./src/api/petCheckups/index.ts",
+      "./api/pets": "./src/api/pets/index.ts",
+      "./models": "./src/models/index.ts"
     },
     "dialects": [
       "esm",
@@ -40,9 +40,7 @@
     "pack": "npm pack 2>&1",
     "lint": "eslint package.json api-extractor.json src",
     "lint:fix": "eslint package.json api-extractor.json src --fix --fix-type [problem,suggestion]",
-    "build": "npm run clean && tshy && npm run extract-api",
-    "test": "npx vitest -c vitest.config.ts",
-    "server": "dotnet run --project ../../servers/aspnet/petstore.csproj"
+    "build": "npm run clean && tshy && npm run extract-api"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.40.3",
@@ -51,12 +49,11 @@
     "typescript": "~5.6.2",
     "tshy": "^2.0.0",
     "rimraf": "^5.0.5",
-    "mkdirp": "^3.0.1",
-    "vitest": "^2.0.5"
+    "mkdirp": "^3.0.1"
   },
   "dependencies": {
     "tslib": "^2.6.2",
-    "@typespec/ts-http-runtime": "^0.1.0"
+    "@typespec/ts-http-runtime": "0.1.0"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -78,24 +75,6 @@
         "default": "./dist/commonjs/index.js"
       }
     },
-    "./models": {
-      "browser": {
-        "types": "./dist/browser/models/index.d.ts",
-        "default": "./dist/browser/models/index.js"
-      },
-      "react-native": {
-        "types": "./dist/react-native/models/index.d.ts",
-        "default": "./dist/react-native/models/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/models/index.d.ts",
-        "default": "./dist/esm/models/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/models/index.d.ts",
-        "default": "./dist/commonjs/models/index.js"
-      }
-    },
     "./api": {
       "browser": {
         "types": "./dist/browser/api/index.d.ts",
@@ -114,130 +93,22 @@
         "default": "./dist/commonjs/api/index.js"
       }
     },
-    "./api/pets": {
+    "./api/ownerInsurance": {
       "browser": {
-        "types": "./dist/browser/api/pets/index.d.ts",
-        "default": "./dist/browser/api/pets/index.js"
+        "types": "./dist/browser/api/ownerInsurance/index.d.ts",
+        "default": "./dist/browser/api/ownerInsurance/index.js"
       },
       "react-native": {
-        "types": "./dist/react-native/api/pets/index.d.ts",
-        "default": "./dist/react-native/api/pets/index.js"
+        "types": "./dist/react-native/api/ownerInsurance/index.d.ts",
+        "default": "./dist/react-native/api/ownerInsurance/index.js"
       },
       "import": {
-        "types": "./dist/esm/api/pets/index.d.ts",
-        "default": "./dist/esm/api/pets/index.js"
+        "types": "./dist/esm/api/ownerInsurance/index.d.ts",
+        "default": "./dist/esm/api/ownerInsurance/index.js"
       },
       "require": {
-        "types": "./dist/commonjs/api/pets/index.d.ts",
-        "default": "./dist/commonjs/api/pets/index.js"
-      }
-    },
-    "./api/petCheckups": {
-      "browser": {
-        "types": "./dist/browser/api/petCheckups/index.d.ts",
-        "default": "./dist/browser/api/petCheckups/index.js"
-      },
-      "react-native": {
-        "types": "./dist/react-native/api/petCheckups/index.d.ts",
-        "default": "./dist/react-native/api/petCheckups/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/api/petCheckups/index.d.ts",
-        "default": "./dist/esm/api/petCheckups/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/api/petCheckups/index.d.ts",
-        "default": "./dist/commonjs/api/petCheckups/index.js"
-      }
-    },
-    "./api/petInsurance": {
-      "browser": {
-        "types": "./dist/browser/api/petInsurance/index.d.ts",
-        "default": "./dist/browser/api/petInsurance/index.js"
-      },
-      "react-native": {
-        "types": "./dist/react-native/api/petInsurance/index.d.ts",
-        "default": "./dist/react-native/api/petInsurance/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/api/petInsurance/index.d.ts",
-        "default": "./dist/esm/api/petInsurance/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/api/petInsurance/index.d.ts",
-        "default": "./dist/commonjs/api/petInsurance/index.js"
-      }
-    },
-    "./api/toys": {
-      "browser": {
-        "types": "./dist/browser/api/toys/index.d.ts",
-        "default": "./dist/browser/api/toys/index.js"
-      },
-      "react-native": {
-        "types": "./dist/react-native/api/toys/index.d.ts",
-        "default": "./dist/react-native/api/toys/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/api/toys/index.d.ts",
-        "default": "./dist/esm/api/toys/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/api/toys/index.d.ts",
-        "default": "./dist/commonjs/api/toys/index.js"
-      }
-    },
-    "./api/toyInsurance": {
-      "browser": {
-        "types": "./dist/browser/api/toyInsurance/index.d.ts",
-        "default": "./dist/browser/api/toyInsurance/index.js"
-      },
-      "react-native": {
-        "types": "./dist/react-native/api/toyInsurance/index.d.ts",
-        "default": "./dist/react-native/api/toyInsurance/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/api/toyInsurance/index.d.ts",
-        "default": "./dist/esm/api/toyInsurance/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/api/toyInsurance/index.d.ts",
-        "default": "./dist/commonjs/api/toyInsurance/index.js"
-      }
-    },
-    "./api/checkups": {
-      "browser": {
-        "types": "./dist/browser/api/checkups/index.d.ts",
-        "default": "./dist/browser/api/checkups/index.js"
-      },
-      "react-native": {
-        "types": "./dist/react-native/api/checkups/index.d.ts",
-        "default": "./dist/react-native/api/checkups/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/api/checkups/index.d.ts",
-        "default": "./dist/esm/api/checkups/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/api/checkups/index.d.ts",
-        "default": "./dist/commonjs/api/checkups/index.js"
-      }
-    },
-    "./api/owners": {
-      "browser": {
-        "types": "./dist/browser/api/owners/index.d.ts",
-        "default": "./dist/browser/api/owners/index.js"
-      },
-      "react-native": {
-        "types": "./dist/react-native/api/owners/index.d.ts",
-        "default": "./dist/react-native/api/owners/index.js"
-      },
-      "import": {
-        "types": "./dist/esm/api/owners/index.d.ts",
-        "default": "./dist/esm/api/owners/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/api/owners/index.d.ts",
-        "default": "./dist/commonjs/api/owners/index.js"
+        "types": "./dist/commonjs/api/ownerInsurance/index.d.ts",
+        "default": "./dist/commonjs/api/ownerInsurance/index.js"
       }
     },
     "./api/ownerCheckups": {
@@ -258,22 +129,148 @@
         "default": "./dist/commonjs/api/ownerCheckups/index.js"
       }
     },
-    "./api/ownerInsurance": {
+    "./api/owners": {
       "browser": {
-        "types": "./dist/browser/api/ownerInsurance/index.d.ts",
-        "default": "./dist/browser/api/ownerInsurance/index.js"
+        "types": "./dist/browser/api/owners/index.d.ts",
+        "default": "./dist/browser/api/owners/index.js"
       },
       "react-native": {
-        "types": "./dist/react-native/api/ownerInsurance/index.d.ts",
-        "default": "./dist/react-native/api/ownerInsurance/index.js"
+        "types": "./dist/react-native/api/owners/index.d.ts",
+        "default": "./dist/react-native/api/owners/index.js"
       },
       "import": {
-        "types": "./dist/esm/api/ownerInsurance/index.d.ts",
-        "default": "./dist/esm/api/ownerInsurance/index.js"
+        "types": "./dist/esm/api/owners/index.d.ts",
+        "default": "./dist/esm/api/owners/index.js"
       },
       "require": {
-        "types": "./dist/commonjs/api/ownerInsurance/index.d.ts",
-        "default": "./dist/commonjs/api/ownerInsurance/index.js"
+        "types": "./dist/commonjs/api/owners/index.d.ts",
+        "default": "./dist/commonjs/api/owners/index.js"
+      }
+    },
+    "./api/checkups": {
+      "browser": {
+        "types": "./dist/browser/api/checkups/index.d.ts",
+        "default": "./dist/browser/api/checkups/index.js"
+      },
+      "react-native": {
+        "types": "./dist/react-native/api/checkups/index.d.ts",
+        "default": "./dist/react-native/api/checkups/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/api/checkups/index.d.ts",
+        "default": "./dist/esm/api/checkups/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/api/checkups/index.d.ts",
+        "default": "./dist/commonjs/api/checkups/index.js"
+      }
+    },
+    "./api/toyInsurance": {
+      "browser": {
+        "types": "./dist/browser/api/toyInsurance/index.d.ts",
+        "default": "./dist/browser/api/toyInsurance/index.js"
+      },
+      "react-native": {
+        "types": "./dist/react-native/api/toyInsurance/index.d.ts",
+        "default": "./dist/react-native/api/toyInsurance/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/api/toyInsurance/index.d.ts",
+        "default": "./dist/esm/api/toyInsurance/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/api/toyInsurance/index.d.ts",
+        "default": "./dist/commonjs/api/toyInsurance/index.js"
+      }
+    },
+    "./api/toys": {
+      "browser": {
+        "types": "./dist/browser/api/toys/index.d.ts",
+        "default": "./dist/browser/api/toys/index.js"
+      },
+      "react-native": {
+        "types": "./dist/react-native/api/toys/index.d.ts",
+        "default": "./dist/react-native/api/toys/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/api/toys/index.d.ts",
+        "default": "./dist/esm/api/toys/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/api/toys/index.d.ts",
+        "default": "./dist/commonjs/api/toys/index.js"
+      }
+    },
+    "./api/petInsurance": {
+      "browser": {
+        "types": "./dist/browser/api/petInsurance/index.d.ts",
+        "default": "./dist/browser/api/petInsurance/index.js"
+      },
+      "react-native": {
+        "types": "./dist/react-native/api/petInsurance/index.d.ts",
+        "default": "./dist/react-native/api/petInsurance/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/api/petInsurance/index.d.ts",
+        "default": "./dist/esm/api/petInsurance/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/api/petInsurance/index.d.ts",
+        "default": "./dist/commonjs/api/petInsurance/index.js"
+      }
+    },
+    "./api/petCheckups": {
+      "browser": {
+        "types": "./dist/browser/api/petCheckups/index.d.ts",
+        "default": "./dist/browser/api/petCheckups/index.js"
+      },
+      "react-native": {
+        "types": "./dist/react-native/api/petCheckups/index.d.ts",
+        "default": "./dist/react-native/api/petCheckups/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/api/petCheckups/index.d.ts",
+        "default": "./dist/esm/api/petCheckups/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/api/petCheckups/index.d.ts",
+        "default": "./dist/commonjs/api/petCheckups/index.js"
+      }
+    },
+    "./api/pets": {
+      "browser": {
+        "types": "./dist/browser/api/pets/index.d.ts",
+        "default": "./dist/browser/api/pets/index.js"
+      },
+      "react-native": {
+        "types": "./dist/react-native/api/pets/index.d.ts",
+        "default": "./dist/react-native/api/pets/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/api/pets/index.d.ts",
+        "default": "./dist/esm/api/pets/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/api/pets/index.d.ts",
+        "default": "./dist/commonjs/api/pets/index.js"
+      }
+    },
+    "./models": {
+      "browser": {
+        "types": "./dist/browser/models/index.d.ts",
+        "default": "./dist/browser/models/index.js"
+      },
+      "react-native": {
+        "types": "./dist/react-native/models/index.d.ts",
+        "default": "./dist/react-native/models/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/models/index.d.ts",
+        "default": "./dist/esm/models/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/models/index.d.ts",
+        "default": "./dist/commonjs/models/index.js"
       }
     }
   },
