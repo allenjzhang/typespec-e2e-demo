@@ -421,3 +421,9 @@ target
 
 # typescript samples bulid output
 **/samples/typescript/dist
+
+# Javascript client build
+**/clients/Javascript/dist
+.tshy
+.tshy-build
+**/clients/Javascript/types
