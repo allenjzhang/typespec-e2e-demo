@@ -9,7 +9,7 @@
     "@typespec/http-client-csharp": "^0.1.9-alpha.20250117.1",
     "@typespec/http-server-csharp": "0.58.0-alpha.7",
     "@typespec/http-server-javascript": "^0.58.0-alpha.7",
-    "@typespec/http-client-java": "^0.1.7",
+    "@typespec/http-client-java": "^0.1.9",
     "@azure-tools/typespec-ts": "^0.38.1",
     "@typespec/http-client-python": "^0.6.5",
     "@typespec/json-schema": "^0.64.0",
