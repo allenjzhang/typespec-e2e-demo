@@ -12,13 +12,16 @@ import io.clientcore.core.http.annotation.PathParam;
 import io.clientcore.core.http.annotation.UnexpectedResponseExceptionDetail;
 import io.clientcore.core.http.exception.HttpResponseException;
 import io.clientcore.core.http.models.HttpMethod;
+import io.clientcore.core.http.models.PagedIterable;
+import io.clientcore.core.http.models.PagedResponse;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
 import io.clientcore.core.util.binarydata.BinaryData;
 import todo.Standard4XXResponse;
 import todo.Standard5XXResponse;
+import todo.TodoAttachment;
 import todo.todoitems.NotFoundErrorResponse;
-import todo.todoitems.PageTodoAttachment;
+import todo.todoitems.implementation.PageTodoAttachment;
 
 /**
  * An instance of this class provides access to all the operations defined in TodoItemsAttachments.
@@ -721,9 +724,38 @@ public final class TodoItemsAttachmentsImpl {
      * @throws HttpResponseException thrown if the service returns an error.
      * @return the response.
      */
-    public Response<PageTodoAttachment> listWithResponse(long itemId, RequestOptions requestOptions) {
+    private PagedResponse<TodoAttachment> listSinglePage(long itemId, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.listSync(this.client.getEndpoint(), itemId, accept, requestOptions);
+        Response<PageTodoAttachment> res = service.listSync(this.client.getEndpoint(), itemId, accept, requestOptions);
+        return new PagedResponse<>(res.getRequest(), res.getStatusCode(), res.getHeaders(), res.getBody(),
+            res.getValue().getItems(), null, null, null, null, null);
+    }
+
+    /**
+     * The list operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     items (Required): [
+     *          (Required){
+     *             filename: String (Required)
+     *             mediaType: String (Required)
+     *             contents: byte[] (Required)
+     *         }
+     *     ]
+     * }
+     * }
+     * </pre>
+     * 
+     * @param itemId The itemId parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the service returns an error.
+     * @return the response.
+     */
+    public PagedIterable<TodoAttachment> list(long itemId, RequestOptions requestOptions) {
+        return new PagedIterable<>((pagingOptions) -> listSinglePage(itemId, requestOptions));
     }
 
     /**
