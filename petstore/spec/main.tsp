@@ -74,7 +74,25 @@ interface PetCheckups
 
 interface PetInsurance extends SingletonResourceOperations<Insurance, Pet, PetStoreError> {}
 
+/**
+ * Structure for a paging response using `value` and `nextLink` to represent pagination.
+ *
+ * @template Resource The resource type of the collection.
+ */
+@doc("Paged response of {name} items", Resource)
+@friendlyName("{name}CollectionWithNextLink", Resource)
+model CollectionWithNextLink<Resource extends {}> {
+  @doc("The items on this page")
+  @pageItems
+  value: Resource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<Resource>;
+}
+
 interface Toys extends ResourceRead<Toy, PetStoreError> {
+  @list
   @autoRoute
   @listsResource(Toy)
   list(

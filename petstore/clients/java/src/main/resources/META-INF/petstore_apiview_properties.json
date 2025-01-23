@@ -64,7 +64,6 @@
     "petstore.PetsClient.update": "TypeSpec.Rest.Resource.Pets.update",
     "petstore.PetsClient.updateWithResponse": "TypeSpec.Rest.Resource.Pets.update",
     "petstore.Toy": "PetStore.Toy",
-    "petstore.ToyCollectionWithNextLink": "TypeSpec.Rest.Resource.CollectionWithNextLink",
     "petstore.ToyInsuranceClient": "PetStore.ToyInsurance",
     "petstore.ToyInsuranceClient.get": "TypeSpec.Rest.Resource.ToyInsurance.get",
     "petstore.ToyInsuranceClient.getWithResponse": "TypeSpec.Rest.Resource.ToyInsurance.get",
@@ -74,6 +73,6 @@
     "petstore.ToysClient.get": "TypeSpec.Rest.Resource.Toys.get",
     "petstore.ToysClient.getWithResponse": "TypeSpec.Rest.Resource.Toys.get",
     "petstore.ToysClient.list": "PetStore.Toys.list",
-    "petstore.ToysClient.listWithResponse": "PetStore.Toys.list"
+    "petstore.implementation.ToyCollectionWithNextLink": "PetStore.CollectionWithNextLink"
   }
 }

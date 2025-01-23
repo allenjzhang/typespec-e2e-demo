@@ -4,6 +4,8 @@ module petstore {
     requires transitive io.clientcore.core;
 
     exports petstore;
+    exports petstore.implementation;
 
     opens petstore to io.clientcore.core;
+    opens petstore.implementation to io.clientcore.core;
 }

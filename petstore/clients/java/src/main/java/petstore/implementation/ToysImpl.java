@@ -12,11 +12,13 @@ import io.clientcore.core.http.annotation.QueryParam;
 import io.clientcore.core.http.annotation.UnexpectedResponseExceptionDetail;
 import io.clientcore.core.http.exception.HttpResponseException;
 import io.clientcore.core.http.models.HttpMethod;
+import io.clientcore.core.http.models.PagedIterable;
+import io.clientcore.core.http.models.PagedResponse;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
+import io.clientcore.core.util.Context;
 import petstore.PetStoreError;
 import petstore.Toy;
-import petstore.ToyCollectionWithNextLink;
 
 /**
  * An instance of this class provides access to all the operations defined in Toys.
@@ -61,6 +63,12 @@ public final class ToysImpl {
         Response<ToyCollectionWithNextLink> listSync(@HostParam("endpoint") String endpoint,
             @PathParam("petId") int petId, @QueryParam("nameFilter") String nameFilter,
             @HeaderParam("Accept") String accept, RequestOptions requestOptions);
+
+        @HttpRequestInformation(method = HttpMethod.GET, path = "{nextLink}", expectedStatusCodes = { 200 })
+        @UnexpectedResponseExceptionDetail(exceptionBodyClass = PetStoreError.class)
+        Response<ToyCollectionWithNextLink> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
+            @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions);
     }
 
     /**
@@ -113,9 +121,77 @@ public final class ToysImpl {
      * @throws HttpResponseException thrown if the service returns an error.
      * @return paged response of Toy items.
      */
-    public Response<ToyCollectionWithNextLink> listWithResponse(int petId, String nameFilter,
-        RequestOptions requestOptions) {
+    private PagedResponse<Toy> listSinglePage(int petId, String nameFilter, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.listSync(this.client.getEndpoint(), petId, nameFilter, accept, requestOptions);
+        Response<ToyCollectionWithNextLink> res
+            = service.listSync(this.client.getEndpoint(), petId, nameFilter, accept, requestOptions);
+        return new PagedResponse<>(res.getRequest(), res.getStatusCode(), res.getHeaders(), res.getBody(),
+            res.getValue().getValue(), null, res.getValue().getNextLink(), null, null, null);
+    }
+
+    /**
+     * The list operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     value (Required): [
+     *          (Required){
+     *             id: long (Required)
+     *             petId: long (Required)
+     *             name: String (Required)
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
+     * 
+     * @param petId The petId parameter.
+     * @param nameFilter The nameFilter parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the service returns an error.
+     * @return paged response of Toy items.
+     */
+    public PagedIterable<Toy> list(int petId, String nameFilter, RequestOptions requestOptions) {
+        RequestOptions requestOptionsForNextPage = new RequestOptions();
+        requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null
+            ? requestOptions.getContext()
+            : Context.none());
+        return new PagedIterable<>((pagingOptions) -> listSinglePage(petId, nameFilter, requestOptions),
+            (pagingOptions, nextLink) -> listNextSinglePage(nextLink, requestOptionsForNextPage));
+    }
+
+    /**
+     * Get the next page of items.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     value (Required): [
+     *          (Required){
+     *             id: long (Required)
+     *             petId: long (Required)
+     *             name: String (Required)
+     *         }
+     *     ]
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
+     * 
+     * @param nextLink The URL to get the next list of items.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the service returns an error.
+     * @return paged response of Toy items.
+     */
+    private PagedResponse<Toy> listNextSinglePage(String nextLink, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        Response<ToyCollectionWithNextLink> res
+            = service.listNextSync(nextLink, this.client.getEndpoint(), accept, requestOptions);
+        return new PagedResponse<>(res.getRequest(), res.getStatusCode(), res.getHeaders(), res.getBody(),
+            res.getValue().getValue(), null, res.getValue().getNextLink(), null, null, null);
     }
 }

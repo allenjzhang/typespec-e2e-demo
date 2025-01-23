@@ -3,8 +3,11 @@
 package petstore;
 
 import io.clientcore.core.annotation.Metadata;
+import io.clientcore.core.annotation.ReturnType;
 import io.clientcore.core.annotation.ServiceClient;
+import io.clientcore.core.annotation.ServiceMethod;
 import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
 import petstore.implementation.ToysImpl;
@@ -78,9 +81,9 @@ public final class ToysClient {
      * @return paged response of Toy items.
      */
     @Metadata(generated = true)
-    public Response<ToyCollectionWithNextLink> listWithResponse(int petId, String nameFilter,
-        RequestOptions requestOptions) {
-        return this.serviceClient.listWithResponse(petId, nameFilter, requestOptions);
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Toy> list(int petId, String nameFilter, RequestOptions requestOptions) {
+        return this.serviceClient.list(petId, nameFilter, requestOptions);
     }
 
     /**
@@ -111,9 +114,10 @@ public final class ToysClient {
      * @return paged response of Toy items.
      */
     @Metadata(generated = true)
-    public ToyCollectionWithNextLink list(int petId, String nameFilter) {
-        // Generated convenience method for listWithResponse
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Toy> list(int petId, String nameFilter) {
+        // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return listWithResponse(petId, nameFilter, requestOptions).getValue();
+        return serviceClient.list(petId, nameFilter, requestOptions);
     }
 }
