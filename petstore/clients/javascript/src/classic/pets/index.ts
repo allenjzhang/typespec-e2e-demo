@@ -1,14 +1,14 @@
 // Licensed under the MIT License.
 
 import {
-  PetsGetOptionalParams,
-  PetsUpdateOptionalParams,
-  PetsDeleteOptionalParams,
-  PetsCreateOptionalParams,
   PetsListOptionalParams,
+  PetsCreateOptionalParams,
+  PetsDeleteOptionalParams,
+  PetsUpdateOptionalParams,
+  PetsGetOptionalParams,
 } from "../../api/options.js";
 import { PetStoreContext } from "../../api/petStoreContext.js";
-import { get, update, $delete, create, list } from "../../api/pets/index.js";
+import { list, create, $delete, update, get } from "../../api/pets/index.js";
 import {
   Pet,
   PetUpdate,
@@ -18,13 +18,14 @@ import {
 
 /** Interface representing a Pets operations. */
 export interface PetsOperations {
-  /** Gets an instance of the resource. */
-  get: (petId: number, options?: PetsGetOptionalParams) => Promise<Pet>;
-  /** Updates an existing instance of the resource. */
-  update: (
-    petId: number,
-    properties: PetUpdate,
-    options?: PetsUpdateOptionalParams,
+  /** Lists all instances of the resource. */
+  list: (
+    options?: PetsListOptionalParams,
+  ) => Promise<PetCollectionWithNextLink>;
+  /** Creates a new instance of the resource. */
+  create: (
+    resource: PetCreate,
+    options?: PetsCreateOptionalParams,
   ) => Promise<Pet>;
   /** Deletes an existing instance of the resource. */
   /**
@@ -33,36 +34,35 @@ export interface PetsOperations {
    *         to the operation to override the generated name.
    */
   delete: (petId: number, options?: PetsDeleteOptionalParams) => Promise<void>;
-  /** Creates a new instance of the resource. */
-  create: (
-    resource: PetCreate,
-    options?: PetsCreateOptionalParams,
+  /** Updates an existing instance of the resource. */
+  update: (
+    petId: number,
+    properties: PetUpdate,
+    options?: PetsUpdateOptionalParams,
   ) => Promise<Pet>;
-  /** Lists all instances of the resource. */
-  list: (
-    options?: PetsListOptionalParams,
-  ) => Promise<PetCollectionWithNextLink>;
+  /** Gets an instance of the resource. */
+  get: (petId: number, options?: PetsGetOptionalParams) => Promise<Pet>;
 }
 
-export function getPets(context: PetStoreContext) {
+function _getPets(context: PetStoreContext) {
   return {
-    get: (petId: number, options?: PetsGetOptionalParams) =>
-      get(context, petId, options),
+    list: (options?: PetsListOptionalParams) => list(context, options),
+    create: (resource: PetCreate, options?: PetsCreateOptionalParams) =>
+      create(context, resource, options),
+    delete: (petId: number, options?: PetsDeleteOptionalParams) =>
+      $delete(context, petId, options),
     update: (
       petId: number,
       properties: PetUpdate,
       options?: PetsUpdateOptionalParams,
     ) => update(context, petId, properties, options),
-    delete: (petId: number, options?: PetsDeleteOptionalParams) =>
-      $delete(context, petId, options),
-    create: (resource: PetCreate, options?: PetsCreateOptionalParams) =>
-      create(context, resource, options),
-    list: (options?: PetsListOptionalParams) => list(context, options),
+    get: (petId: number, options?: PetsGetOptionalParams) =>
+      get(context, petId, options),
   };
 }
 
-export function getPetsOperations(context: PetStoreContext): PetsOperations {
+export function _getPetsOperations(context: PetStoreContext): PetsOperations {
   return {
-    ...getPets(context),
+    ..._getPets(context),
   };
 }

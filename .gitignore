@@ -418,3 +418,12 @@ temp/
 target
 .idea
 *.iml
+
+# typescript samples bulid output
+**/samples/typescript/dist
+
+# Javascript client build
+**/clients/javascript/dist
+.tshy
+.tshy-build
+**/clients/javascript/types

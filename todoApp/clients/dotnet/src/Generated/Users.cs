@@ -15,20 +15,16 @@ namespace Todo
     public partial class Users
     {
         private readonly Uri _endpoint;
-        /// <summary> A credential used to authenticate to the service. </summary>
-        private readonly ApiKeyCredential _keyCredential;
-        private const string AuthorizationHeader = "session-id";
 
         /// <summary> Initializes a new instance of Users for mocking. </summary>
         protected Users()
         {
         }
 
-        internal Users(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
+        internal Users(ClientPipeline pipeline, Uri endpoint)
         {
             _endpoint = endpoint;
             Pipeline = pipeline;
-            _keyCredential = keyCredential;
         }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>

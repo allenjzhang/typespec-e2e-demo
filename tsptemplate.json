@@ -20,6 +20,12 @@
         },
         "message": "Please ensure dotnet SDK has been installed. Download from https://dotnet.microsoft.com/download"
       },
+      "@azure-tools/typespec-ts": {
+        "description": "Client: generate TypeScript client",
+        "options": {
+          "emitter-output-dir": "{project-root}/clients/javascript"
+        }
+      },
       "@typespec/http-client-java": {
         "description": "Client: generate Java client",
         "options": {
@@ -31,8 +37,7 @@
         "description": "Client: generate Python client",
         "options": {
           "emitter-output-dir": "{project-root}/clients/python"
-        },
-        "message": "Please ensure Python has been installed. Download from https://test.python.org/downloads/"
+        }
       },
       "@typespec/http-server-csharp": {
         "description": "Server: generate ASP.NET Core server",

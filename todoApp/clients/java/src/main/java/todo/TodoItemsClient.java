@@ -3,18 +3,21 @@
 package todo;
 
 import io.clientcore.core.annotation.Metadata;
+import io.clientcore.core.annotation.ReturnType;
 import io.clientcore.core.annotation.ServiceClient;
+import io.clientcore.core.annotation.ServiceMethod;
 import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
 import io.clientcore.core.util.binarydata.BinaryData;
 import java.util.List;
+import java.util.stream.Collectors;
 import todo.implementation.CreateJsonRequest;
 import todo.implementation.JsonMergePatchHelper;
 import todo.implementation.MultipartFormDataHelper;
 import todo.implementation.TodoItemsImpl;
 import todo.todoitems.TodoItemPatch;
-import todo.todoitems.TodoPage;
 
 /**
  * Initializes a new instance of the synchronous TodoClient type.
@@ -44,14 +47,42 @@ public final class TodoItemsClient {
      * <tr><td>offset</td><td>Integer</td><td>No</td><td>The offset to start paginating at</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     items (Required): [
+     *          (Required){
+     *             id: long (Required)
+     *             title: String (Required)
+     *             createdBy: long (Required)
+     *             assignedTo: Long (Optional)
+     *             description: String (Optional)
+     *             status: String(NotStarted/InProgress/Completed) (Required)
+     *             createdAt: OffsetDateTime (Required)
+     *             updatedAt: OffsetDateTime (Required)
+     *             completedAt: OffsetDateTime (Optional)
+     *             labels: BinaryData (Optional)
+     *             _dummy: String (Optional)
+     *         }
+     *     ]
+     *     pageSize: int (Required)
+     *     totalSize: int (Required)
+     *     prevLink: String (Optional)
+     *     nextLink: String (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.
      * @return the response.
      */
     @Metadata(generated = true)
-    public Response<TodoPage> listWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.listWithResponse(requestOptions);
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoItem> list(RequestOptions requestOptions) {
+        return this.serviceClient.list(requestOptions);
     }
 
     /**
@@ -85,6 +116,25 @@ public final class TodoItemsClient {
      * }
      * </pre>
      * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     createdBy: long (Required)
+     *     assignedTo: Long (Optional)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     labels: BinaryData (Optional)
+     * }
+     * }
+     * </pre>
+     * 
      * @param createJsonRequest The createJsonRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the service returns an error.
@@ -98,6 +148,24 @@ public final class TodoItemsClient {
 
     /**
      * The createForm operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     createdBy: long (Required)
+     *     assignedTo: Long (Optional)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     labels: BinaryData (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -113,6 +181,24 @@ public final class TodoItemsClient {
 
     /**
      * The get operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     createdBy: long (Required)
+     *     assignedTo: Long (Optional)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     labels: BinaryData (Optional)
+     * }
+     * }
+     * </pre>
      * 
      * @param id The id parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -135,6 +221,25 @@ public final class TodoItemsClient {
      *     assignedTo: Long (Optional)
      *     description: String (Optional)
      *     status: String(NotStarted/InProgress/Completed) (Optional)
+     * }
+     * }
+     * </pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     createdBy: long (Required)
+     *     assignedTo: Long (Optional)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     labels: BinaryData (Optional)
      * }
      * }
      * </pre>
@@ -174,8 +279,9 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public TodoPage list(Integer limit, Integer offset) {
-        // Generated convenience method for listWithResponse
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoItem> list(Integer limit, Integer offset) {
+        // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (limit != null) {
             requestOptions.addQueryParam("limit", String.valueOf(limit));
@@ -183,7 +289,7 @@ public final class TodoItemsClient {
         if (offset != null) {
             requestOptions.addQueryParam("offset", String.valueOf(offset));
         }
-        return listWithResponse(requestOptions).getValue();
+        return serviceClient.list(requestOptions);
     }
 
     /**
@@ -194,10 +300,11 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public TodoPage list() {
-        // Generated convenience method for listWithResponse
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoItem> list() {
+        // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return listWithResponse(requestOptions).getValue();
+        return serviceClient.list(requestOptions);
     }
 
     /**
@@ -252,7 +359,16 @@ public final class TodoItemsClient {
         RequestOptions requestOptions = new RequestOptions();
         return createFormWithResponse(
             new MultipartFormDataHelper(requestOptions).serializeJsonField("item", body.getItem())
-                .serializeJsonField("attachments", body.getAttachments())
+                .serializeFileFields("attachments",
+                    body.getAttachments() == null
+                        ? null
+                        : body.getAttachments().stream().map(FileDetails::getContent).collect(Collectors.toList()),
+                    body.getAttachments() == null
+                        ? null
+                        : body.getAttachments().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
+                    body.getAttachments() == null
+                        ? null
+                        : body.getAttachments().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
                 .end()
                 .getRequestBody(),
             requestOptions).getValue();

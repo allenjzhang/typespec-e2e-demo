@@ -3,15 +3,16 @@
 package todo;
 
 import io.clientcore.core.annotation.Metadata;
+import io.clientcore.core.annotation.ReturnType;
 import io.clientcore.core.annotation.ServiceClient;
+import io.clientcore.core.annotation.ServiceMethod;
 import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
 import io.clientcore.core.util.binarydata.BinaryData;
-import java.util.Objects;
 import todo.implementation.MultipartFormDataHelper;
 import todo.implementation.TodoItemsAttachmentsImpl;
-import todo.todoitems.PageTodoAttachment;
 
 /**
  * Initializes a new instance of the synchronous TodoClient type.
@@ -33,6 +34,21 @@ public final class TodoItemsAttachmentsClient {
 
     /**
      * The list operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>
+     * {@code
+     * {
+     *     items (Required): [
+     *          (Required){
+     *             filename: String (Required)
+     *             mediaType: String (Required)
+     *             contents: byte[] (Required)
+     *         }
+     *     ]
+     * }
+     * }
+     * </pre>
      * 
      * @param itemId The itemId parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -40,8 +56,9 @@ public final class TodoItemsAttachmentsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public Response<PageTodoAttachment> listWithResponse(long itemId, RequestOptions requestOptions) {
-        return this.serviceClient.listWithResponse(itemId, requestOptions);
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoAttachment> list(long itemId, RequestOptions requestOptions) {
+        return this.serviceClient.list(itemId, requestOptions);
     }
 
     /**
@@ -96,10 +113,11 @@ public final class TodoItemsAttachmentsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public PageTodoAttachment list(long itemId) {
-        // Generated convenience method for listWithResponse
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoAttachment> list(long itemId) {
+        // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return listWithResponse(itemId, requestOptions).getValue();
+        return serviceClient.list(itemId, requestOptions);
     }
 
     /**
@@ -132,10 +150,8 @@ public final class TodoItemsAttachmentsClient {
         // Generated convenience method for createFileAttachmentWithResponse
         RequestOptions requestOptions = new RequestOptions();
         createFileAttachmentWithResponse(itemId,
-            new MultipartFormDataHelper(requestOptions)
-                .serializeTextField("contents", Objects.toString(body.getContents()))
-                .end()
-                .getRequestBody(),
+            new MultipartFormDataHelper(requestOptions).serializeFileField("contents", body.getContents().getContent(),
+                body.getContents().getContentType(), body.getContents().getFilename()).end().getRequestBody(),
             requestOptions).getValue();
     }
 }

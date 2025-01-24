@@ -17,9 +17,6 @@ namespace Todo
     public partial class TodoItems
     {
         private readonly Uri _endpoint;
-        /// <summary> A credential used to authenticate to the service. </summary>
-        private readonly ApiKeyCredential _keyCredential;
-        private const string AuthorizationHeader = "session-id";
         private TodoItemsAttachments _cachedTodoItemsAttachments;
 
         /// <summary> Initializes a new instance of TodoItems for mocking. </summary>
@@ -27,11 +24,10 @@ namespace Todo
         {
         }
 
-        internal TodoItems(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
+        internal TodoItems(ClientPipeline pipeline, Uri endpoint)
         {
             _endpoint = endpoint;
             Pipeline = pipeline;
-            _keyCredential = keyCredential;
         }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
@@ -370,7 +366,7 @@ namespace Todo
         /// <summary> Initializes a new instance of TodoItemsAttachments. </summary>
         public virtual TodoItemsAttachments GetTodoItemsAttachmentsClient()
         {
-            return Volatile.Read(ref _cachedTodoItemsAttachments) ?? Interlocked.CompareExchange(ref _cachedTodoItemsAttachments, new TodoItemsAttachments(Pipeline, _keyCredential, _endpoint), null) ?? _cachedTodoItemsAttachments;
+            return Volatile.Read(ref _cachedTodoItemsAttachments) ?? Interlocked.CompareExchange(ref _cachedTodoItemsAttachments, new TodoItemsAttachments(Pipeline, _endpoint), null) ?? _cachedTodoItemsAttachments;
         }
     }
 }

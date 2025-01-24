@@ -1,7 +1,0 @@
-.tshy-build
-.tshy
-dist
-package-lock.json
-temp 
-types
-test-results.browser.xml
