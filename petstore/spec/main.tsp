@@ -76,6 +76,7 @@ interface PetInsurance extends SingletonResourceOperations<Insurance, Pet, PetSt
 
 interface Toys extends ResourceRead<Toy, PetStoreError> {
   @autoRoute
+  @list
   @listsResource(Toy)
   list(
     ...ParentKeysOf<Toy>,
