@@ -1,0 +1,38 @@
+name: Install Dependencies
+description: Setup for Dependencies
+
+inputs:
+  node-version:
+    required: false
+    description: Node version for setup-node
+    default: 20.x
+  dotnet-version:
+    required: false
+    description: .NET version for setup-dotnet
+    default: 9.x
+  java-version:
+    required: false
+    description: Java version for setup-java
+    default: 17
+
+runs:
+  using: composite
+
+  steps:
+    - name: Set node version to ${{ inputs.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: npm
+
+    - name: Set .NET version to ${{ inputs.dotnet-version }}
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
+
+    - name: Set Java version to ${{ inputs.java-version }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: microsoft
+        cache: maven
