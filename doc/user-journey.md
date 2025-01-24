@@ -20,13 +20,13 @@ Before you begin, ensure you have met the following requirements:
 - You have installed [Node.js](https://nodejs.org/) (version 14.x or later).
 - You have installed [npm](https://www.npmjs.com/) (version 6.x or later).
 
-Next, you need to install TypeSpec CLI and compiler.
+Next, you need to install TypeSpec CLI and compiler. Please note to install @next version since some init features exist will be released next sprint in Feb.
 
 ```bash
 npm install -g @typespec/compiler@next
 ```
 
-That's it. Now check out steps below to create your first TypeSpec project.
+Now check out steps below to create your first TypeSpec project.
 
 ## CLI
 
@@ -82,6 +82,7 @@ If you have selected client emitters, you can use the following commands to comp
 ### Compile and Test Server
 
 - asp.net:
+  - run `npx hscs scaffold .\tsp-output\server\ . --use-swaggerui` to create basic aspnet project scaffolding.
   - Run `dotnet run`
   - use browser to `http://localhost:XXXX/swagger/index.html` where XXXX is the port number shown
   - You can use Swagger UI's `Try it out` to interact with the running service
