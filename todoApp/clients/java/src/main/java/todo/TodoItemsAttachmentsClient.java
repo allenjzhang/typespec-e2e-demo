@@ -3,14 +3,16 @@
 package todo;
 
 import io.clientcore.core.annotation.Metadata;
+import io.clientcore.core.annotation.ReturnType;
 import io.clientcore.core.annotation.ServiceClient;
+import io.clientcore.core.annotation.ServiceMethod;
 import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
 import io.clientcore.core.util.binarydata.BinaryData;
 import todo.implementation.MultipartFormDataHelper;
 import todo.implementation.TodoItemsAttachmentsImpl;
-import todo.todoitems.PageTodoAttachment;
 
 /**
  * Initializes a new instance of the synchronous TodoClient type.
@@ -54,8 +56,9 @@ public final class TodoItemsAttachmentsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public Response<PageTodoAttachment> listWithResponse(long itemId, RequestOptions requestOptions) {
-        return this.serviceClient.listWithResponse(itemId, requestOptions);
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoAttachment> list(long itemId, RequestOptions requestOptions) {
+        return this.serviceClient.list(itemId, requestOptions);
     }
 
     /**
@@ -110,10 +113,11 @@ public final class TodoItemsAttachmentsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public PageTodoAttachment list(long itemId) {
-        // Generated convenience method for listWithResponse
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<TodoAttachment> list(long itemId) {
+        // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
-        return listWithResponse(itemId, requestOptions).getValue();
+        return serviceClient.list(itemId, requestOptions);
     }
 
     /**
