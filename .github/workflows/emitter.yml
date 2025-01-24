@@ -1,4 +1,4 @@
-name: Build
+name: Emitter
 
 # Controls when the workflow will run
 on:
@@ -12,8 +12,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  todo-app:
-    name: TodoApp
+  java:
+    name: Code Generation
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
@@ -23,21 +23,11 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - name: Build TodoApp Asp.Net
-        run: dotnet build
-        working-directory: ./todoApp/servers/aspnet
+      - name: Generate Code
+        run: eng/scripts/java/Generate.ps1
+        shell: pwsh
+        working-directory: .
 
-  petstore:
-    name: PetStore
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: ./.github/actions/setup
-
-      - name: Build TodoApp Asp.Net
-        run: dotnet build
-        working-directory: ./petstore/servers/aspnet
+      - name: Verify Code Change
+        run: git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code -- ./petstore/clients/java ./todoApp/clients/java
+        working-directory: .
