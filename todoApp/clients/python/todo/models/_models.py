@@ -472,8 +472,8 @@ class TodoItem(_model_base.Model):
     :ivar labels: Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]
     :vartype labels: str or list[str] or ~todo.models.TodoLabelRecord or
      list[~todo.models.TodoLabelRecord]
-    :ivar _dummy:
-    :vartype _dummy: str
+    :ivar dummy:
+    :vartype dummy: str
     """
 
     id: int = rest_field(visibility=["read"])
@@ -497,7 +497,7 @@ class TodoItem(_model_base.Model):
     """When the todo item was makred as completed."""
     labels: Optional["_types.TodoLabels"] = rest_field()
     """Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]"""
-    _dummy: Optional[str] = rest_field(visibility=["create"])
+    dummy: Optional[str] = rest_field(name="_dummy", visibility=["create"])
 
     @overload
     def __init__(
@@ -508,7 +508,7 @@ class TodoItem(_model_base.Model):
         assigned_to: Optional[int] = None,
         description: Optional[str] = None,
         labels: Optional["_types.TodoLabels"] = None,
-        _dummy: Optional[str] = None,
+        dummy: Optional[str] = None,
     ) -> None: ...
 
     @overload

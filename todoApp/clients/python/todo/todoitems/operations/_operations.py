@@ -256,22 +256,6 @@ class TodoItemsOperations:
 
     @overload
     def create_json(
-        self, body: JSON, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models2.CreateJsonResponse:
-        """create_json.
-
-        :param body: Required.
-        :type body: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: CreateJsonResponse. The CreateJsonResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateJsonResponse
-        :raises ~corehttp.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def create_json(
         self,
         *,
         item: _models2.TodoItem,
@@ -288,6 +272,22 @@ class TodoItemsOperations:
         :paramtype content_type: str
         :keyword attachments: Default value is None.
         :paramtype attachments: list[~todo.models.TodoAttachment]
+        :return: CreateJsonResponse. The CreateJsonResponse is compatible with MutableMapping
+        :rtype: ~todo.models.CreateJsonResponse
+        :raises ~corehttp.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def create_json(
+        self, body: JSON, *, content_type: str = "application/json", **kwargs: Any
+    ) -> _models2.CreateJsonResponse:
+        """create_json.
+
+        :param body: Required.
+        :type body: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
         :return: CreateJsonResponse. The CreateJsonResponse is compatible with MutableMapping
         :rtype: ~todo.models.CreateJsonResponse
         :raises ~corehttp.exceptions.HttpResponseError:
