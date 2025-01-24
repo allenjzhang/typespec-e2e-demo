@@ -12,22 +12,18 @@ import io.clientcore.core.http.annotation.PathParam;
 import io.clientcore.core.http.annotation.UnexpectedResponseExceptionDetail;
 import io.clientcore.core.http.exception.HttpResponseException;
 import io.clientcore.core.http.models.HttpMethod;
-import io.clientcore.core.http.models.PagedIterable;
-import io.clientcore.core.http.models.PagedResponse;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
-import io.clientcore.core.util.Context;
 import io.clientcore.core.util.binarydata.BinaryData;
 import todo.CreateFormResponse;
 import todo.CreateJsonResponse;
 import todo.GetResponse;
 import todo.Standard4XXResponse;
 import todo.Standard5XXResponse;
-import todo.TodoItem;
 import todo.UpdateResponse;
 import todo.todoitems.InvalidTodoItem;
 import todo.todoitems.NotFoundErrorResponse;
-import todo.todoitems.implementation.TodoPage;
+import todo.todoitems.TodoPage;
 
 /**
  * An instance of this class provides access to all the operations defined in TodoItems.
@@ -918,218 +914,6 @@ public final class TodoItemsImpl {
         @UnexpectedResponseExceptionDetail
         Response<Void> deleteSync(@HostParam("endpoint") String endpoint, @PathParam("id") long id,
             @HeaderParam("Accept") String accept, RequestOptions requestOptions);
-
-        @HttpRequestInformation(method = HttpMethod.GET, path = "{nextLink}", expectedStatusCodes = { 200 })
-        @UnexpectedResponseExceptionDetail(
-            statusCode = {
-                400,
-                401,
-                402,
-                403,
-                404,
-                405,
-                406,
-                407,
-                408,
-                409,
-                410,
-                411,
-                412,
-                413,
-                414,
-                415,
-                416,
-                417,
-                418,
-                419,
-                420,
-                421,
-                422,
-                423,
-                424,
-                425,
-                426,
-                427,
-                428,
-                429,
-                430,
-                431,
-                432,
-                433,
-                434,
-                435,
-                436,
-                437,
-                438,
-                439,
-                440,
-                441,
-                442,
-                443,
-                444,
-                445,
-                446,
-                447,
-                448,
-                449,
-                450,
-                451,
-                452,
-                453,
-                454,
-                455,
-                456,
-                457,
-                458,
-                459,
-                460,
-                461,
-                462,
-                463,
-                464,
-                465,
-                466,
-                467,
-                468,
-                469,
-                470,
-                471,
-                472,
-                473,
-                474,
-                475,
-                476,
-                477,
-                478,
-                479,
-                480,
-                481,
-                482,
-                483,
-                484,
-                485,
-                486,
-                487,
-                488,
-                489,
-                490,
-                491,
-                492,
-                493,
-                494,
-                495,
-                496,
-                497,
-                498,
-                499 },
-            exceptionBodyClass = Standard4XXResponse.class)
-        @UnexpectedResponseExceptionDetail(
-            statusCode = {
-                500,
-                501,
-                502,
-                503,
-                504,
-                505,
-                506,
-                507,
-                508,
-                509,
-                510,
-                511,
-                512,
-                513,
-                514,
-                515,
-                516,
-                517,
-                518,
-                519,
-                520,
-                521,
-                522,
-                523,
-                524,
-                525,
-                526,
-                527,
-                528,
-                529,
-                530,
-                531,
-                532,
-                533,
-                534,
-                535,
-                536,
-                537,
-                538,
-                539,
-                540,
-                541,
-                542,
-                543,
-                544,
-                545,
-                546,
-                547,
-                548,
-                549,
-                550,
-                551,
-                552,
-                553,
-                554,
-                555,
-                556,
-                557,
-                558,
-                559,
-                560,
-                561,
-                562,
-                563,
-                564,
-                565,
-                566,
-                567,
-                568,
-                569,
-                570,
-                571,
-                572,
-                573,
-                574,
-                575,
-                576,
-                577,
-                578,
-                579,
-                580,
-                581,
-                582,
-                583,
-                584,
-                585,
-                586,
-                587,
-                588,
-                589,
-                590,
-                591,
-                592,
-                593,
-                594,
-                595,
-                596,
-                597,
-                598,
-                599 },
-            exceptionBodyClass = Standard5XXResponse.class)
-        @UnexpectedResponseExceptionDetail
-        Response<TodoPage> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
-            RequestOptions requestOptions);
     }
 
     /**
@@ -1174,62 +958,9 @@ public final class TodoItemsImpl {
      * @throws HttpResponseException thrown if the service returns an error.
      * @return the response.
      */
-    private PagedResponse<TodoItem> listSinglePage(RequestOptions requestOptions) {
+    public Response<TodoPage> listWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<TodoPage> res = service.listSync(this.client.getEndpoint(), accept, requestOptions);
-        return new PagedResponse<>(res.getRequest(), res.getStatusCode(), res.getHeaders(), res.getBody(),
-            res.getValue().getItems(), null, res.getValue().getNextLink(), null, null, null);
-    }
-
-    /**
-     * The list operation.
-     * <p><strong>Query Parameters</strong></p>
-     * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>limit</td><td>Integer</td><td>No</td><td>The limit to the number of items</td></tr>
-     * <tr><td>offset</td><td>Integer</td><td>No</td><td>The offset to start paginating at</td></tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>
-     * {@code
-     * {
-     *     items (Required): [
-     *          (Required){
-     *             id: long (Required)
-     *             title: String (Required)
-     *             createdBy: long (Required)
-     *             assignedTo: Long (Optional)
-     *             description: String (Optional)
-     *             status: String(NotStarted/InProgress/Completed) (Required)
-     *             createdAt: OffsetDateTime (Required)
-     *             updatedAt: OffsetDateTime (Required)
-     *             completedAt: OffsetDateTime (Optional)
-     *             labels: BinaryData (Optional)
-     *             _dummy: String (Optional)
-     *         }
-     *     ]
-     *     pageSize: int (Required)
-     *     totalSize: int (Required)
-     *     prevLink: String (Optional)
-     *     nextLink: String (Optional)
-     * }
-     * }
-     * </pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the service returns an error.
-     * @return the response.
-     */
-    public PagedIterable<TodoItem> list(RequestOptions requestOptions) {
-        RequestOptions requestOptionsForNextPage = new RequestOptions();
-        requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null
-            ? requestOptions.getContext()
-            : Context.none());
-        return new PagedIterable<>((pagingOptions) -> listSinglePage(requestOptions),
-            (pagingOptions, nextLink) -> listNextSinglePage(nextLink, requestOptionsForNextPage));
+        return service.listSync(this.client.getEndpoint(), accept, requestOptions);
     }
 
     /**
@@ -1415,47 +1146,5 @@ public final class TodoItemsImpl {
     public Response<Void> deleteWithResponse(long id, RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.deleteSync(this.client.getEndpoint(), id, accept, requestOptions);
-    }
-
-    /**
-     * Get the next page of items.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>
-     * {@code
-     * {
-     *     items (Required): [
-     *          (Required){
-     *             id: long (Required)
-     *             title: String (Required)
-     *             createdBy: long (Required)
-     *             assignedTo: Long (Optional)
-     *             description: String (Optional)
-     *             status: String(NotStarted/InProgress/Completed) (Required)
-     *             createdAt: OffsetDateTime (Required)
-     *             updatedAt: OffsetDateTime (Required)
-     *             completedAt: OffsetDateTime (Optional)
-     *             labels: BinaryData (Optional)
-     *             _dummy: String (Optional)
-     *         }
-     *     ]
-     *     pageSize: int (Required)
-     *     totalSize: int (Required)
-     *     prevLink: String (Optional)
-     *     nextLink: String (Optional)
-     * }
-     * }
-     * </pre>
-     * 
-     * @param nextLink The URL to get the next list of items.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the service returns an error.
-     * @return the response.
-     */
-    private PagedResponse<TodoItem> listNextSinglePage(String nextLink, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        Response<TodoPage> res = service.listNextSync(nextLink, this.client.getEndpoint(), accept, requestOptions);
-        return new PagedResponse<>(res.getRequest(), res.getStatusCode(), res.getHeaders(), res.getBody(),
-            res.getValue().getItems(), null, res.getValue().getNextLink(), null, null, null);
     }
 }

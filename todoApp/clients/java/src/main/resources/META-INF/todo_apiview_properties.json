@@ -22,6 +22,7 @@
     "todo.TodoItemsAttachmentsClient.createJsonAttachment": "Todo.TodoItems.Attachments.createJsonAttachment",
     "todo.TodoItemsAttachmentsClient.createJsonAttachmentWithResponse": "Todo.TodoItems.Attachments.createJsonAttachment",
     "todo.TodoItemsAttachmentsClient.list": "Todo.TodoItems.Attachments.list",
+    "todo.TodoItemsAttachmentsClient.listWithResponse": "Todo.TodoItems.Attachments.list",
     "todo.TodoItemsClient": "Todo.TodoItems",
     "todo.TodoItemsClient.createForm": "Todo.TodoItems.createForm",
     "todo.TodoItemsClient.createFormWithResponse": "Todo.TodoItems.createForm",
@@ -32,6 +33,7 @@
     "todo.TodoItemsClient.get": "Todo.TodoItems.get",
     "todo.TodoItemsClient.getWithResponse": "Todo.TodoItems.get",
     "todo.TodoItemsClient.list": "Todo.TodoItems.list",
+    "todo.TodoItemsClient.listWithResponse": "Todo.TodoItems.list",
     "todo.TodoItemsClient.update": "Todo.TodoItems.update",
     "todo.TodoItemsClient.updateWithResponse": "Todo.TodoItems.update",
     "todo.TodoLabelRecord": "Todo.TodoLabelRecord",
@@ -43,9 +45,9 @@
     "todo.implementation.CreateJsonRequest": "Todo.TodoItems.createJson.Request.anonymous",
     "todo.todoitems.InvalidTodoItem": "Todo.TodoItems.InvalidTodoItem",
     "todo.todoitems.NotFoundErrorResponse": "Todo.TodoItems.NotFoundErrorResponse",
+    "todo.todoitems.PageTodoAttachment": "Todo.TodoItems.Page",
     "todo.todoitems.TodoItemPatch": "Todo.TodoItems.TodoItemPatch",
-    "todo.todoitems.implementation.PageTodoAttachment": "Todo.TodoItems.Page",
-    "todo.todoitems.implementation.TodoPage": "Todo.TodoItems.TodoPage",
+    "todo.todoitems.TodoPage": "Todo.TodoItems.TodoPage",
     "todo.users.InvalidUserResponse": "Todo.Users.InvalidUserResponse",
     "todo.users.UserExistsResponse": "Todo.Users.UserExistsResponse"
   }

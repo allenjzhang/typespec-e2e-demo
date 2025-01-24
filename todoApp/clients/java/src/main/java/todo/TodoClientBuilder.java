@@ -10,19 +10,19 @@ import io.clientcore.core.http.models.HttpLogOptions;
 import io.clientcore.core.http.models.HttpRedirectOptions;
 import io.clientcore.core.http.models.HttpRetryOptions;
 import io.clientcore.core.http.models.ProxyOptions;
-import io.clientcore.core.http.pipeline.HttpInstrumentationPolicy;
+import io.clientcore.core.http.pipeline.HttpLoggingPolicy;
 import io.clientcore.core.http.pipeline.HttpPipeline;
 import io.clientcore.core.http.pipeline.HttpPipelineBuilder;
 import io.clientcore.core.http.pipeline.HttpPipelinePolicy;
 import io.clientcore.core.http.pipeline.HttpRedirectPolicy;
 import io.clientcore.core.http.pipeline.HttpRetryPolicy;
 import io.clientcore.core.http.pipeline.KeyCredentialPolicy;
-import io.clientcore.core.instrumentation.logging.ClientLogger;
 import io.clientcore.core.models.traits.ConfigurationTrait;
 import io.clientcore.core.models.traits.EndpointTrait;
 import io.clientcore.core.models.traits.HttpTrait;
 import io.clientcore.core.models.traits.KeyCredentialTrait;
 import io.clientcore.core.models.traits.ProxyTrait;
+import io.clientcore.core.util.ClientLogger;
 import io.clientcore.core.util.configuration.Configuration;
 import java.util.ArrayList;
 import java.util.List;
@@ -243,7 +243,7 @@ public final class TodoClientBuilder implements HttpTrait<TodoClientBuilder>, Pr
         if (keyCredential != null) {
             policies.add(new KeyCredentialPolicy("authorization", keyCredential, "Bearer"));
         }
-        policies.add(new HttpInstrumentationPolicy(null, localHttpLogOptions));
+        policies.add(new HttpLoggingPolicy(localHttpLogOptions));
         httpPipelineBuilder.policies(policies.toArray(new HttpPipelinePolicy[0]));
         return httpPipelineBuilder.build();
     }
