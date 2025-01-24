@@ -1,0 +1,52 @@
+name: Emitter
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  merge_group:
+  workflow_dispatch: {}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  java:
+    name: Java Emitter
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup
+
+      - name: Generate Code
+        run: eng/scripts/java/Generate.ps1
+        shell: pwsh
+        working-directory: .
+
+      - name: Verify Code Change
+        run: git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code -- ./petstore/clients/java ./todoApp/clients/java
+        working-directory: .
+  dotnet:
+    name: .NET Emitter
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup
+
+      - name: Generate Code
+        run: eng/scripts/dotnet/Generate.ps1
+        shell: pwsh
+        working-directory: .
+
+      - name: Verify Code Change
+        run: git -c core.safecrlf=false diff --ignore-space-at-eol --exit-code -- ./petstore/clients/dotnet ./todoApp/clients/dotnet
+        working-directory: .
