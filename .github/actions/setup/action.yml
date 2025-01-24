@@ -23,7 +23,7 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
-        cache: pnpm
+        cache: npm
 
     - name: Set .NET version to ${{ inputs.dotnet-version }}
       uses: actions/setup-dotnet@v4
@@ -35,3 +35,4 @@ runs:
       with:
         java-version: ${{ inputs.java-version }}
         distribution: microsoft
+        cache: maven
