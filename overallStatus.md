@@ -8,19 +8,19 @@
 
 ### CLI
 
-| **Extension Feature** | **Status**  | **ETA** | **Issues Link** | **Remarks**           |
-| --------------------- | ----------- | ------- | --------------- | --------------------- |
-| Project init          | Implemented |         |                 | Demoed and in testing |
+| **Extension Feature** | **Status**  | **ETA** | **Issues Link** | **Remarks**       |
+| --------------------- | ----------- | ------- | --------------- | ----------------- |
+| Project init          | Implemented |         |                 | Ready for testing |
 
 ### VSCode
 
-| **Extension Feature**     | **Dependency**         | **Status**  | **ETA** | **Issues Link**                                                                                                                        | **Remarks**           |
-| ------------------------- | ---------------------- | ----------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| New Project from Template | Josephine/Rodge/Arthur | Implemented |         | [design spec](https://microsoft.sharepoint.com/:w:/t/AzureDeveloperExperience/EXfInUWxaOpNpXVtcQOAt4cBoVwvu3tZe3Od__r9vdc8qQ?e=nQk7DO) | Demoed and in testing |
-| Generate OpenAPI          | Josephine/Rodge/Arthur | Implemented |         | [design spec](https://microsoft.sharepoint.com/:w:/t/AzureDeveloperExperience/EXfInUWxaOpNpXVtcQOAt4cBoVwvu3tZe3Od__r9vdc8qQ?e=nQk7DO) | Demoed and in testing |
-| Generate Client           | Josephine/Rodge/Arthur | Implemented |         | [design spec](https://microsoft.sharepoint.com/:w:/t/AzureDeveloperExperience/EXfInUWxaOpNpXVtcQOAt4cBoVwvu3tZe3Od__r9vdc8qQ?e=nQk7DO) | Demoed and in testing |
-| Generate Server           | Josephine/Rodge/Arthur | Implemented |         | [design spec](https://microsoft.sharepoint.com/:w:/t/AzureDeveloperExperience/EXfInUWxaOpNpXVtcQOAt4cBoVwvu3tZe3Od__r9vdc8qQ?e=nQk7DO) | Demoed and in testing |
-| Convert from OpenAPI      | Josephine/Rodge/Arthur |             | 2/15    | [design spec](https://microsoft.sharepoint.com/:w:/t/AzureDeveloperExperience/EXfInUWxaOpNpXVtcQOAt4cBoVwvu3tZe3Od__r9vdc8qQ?e=nQk7DO) |                       |
+| **Extension Feature**     | **Dependency**         | **Status**  | **ETA** | **Remarks**       |
+| ------------------------- | ---------------------- | ----------- | ------- | ----------------- |
+| New Project from Template | Josephine/Rodge/Arthur | Implemented |         | Ready for testing |
+| Generate OpenAPI          | Josephine/Rodge/Arthur | Implemented |         | Ready for testing |
+| Generate Client           | Josephine/Rodge/Arthur | Implemented |         | Ready for testing |
+| Generate Server           | Josephine/Rodge/Arthur | Implemented |         | Ready for testing |
+| Convert from OpenAPI      | Josephine/Rodge/Arthur | Pending     | 2/15    |                   |
 
 ---
 
