@@ -14,13 +14,13 @@
 
 ### VSCode
 
-| **Extension Feature**     | **Dependency**         | **Status**  | **ETA** | **Remarks**       |
-| ------------------------- | ---------------------- | ----------- | ------- | ----------------- |
-| New Project from Template | Josephine/Rodge/Arthur | Implemented |         | Ready for testing |
-| Generate OpenAPI          | Josephine/Rodge/Arthur | Implemented |         | Ready for testing |
-| Generate Client           | Josephine/Rodge/Arthur | Implemented |         | Ready for testing |
-| Generate Server           | Josephine/Rodge/Arthur | Implemented |         | Ready for testing |
-| Convert from OpenAPI      | Josephine/Rodge/Arthur | Pending     | 2/15    |                   |
+| **Extension Feature**     | **Status**  | **ETA** | **Remarks**       |
+| ------------------------- | ----------- | ------- | ----------------- |
+| New Project from Template | Implemented |         | Ready for testing |
+| Generate OpenAPI          | Implemented |         | Ready for testing |
+| Generate Client           | Implemented |         | Ready for testing |
+| Generate Server           | Implemented |         | Ready for testing |
+| Convert from OpenAPI      | Pending     | 2/15    |                   |
 
 ---
 
