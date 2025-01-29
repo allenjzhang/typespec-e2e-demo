@@ -8,19 +8,19 @@
 
 ### CLI
 
-| **Extension Feature** | **Status**  | **ETA** | **Issues Link** | **Remarks**       |
-| --------------------- | ----------- | ------- | --------------- | ----------------- |
-| Project init          | Implemented |         |                 | Ready for testing |
+| **Extension Feature** | **Status**  | **ETA** | **Issues Link** | **Remarks**                                    |
+| --------------------- | ----------- | ------- | --------------- | ---------------------------------------------- |
+| Project init          | Implemented |         |                 | [Ready for testing](./doc/user-journey.md#cli) |
 
 ### VSCode
 
-| **Extension Feature**     | **Status**  | **ETA** | **Remarks**       |
-| ------------------------- | ----------- | ------- | ----------------- |
-| New Project from Template | Implemented |         | Ready for testing |
-| Generate OpenAPI          | Implemented |         | Ready for testing |
-| Generate Client           | Implemented |         | Ready for testing |
-| Generate Server           | Implemented |         | Ready for testing |
-| Convert from OpenAPI      | Pending     | 2/15    |                   |
+| **Extension Feature**     | **Status**  | **ETA** | **Remarks**                                                                             |
+| ------------------------- | ----------- | ------- | --------------------------------------------------------------------------------------- |
+| New Project from Template | Implemented |         | [Ready for testing](./doc/user-journey.md#project-scaffolding)                          |
+| Generate OpenAPI          | Implemented |         | [Ready for testing](./doc/user-journey.md#generate-the-openapi-document)                |
+| Generate Client           | Implemented |         | [Ready for testing](./doc/user-journey.md#generate-the-client-code-and-the-server-stub) |
+| Generate Server           | Implemented |         | [Ready for testing](./doc/user-journey.md#generate-the-client-code-and-the-server-stub) |
+| Convert from OpenAPI      | Pending     | 2/15    |                                                                                         |
 
 ---
 
