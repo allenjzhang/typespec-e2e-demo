@@ -24,16 +24,16 @@
 
 ### Language & Spec Readiness
 
-| **Language** | **Pet Store**                          | **ToDo App**                          |
-| ------------ | -------------------------------------- | ------------------------------------- |
-| TypeSpec     | [Yes](./petstore/spec/)                | [Yes](./todoApp/spec/)                |
-| OpenAPI      | [Yes](./petstore/openapi/openapi.yaml) | [Yes](./todoApp/openapi/openapi.yaml) |
-| Client C#    | [Yes](./petstore/clients/dotnet/)      | [Yes](./todoApp/clients/dotnet/)      |
-| Java         | [Yes](./petstore/clients/java/)        | [Yes](./todoApp/clients/java/)        |
-| Javascript   | [Yes](./petstore/clients/javascript/)  | [Yes](./todoApp/clients/javascript/)  |
-| Python       | [Yes](./petstore/clients/python/)      | [Yes](./todoApp/clients/python/)      |
-| ASP.NET C#   | [Yes](./petstore/servers/aspnet/)      | [Yes](./todoApp/servers/aspnet/)      |
-| Node Server  | [Yes](./petstore/servers/node/)        | [Yes](./todoApp/servers/node/)        |
+| **Language** | **Pet Store**                          | **ToDo App**                          | **Remark**                            |
+| ------------ | -------------------------------------- | ------------------------------------- | ------------------------------------- |
+| TypeSpec     | [Yes](./petstore/spec/)                | [Yes](./todoApp/spec/)                |                                       |
+| OpenAPI      | [Yes](./petstore/openapi/openapi.yaml) | [Yes](./todoApp/openapi/openapi.yaml) |                                       |
+| Client C#    | [Yes](./petstore/clients/dotnet/)      | [Yes](./todoApp/clients/dotnet/)      |                                       |
+| Java         | [Yes](./petstore/clients/java/)        | [Yes](./todoApp/clients/java/)        |                                       |
+| Javascript   | [Yes](./petstore/clients/javascript/)  | [Yes](./todoApp/clients/javascript/)  |                                       |
+| Python       | [Yes](./petstore/clients/python/)      | [Yes](./todoApp/clients/python/)      |                                       |
+| ASP.NET C#   | [Yes](./petstore/servers/aspnet/)      | [Yes](./todoApp/servers/aspnet/)      |                                       |
+| Node Server  | [Yes](./petstore/servers/node/)        | [Yes](./todoApp/servers/node/)        | Project scaffolding under development |
 
 ---
 
