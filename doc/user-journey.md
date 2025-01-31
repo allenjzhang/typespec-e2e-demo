@@ -17,8 +17,8 @@ These workflows are designed to offer a seamless and productive experience for n
 
 Please take a look at the sample scenarios to give CLI and VSCode a try. You can provide feedback and suggestions with following links.
 
-    - [Discussion channel](https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47)
-    - [Opening issues](https://github.com/microsoft/typespec/issues/new/choose)
+- [Discussion channel](https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47)
+- [Opening issues](https://github.com/microsoft/typespec/issues/new/choose)
 
 **We welcome all questions, bug reports, performance, and useability improvement suggestions.**
 
@@ -36,8 +36,12 @@ Here are some suggested sample scenarios you can try. Please note you do not nee
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed [Node.js](https://nodejs.org/) (version 14.x or later).
+- You have installed [Node.js](https://nodejs.org/) (version 20.x or later).
 - You have installed [npm](https://www.npmjs.com/) (version 6.x or later).
+- To compile dotnet SDKs, please install [dotnet SDK](https://dotnet.microsoft.com/download)
+- To compile Java SDKs, please install [JDK](https://www.oracle.com/java/technologies/downloads/)
+- To compile Python SDKs, please install [Python](https://www.python.org/downloads/)
+
 
 Next, you need to install TypeSpec CLI and compiler. Please note to install @next version since some init features exist will be released next sprint in Feb.
 
@@ -99,7 +103,7 @@ If you have selected client emitters, you can use the following commands to comp
 #### Compile and Test Server
 
 - asp.net:
-  - run `npx hscs scaffold .\tsp-output\server\ . --use-swaggerui` to create basic aspnet project scaffolding.
+  - run `npx hscs scaffold ./tsp-output/server/ . --use-swaggerui` to create basic aspnet project scaffolding.
   - Run `dotnet run`
   - use browser to `http://localhost:XXXX/swagger/index.html` where XXXX is the port number shown
   - You can use Swagger UI's `Try it out` to interact with the running service
