@@ -38,12 +38,16 @@ Before you begin, ensure you have met the following requirements:
 
 - You have installed [Node.js](https://nodejs.org/) (version 20.x or later).
 - You have installed [npm](https://www.npmjs.com/) (version 6.x or later).
-- To compile dotnet SDKs, please install [dotnet SDK](https://dotnet.microsoft.com/download)
-- To compile Java SDKs, please install [JDK](https://www.oracle.com/java/technologies/downloads/)
-- To compile Python SDKs, please install [Python](https://www.python.org/downloads/)
+- To emit dotnet SDKs, please install [dotnet SDK](https://dotnet.microsoft.com/download)
+- To emit Java SDKs, please install [JDK](https://www.oracle.com/java/technologies/downloads/)
 
+In order to test generated code:
 
-Next, you need to install TypeSpec CLI and compiler. Please note to install @next version since some init features exist will be released next sprint in Feb.
+- To compile and test dotnet SDKs, please install [dotnet SDK](https://dotnet.microsoft.com/download)
+- To compile and test Java SDKs, please install [JDK](https://www.oracle.com/java/technologies/downloads/)
+- To execute Python SDKs, please install [Python](https://www.python.org/downloads/)
+
+Next, you need to install TypeSpec CLI and compiler. Please note to install **@next** version since some init features will be released next sprint in Feb.
 
 ```bash
     npm install -g @typespec/compiler@next
