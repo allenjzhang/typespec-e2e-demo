@@ -1,0 +1,21 @@
+{
+  "body": {
+    "messages": [
+      {
+        "role": "assistant",
+        "content": "Hello, world",
+        "context": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        }
+      }
+    ],
+    "context": {
+      "additionalProp1": "string",
+      "additionalProp2": "string",
+      "additionalProp3": "string"
+    },
+    "sessionState": "string"
+  }
+}
