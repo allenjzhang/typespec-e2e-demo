@@ -11,5 +11,7 @@ options:
     namespace: "Getitdone.Client"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{project-root}/clients/typescript"
+    isModularLibrary: true
+    azureSdkForJs: false
   "@typespec/http-server-csharp":
     emitter-output-dir: "{project-root}/servers/aspnet/generated"
