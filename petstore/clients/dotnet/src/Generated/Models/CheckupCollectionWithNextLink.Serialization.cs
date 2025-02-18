@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using PetStore;
 
-namespace PetStore.Models
+namespace TypeSpec.Rest.Resource
 {
     /// <summary></summary>
     public partial class CheckupCollectionWithNextLink : IJsonModel<CheckupCollectionWithNextLink>

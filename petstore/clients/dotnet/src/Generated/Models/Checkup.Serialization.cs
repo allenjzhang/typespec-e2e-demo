@@ -7,9 +7,8 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using PetStore;
 
-namespace PetStore.Models
+namespace PetStore
 {
     /// <summary></summary>
     public partial class Checkup : IJsonModel<Checkup>

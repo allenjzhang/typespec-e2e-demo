@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using PetStore;
 
-namespace PetStore.Models
+namespace TypeSpec.Rest.Resource
 {
     /// <summary> Resource create operation model. </summary>
     public partial class OwnerCreate
