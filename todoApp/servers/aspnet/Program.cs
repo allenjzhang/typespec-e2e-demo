@@ -3,7 +3,9 @@
 
 using Microsoft.AspNetCore.Http.Features;
 using Todo.Exceptions;
+using Todo.Service;
 using Todo.Service.Common;
+using Todo.Service.Impl;
 using Todo.Service.Models;
 // using Todo.Temp;
 
@@ -17,6 +19,9 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddSingleton<IResourceStore<long, TodoItem>, InMemoryStore<long, TodoItem>>();
 builder.Services.AddSingleton<IResourceStore<long, List<TodoAttachment>>, InMemoryStore<long, List<TodoAttachment>>>();
 builder.Services.AddSingleton<IResourceStore<long, User>, InMemoryStore<long, User>>();
+builder.Services.AddSingleton<IAttachmentsOperations, AttachmentsOperations>();
+builder.Services.AddSingleton<ITodoItemsOperations, TodoOperations>();
+builder.Services.AddSingleton<IUsersOperations, UsersOperations>();
 builder.Services.Configure<FormOptions>(options =>
 {
     options.MemoryBufferThreshold = int.MaxValue;

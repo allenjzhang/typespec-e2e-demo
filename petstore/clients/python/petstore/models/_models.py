@@ -23,11 +23,11 @@ class Checkup(_model_base.Model):
     :vartype notes: str
     """
 
-    id: int = rest_field()
+    id: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    vet_name: str = rest_field(name="vetName")
+    vet_name: str = rest_field(name="vetName", visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    notes: str = rest_field()
+    notes: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
 
     @overload
@@ -60,9 +60,9 @@ class CheckupCollectionWithNextLink(_model_base.Model):
     :vartype next_link: str
     """
 
-    value: List["_models.Checkup"] = rest_field()
+    value: List["_models.Checkup"] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The items on this page. Required."""
-    next_link: Optional[str] = rest_field(name="nextLink")
+    next_link: Optional[str] = rest_field(name="nextLink", visibility=["read", "create", "update", "delete", "query"])
     """The link to the next page of items."""
 
     @overload
@@ -93,8 +93,8 @@ class CheckupUpdate(_model_base.Model):
     :vartype notes: str
     """
 
-    vet_name: Optional[str] = rest_field(name="vetName")
-    notes: Optional[str] = rest_field()
+    vet_name: Optional[str] = rest_field(name="vetName", visibility=["read", "create", "update", "delete", "query"])
+    notes: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
 
     @overload
     def __init__(
@@ -127,11 +127,11 @@ class Insurance(_model_base.Model):
     :vartype deductible: int
     """
 
-    provider: str = rest_field()
+    provider: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    premium: int = rest_field()
+    premium: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    deductible: int = rest_field()
+    deductible: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
 
     @overload
@@ -165,9 +165,9 @@ class InsuranceUpdate(_model_base.Model):
     :vartype deductible: int
     """
 
-    provider: Optional[str] = rest_field()
-    premium: Optional[int] = rest_field()
-    deductible: Optional[int] = rest_field()
+    provider: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    premium: Optional[int] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    deductible: Optional[int] = rest_field(visibility=["read", "create", "update", "delete", "query"])
 
     @overload
     def __init__(
@@ -201,11 +201,11 @@ class Owner(_model_base.Model):
     :vartype age: int
     """
 
-    id: int = rest_field()
+    id: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    name: str = rest_field()
+    name: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    age: int = rest_field()
+    age: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
 
     @overload
@@ -238,9 +238,9 @@ class OwnerCollectionWithNextLink(_model_base.Model):
     :vartype next_link: str
     """
 
-    value: List["_models.Owner"] = rest_field()
+    value: List["_models.Owner"] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The items on this page. Required."""
-    next_link: Optional[str] = rest_field(name="nextLink")
+    next_link: Optional[str] = rest_field(name="nextLink", visibility=["read", "create", "update", "delete", "query"])
     """The link to the next page of items."""
 
     @overload
@@ -273,9 +273,9 @@ class OwnerCreate(_model_base.Model):
     :vartype age: int
     """
 
-    name: str = rest_field()
+    name: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    age: int = rest_field()
+    age: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
 
     @overload
@@ -306,8 +306,8 @@ class OwnerUpdate(_model_base.Model):
     :vartype age: int
     """
 
-    name: Optional[str] = rest_field()
-    age: Optional[int] = rest_field()
+    name: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    age: Optional[int] = rest_field(visibility=["read", "create", "update", "delete", "query"])
 
     @overload
     def __init__(
@@ -344,14 +344,14 @@ class Pet(_model_base.Model):
     :vartype owner_id: int
     """
 
-    id: int = rest_field()
+    id: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    name: str = rest_field()
+    name: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    tag: Optional[str] = rest_field()
-    age: int = rest_field()
+    tag: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    age: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    owner_id: int = rest_field(name="ownerId")
+    owner_id: int = rest_field(name="ownerId", visibility=["read", "create", "update", "delete", "query"])
     """Required."""
 
     @overload
@@ -386,9 +386,9 @@ class PetCollectionWithNextLink(_model_base.Model):
     :vartype next_link: str
     """
 
-    value: List["_models.Pet"] = rest_field()
+    value: List["_models.Pet"] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The items on this page. Required."""
-    next_link: Optional[str] = rest_field(name="nextLink")
+    next_link: Optional[str] = rest_field(name="nextLink", visibility=["read", "create", "update", "delete", "query"])
     """The link to the next page of items."""
 
     @overload
@@ -425,12 +425,12 @@ class PetCreate(_model_base.Model):
     :vartype owner_id: int
     """
 
-    name: str = rest_field()
+    name: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    tag: Optional[str] = rest_field()
-    age: int = rest_field()
+    tag: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    age: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    owner_id: int = rest_field(name="ownerId")
+    owner_id: int = rest_field(name="ownerId", visibility=["read", "create", "update", "delete", "query"])
     """Required."""
 
     @overload
@@ -465,9 +465,9 @@ class PetStoreError(_model_base.Model):
     :vartype message: str
     """
 
-    code: int = rest_field()
+    code: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    message: str = rest_field()
+    message: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
 
     @overload
@@ -502,10 +502,10 @@ class PetUpdate(_model_base.Model):
     :vartype owner_id: int
     """
 
-    name: Optional[str] = rest_field()
-    tag: Optional[str] = rest_field()
-    age: Optional[int] = rest_field()
-    owner_id: Optional[int] = rest_field(name="ownerId")
+    name: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    tag: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    age: Optional[int] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    owner_id: Optional[int] = rest_field(name="ownerId", visibility=["read", "create", "update", "delete", "query"])
 
     @overload
     def __init__(
@@ -540,11 +540,11 @@ class Toy(_model_base.Model):
     :vartype name: str
     """
 
-    id: int = rest_field()
+    id: int = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    pet_id: int = rest_field(name="petId")
+    pet_id: int = rest_field(name="petId", visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    name: str = rest_field()
+    name: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
 
     @overload
@@ -577,9 +577,9 @@ class ToyCollectionWithNextLink(_model_base.Model):
     :vartype next_link: str
     """
 
-    value: List["_models.Toy"] = rest_field()
+    value: List["_models.Toy"] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The items on this page. Required."""
-    next_link: Optional[str] = rest_field(name="nextLink")
+    next_link: Optional[str] = rest_field(name="nextLink", visibility=["read", "create", "update", "delete", "query"])
     """The link to the next page of items."""
 
     @overload

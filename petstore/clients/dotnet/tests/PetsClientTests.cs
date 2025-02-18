@@ -1,8 +1,6 @@
-using PetStore.Models;
 using System.ClientModel;
-using System.IO;
-using System.Text;
 using System.Text.Json;
+using TypeSpec.Rest.Resource;
 
 namespace PetStore.Tests
 {

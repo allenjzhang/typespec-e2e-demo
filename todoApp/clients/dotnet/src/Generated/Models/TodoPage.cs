@@ -5,8 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Todo;
 
-namespace Todo.Models
+namespace Todo._TodoItems
 {
     /// <summary> The TodoPage. </summary>
     public partial class TodoPage

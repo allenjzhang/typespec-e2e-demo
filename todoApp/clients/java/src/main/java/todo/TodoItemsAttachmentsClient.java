@@ -98,8 +98,8 @@ public final class TodoItemsAttachmentsClient {
      */
     @Metadata(generated = true)
     Response<Void> createFileAttachmentWithResponse(long itemId, BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation
-        // 'createFileAttachment' is 'multipart/form-data'
+        // Operation 'createFileAttachment' is of content-type 'multipart/form-data'. Protocol API is not usable and
+        // hence not generated.
         return this.serviceClient.createFileAttachmentWithResponse(itemId, body, requestOptions);
     }
 

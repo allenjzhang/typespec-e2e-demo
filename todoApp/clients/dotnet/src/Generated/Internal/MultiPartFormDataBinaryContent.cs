@@ -24,6 +24,7 @@ namespace Todo
             _multipartContent = new MultipartFormDataContent(CreateBoundary());
         }
 
+        /// <summary> Gets the ContentType. </summary>
         public string ContentType
         {
             get
@@ -32,6 +33,7 @@ namespace Todo
             }
         }
 
+        /// <summary> Gets the HttpContent. </summary>
         internal HttpContent HttpContent => _multipartContent;
 
         private static string CreateBoundary()

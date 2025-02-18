@@ -20,7 +20,7 @@ class InvalidUserResponse(ApiError):
     :vartype code: str
     """
 
-    code: Literal["invalid-user"] = rest_field()
+    code: Literal["invalid-user"] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required. Default value is \"invalid-user\"."""
 
     @overload
@@ -55,7 +55,7 @@ class UserExistsResponse(ApiError):
     :vartype code: str
     """
 
-    code: Literal["user-exists"] = rest_field()
+    code: Literal["user-exists"] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required. Default value is \"user-exists\"."""
 
     @overload

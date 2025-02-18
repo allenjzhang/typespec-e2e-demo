@@ -1,6 +1,6 @@
 ﻿using PetStore;
-using PetStore.Models;
 using System.ClientModel;
+using TypeSpec.Rest.Resource;
 
 Pets petsClient = new PetStoreClient(new Uri("http://localhost:5118")).GetPetsClient();
 

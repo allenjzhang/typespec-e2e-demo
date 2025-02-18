@@ -122,7 +122,7 @@ class TodoItemsAttachmentsOperations:
                 if response.status_code == 404:
                     error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                     raise ResourceNotFoundError(response=response, model=error)
-                elif 400 <= response.status_code <= 499:
+                if 400 <= response.status_code <= 499:
                     error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
                 elif 500 <= response.status_code <= 599:
                     error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())
@@ -240,7 +240,7 @@ class TodoItemsAttachmentsOperations:
             if response.status_code == 404:
                 error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
-            elif 400 <= response.status_code <= 499:
+            if 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
                 error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())
@@ -328,7 +328,7 @@ class TodoItemsAttachmentsOperations:
             if response.status_code == 404:
                 error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
-            elif 400 <= response.status_code <= 499:
+            if 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
                 error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())

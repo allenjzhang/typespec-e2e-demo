@@ -5,9 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Todo;
+using Todo._TodoItems;
+using Todo._Users;
+using TypeSpec.Http;
 
-namespace Todo.Models
+namespace Todo
 {
     /// <summary> A factory class for creating instances of the models for mocking. </summary>
     public static partial class TodoModelFactory
@@ -18,7 +20,7 @@ namespace Todo.Models
         /// <param name="totalSize"> The total number of items. </param>
         /// <param name="prevLink"> A link to the previous page, if it exists. </param>
         /// <param name="nextLink"> A link to the next page, if it exists. </param>
-        /// <returns> A new <see cref="Models.TodoPage"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="_TodoItems.TodoPage"/> instance for mocking. </returns>
         public static TodoPage TodoPage(IEnumerable<TodoItem> items = default, int pageSize = default, int totalSize = default, Uri prevLink = default, Uri nextLink = default)
         {
             items ??= new ChangeTrackingList<TodoItem>();
@@ -44,7 +46,7 @@ namespace Todo.Models
         /// <param name="completedAt"> When the todo item was makred as completed. </param>
         /// <param name="labels"></param>
         /// <param name="dummy"></param>
-        /// <returns> A new <see cref="Models.TodoItem"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="Todo.TodoItem"/> instance for mocking. </returns>
         public static TodoItem TodoItem(long id = default, string title = default, long createdBy = default, long? assignedTo = default, string description = default, TodoItemStatus status = default, DateTimeOffset createdAt = default, DateTimeOffset updatedAt = default, DateTimeOffset? completedAt = default, BinaryData labels = default, string dummy = default)
         {
 
@@ -66,7 +68,7 @@ namespace Todo.Models
         /// <summary> The TodoLabelRecord. </summary>
         /// <param name="name"></param>
         /// <param name="color"></param>
-        /// <returns> A new <see cref="Models.TodoLabelRecord"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="Todo.TodoLabelRecord"/> instance for mocking. </returns>
         public static TodoLabelRecord TodoLabelRecord(string name = default, string color = default)
         {
 
@@ -77,7 +79,7 @@ namespace Todo.Models
         /// <param name="filename"> The file name of the attachment. </param>
         /// <param name="mediaType"> The media type of the attachment. </param>
         /// <param name="contents"> The contents of the file. </param>
-        /// <returns> A new <see cref="Models.TodoAttachment"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="Todo.TodoAttachment"/> instance for mocking. </returns>
         public static TodoAttachment TodoAttachment(string filename = default, string mediaType = default, BinaryData contents = default)
         {
 
@@ -95,7 +97,7 @@ namespace Todo.Models
         /// <param name="updatedAt"> When the todo item was last updated. </param>
         /// <param name="completedAt"> When the todo item was makred as completed. </param>
         /// <param name="labels"></param>
-        /// <returns> A new <see cref="Models.CreateJsonResponse"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="Todo.CreateJsonResponse"/> instance for mocking. </returns>
         public static CreateJsonResponse CreateJsonResponse(long id = default, string title = default, long createdBy = default, long? assignedTo = default, string description = default, TodoItemStatus status = default, DateTimeOffset createdAt = default, DateTimeOffset updatedAt = default, DateTimeOffset? completedAt = default, BinaryData labels = default)
         {
 
@@ -124,7 +126,7 @@ namespace Todo.Models
         /// <param name="updatedAt"> When the todo item was last updated. </param>
         /// <param name="completedAt"> When the todo item was makred as completed. </param>
         /// <param name="labels"></param>
-        /// <returns> A new <see cref="Models.GetResponse"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="Todo.GetResponse"/> instance for mocking. </returns>
         public static GetResponse GetResponse(long id = default, string title = default, long createdBy = default, long? assignedTo = default, string description = default, TodoItemStatus status = default, DateTimeOffset createdAt = default, DateTimeOffset updatedAt = default, DateTimeOffset? completedAt = default, BinaryData labels = default)
         {
 
@@ -144,7 +146,7 @@ namespace Todo.Models
 
         /// <summary> The PageTodoAttachment. </summary>
         /// <param name="items"></param>
-        /// <returns> A new <see cref="Models.PageTodoAttachment"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="_TodoItems.PageTodoAttachment"/> instance for mocking. </returns>
         public static PageTodoAttachment PageTodoAttachment(IEnumerable<TodoAttachment> items = default)
         {
             items ??= new ChangeTrackingList<TodoAttachment>();
@@ -160,7 +162,7 @@ namespace Todo.Models
         /// The user's password, provided when creating a user
         /// but is otherwise not visible (and hashed by the backend)
         /// </param>
-        /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="Todo.User"/> instance for mocking. </returns>
         public static User User(long id = default, string username = default, string email = default, string password = default)
         {
 
@@ -172,7 +174,7 @@ namespace Todo.Models
         /// <param name="username"> The user's username. </param>
         /// <param name="email"> The user's email address. </param>
         /// <param name="token"> The token to use to construct the validate email address url. </param>
-        /// <returns> A new <see cref="Models.CreateResponse"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="Todo.CreateResponse"/> instance for mocking. </returns>
         public static CreateResponse CreateResponse(long id = default, string username = default, string email = default, string token = default)
         {
 

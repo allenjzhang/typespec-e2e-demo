@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Todo.Models
+namespace Todo
 {
     /// <summary> The CreateResponse. </summary>
     public partial class CreateResponse

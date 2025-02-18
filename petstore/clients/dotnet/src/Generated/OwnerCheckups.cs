@@ -7,7 +7,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
-using PetStore.Models;
+using TypeSpec.Rest.Resource;
 
 namespace PetStore
 {

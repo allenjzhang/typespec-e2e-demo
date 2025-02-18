@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PetStore.Models
+namespace PetStore
 {
     /// <summary> The Owner. </summary>
     public partial class Owner

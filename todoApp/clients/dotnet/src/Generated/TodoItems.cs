@@ -9,9 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Todo.Models;
+using Todo;
+using Todo._TodoItems.Attachments;
 
-namespace Todo
+namespace Todo._TodoItems
 {
     /// <summary></summary>
     public partial class TodoItems

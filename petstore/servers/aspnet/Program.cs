@@ -12,6 +12,15 @@ builder.Services.AddControllers(options =>
 {
     options.InvalidModelStateResponseFactory = HandleInvalidModelStateResponse;
 });
+builder.Services.AddSingleton<ICheckups, Checkups>();
+builder.Services.AddSingleton<IOwnerCheckups, OwnerCheckups>();
+builder.Services.AddSingleton<IOwnerInsurance, OwnerInsurance>();
+builder.Services.AddSingleton<IOwners, Owners>();
+builder.Services.AddSingleton<IPetCheckups, PetCheckups>();
+builder.Services.AddSingleton<IPetInsurance, PetInsurance>();
+builder.Services.AddSingleton<IPets, Pets>();
+builder.Services.AddSingleton<IToyInsurance, ToyInsurance>();
+builder.Services.AddSingleton<IToys, Toys>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PetStore;
+using TypeSpec.Rest.Resource;
 
-namespace PetStore.Models
+namespace PetStore
 {
     /// <summary> A factory class for creating instances of the models for mocking. </summary>
     public static partial class PetStoreModelFactory
@@ -16,7 +16,7 @@ namespace PetStore.Models
         /// <param name="provider"></param>
         /// <param name="premium"></param>
         /// <param name="deductible"></param>
-        /// <returns> A new <see cref="Models.Insurance"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="PetStore.Insurance"/> instance for mocking. </returns>
         public static Insurance Insurance(string provider = default, int premium = default, int deductible = default)
         {
 
@@ -27,7 +27,7 @@ namespace PetStore.Models
         /// <param name="id"></param>
         /// <param name="vetName"></param>
         /// <param name="notes"></param>
-        /// <returns> A new <see cref="Models.Checkup"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="PetStore.Checkup"/> instance for mocking. </returns>
         public static Checkup Checkup(int id = default, string vetName = default, string notes = default)
         {
 
@@ -37,7 +37,7 @@ namespace PetStore.Models
         /// <summary> Paged response of Checkup items. </summary>
         /// <param name="value"> The items on this page. </param>
         /// <param name="nextLink"> The link to the next page of items. </param>
-        /// <returns> A new <see cref="Models.CheckupCollectionWithNextLink"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="TypeSpec.Rest.Resource.CheckupCollectionWithNextLink"/> instance for mocking. </returns>
         public static CheckupCollectionWithNextLink CheckupCollectionWithNextLink(IEnumerable<Checkup> value = default, Uri nextLink = default)
         {
             value ??= new ChangeTrackingList<Checkup>();
@@ -49,7 +49,7 @@ namespace PetStore.Models
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="age"></param>
-        /// <returns> A new <see cref="Models.Owner"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="PetStore.Owner"/> instance for mocking. </returns>
         public static Owner Owner(long id = default, string name = default, int age = default)
         {
 
@@ -59,7 +59,7 @@ namespace PetStore.Models
         /// <summary> Resource create operation model. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
-        /// <returns> A new <see cref="Models.OwnerCreate"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="TypeSpec.Rest.Resource.OwnerCreate"/> instance for mocking. </returns>
         public static OwnerCreate OwnerCreate(string name = default, int age = default)
         {
 
@@ -69,7 +69,7 @@ namespace PetStore.Models
         /// <summary> Paged response of Owner items. </summary>
         /// <param name="value"> The items on this page. </param>
         /// <param name="nextLink"> The link to the next page of items. </param>
-        /// <returns> A new <see cref="Models.OwnerCollectionWithNextLink"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="TypeSpec.Rest.Resource.OwnerCollectionWithNextLink"/> instance for mocking. </returns>
         public static OwnerCollectionWithNextLink OwnerCollectionWithNextLink(IEnumerable<Owner> value = default, Uri nextLink = default)
         {
             value ??= new ChangeTrackingList<Owner>();
@@ -81,7 +81,7 @@ namespace PetStore.Models
         /// <param name="id"></param>
         /// <param name="petId"></param>
         /// <param name="name"></param>
-        /// <returns> A new <see cref="Models.Toy"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="PetStore.Toy"/> instance for mocking. </returns>
         public static Toy Toy(long id = default, long petId = default, string name = default)
         {
 
@@ -91,7 +91,7 @@ namespace PetStore.Models
         /// <summary> Paged response of Toy items. </summary>
         /// <param name="value"> The items on this page. </param>
         /// <param name="nextLink"> The link to the next page of items. </param>
-        /// <returns> A new <see cref="Models.ToyCollectionWithNextLink"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="TypeSpec.Rest.Resource.ToyCollectionWithNextLink"/> instance for mocking. </returns>
         public static ToyCollectionWithNextLink ToyCollectionWithNextLink(IEnumerable<Toy> value = default, Uri nextLink = default)
         {
             value ??= new ChangeTrackingList<Toy>();
@@ -105,7 +105,7 @@ namespace PetStore.Models
         /// <param name="tag"></param>
         /// <param name="age"></param>
         /// <param name="ownerId"></param>
-        /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="PetStore.Pet"/> instance for mocking. </returns>
         public static Pet Pet(int id = default, string name = default, string tag = default, int age = default, long ownerId = default)
         {
 
@@ -123,7 +123,7 @@ namespace PetStore.Models
         /// <param name="tag"></param>
         /// <param name="age"></param>
         /// <param name="ownerId"></param>
-        /// <returns> A new <see cref="Models.PetCreate"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="TypeSpec.Rest.Resource.PetCreate"/> instance for mocking. </returns>
         public static PetCreate PetCreate(string name = default, string tag = default, int age = default, long ownerId = default)
         {
 
@@ -133,7 +133,7 @@ namespace PetStore.Models
         /// <summary> Paged response of Pet items. </summary>
         /// <param name="value"> The items on this page. </param>
         /// <param name="nextLink"> The link to the next page of items. </param>
-        /// <returns> A new <see cref="Models.PetCollectionWithNextLink"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="TypeSpec.Rest.Resource.PetCollectionWithNextLink"/> instance for mocking. </returns>
         public static PetCollectionWithNextLink PetCollectionWithNextLink(IEnumerable<Pet> value = default, Uri nextLink = default)
         {
             value ??= new ChangeTrackingList<Pet>();

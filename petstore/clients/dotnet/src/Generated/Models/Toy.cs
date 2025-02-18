@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PetStore.Models
+namespace PetStore
 {
     /// <summary> The Toy. </summary>
     public partial class Toy
