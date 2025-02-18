@@ -7,9 +7,10 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
-using Todo.Models;
+using Todo;
+using Todo._TodoItems;
 
-namespace Todo
+namespace Todo._TodoItems.Attachments
 {
     /// <summary></summary>
     public partial class TodoItemsAttachments

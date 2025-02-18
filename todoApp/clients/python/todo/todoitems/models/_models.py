@@ -50,7 +50,7 @@ class NotFoundErrorResponse(_model_base.Model):
     :vartype code: str
     """
 
-    code: Literal["not-found"] = rest_field()
+    code: Literal["not-found"] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required. Default value is \"not-found\"."""
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
@@ -72,13 +72,17 @@ class TodoItemPatch(_model_base.Model):
     :vartype status: str or str or str
     """
 
-    title: Optional[str] = rest_field()
+    title: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The item's title."""
-    assigned_to: Optional[int] = rest_field(name="assignedTo")
+    assigned_to: Optional[int] = rest_field(
+        name="assignedTo", visibility=["read", "create", "update", "delete", "query"]
+    )
     """User that the todo is assigned to."""
-    description: Optional[str] = rest_field()
+    description: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """A longer description of the todo item in markdown format."""
-    status: Optional[Literal["NotStarted", "InProgress", "Completed"]] = rest_field()
+    status: Optional[Literal["NotStarted", "InProgress", "Completed"]] = rest_field(
+        visibility=["read", "create", "update", "delete", "query"]
+    )
     """The status of the todo item. Is one of the following types: Literal[\"NotStarted\"],
      Literal[\"InProgress\"], Literal[\"Completed\"]"""
 

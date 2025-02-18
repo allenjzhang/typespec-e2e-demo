@@ -172,7 +172,7 @@ class UsersOperations:
             if response.status_code == 409:
                 error = _failsafe_deserialize(_models1.UserExistsResponse, response.json())
                 raise ResourceExistsError(response=response, model=error)
-            elif response.status_code == 422:
+            if response.status_code == 422:
                 error = _failsafe_deserialize(_models1.InvalidUserResponse, response.json())
             elif 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models2.Standard4XXResponse, response.json())

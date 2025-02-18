@@ -13,7 +13,7 @@ namespace Todo.Service.Common
         Task<bool> DeleteAsync(Key id);
         Task<Model[]> ListAsync(int? offset, int? limit);
     }
-    public class InMemoryStore<Key, Model> : IResourceStore<Key, Model> where Model :class where Key : notnull 
+    public class InMemoryStore<Key, Model> : IResourceStore<Key, Model> where Model : class where Key : notnull
     {
         private readonly ConcurrentDictionary<Key, Model> _store = new();
 

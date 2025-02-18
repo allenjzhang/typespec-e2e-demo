@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Todo.Models
+namespace Todo
 {
     /// <summary> The CreateJsonResponse. </summary>
     public partial class CreateJsonResponse

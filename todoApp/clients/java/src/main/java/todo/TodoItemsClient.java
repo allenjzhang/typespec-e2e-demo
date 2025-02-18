@@ -174,8 +174,8 @@ public final class TodoItemsClient {
      */
     @Metadata(generated = true)
     Response<CreateFormResponse> createFormWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'createForm' is
-        // 'multipart/form-data'
+        // Operation 'createForm' is of content-type 'multipart/form-data'. Protocol API is not usable and hence not
+        // generated.
         return this.serviceClient.createFormWithResponse(body, requestOptions);
     }
 
