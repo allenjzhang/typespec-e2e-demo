@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 
-@service({
+@service(#{
   title: "Pet Store Service",
 })
 namespace PetStore;

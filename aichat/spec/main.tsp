@@ -6,7 +6,7 @@ import "./operations.tsp";
 
 using TypeSpec.Http;
 
-@service({
+@service(#{
   title: "Chat Protocol",
 })
 @server(

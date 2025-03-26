@@ -1,16 +1,16 @@
-import { HttpContext } from "../../tsp-output/@typespec/http-server-javascript/helpers/router.js";
+import { HttpContext } from "../../tsp-output/@typespec/http-server-js/helpers/router.js";
 import {
   Pet,
   Pets,
   PetStoreError,
-} from "../../tsp-output/@typespec/http-server-javascript/models/all/pet-store.js";
+} from "../../tsp-output/@typespec/http-server-js/models/all/pet-store.js";
 import {
   PetUpdate,
   ResourceDeletedResponse,
   PetCreate,
   PetResourceCreatedResponse,
   PetCollectionWithNextLink,
-} from "../../tsp-output/@typespec/http-server-javascript/models/all/typespec/rest/resource.js";
+} from "../../tsp-output/@typespec/http-server-js/models/all/typespec/rest/resource.js";
 
 export class PetsImpl implements Pets<HttpContext> {
   get(ctx: HttpContext, petId: number): Promise<Pet | PetStoreError> {

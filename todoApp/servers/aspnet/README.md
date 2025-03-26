@@ -1,29 +1,20 @@
-# TodoApp ASP.NET WebAPI project
+---
+title: Next Steps
+---
 
-The current folder contains ASP.NET core basic project with basic service stub code for out of box run-ability.
+# Next Steps
 
-## Testing the server code
+- Use the SwaggerUI endpoint to test out the running service
+- Update business logic mocks with real business logic
+  - `mocks/UsersOperations.cs`
+  - `mocks/TodoItemsOperations.cs`
+  - `mocks/AttachmentsOperations.cs`
+- Update `mocks/MockRegistration.cs` if you update the constructor of business logic implementations.
+- Update development and production configuration to suit your needs
 
-[Follow these steps](../../../how-to-test-server-api.md)
+## More Information
 
-## How the server implements the API
-
-The spec contains three parts:
-- `Users`
-- `TodoItems`
-- `TodoItems.Attachments`
-
-All operations are implemented with internal memory storage.
-
-For create operations, the server will echo your request back and update the internal storage with an id `0` (see the next section for details).
-
-For get and list operations, the server will query the internal storage and give back the results.
-
-For delete operations, the server will remove the item from the internal storage, therefore next time you call get using that id should get an error.
-
-### Possible issues and questions
-
-1. `Users.create`
-
-The request body in `Users.create` has `@key` on the request body, but because this operation is not using the template, therefore there is no approach that the client could send the id to the server.
-The current implementation will always return 0 as id. And if you call create with a different body, it will override the old user.
+- See [Code Layout](docs/usage.md) for information about the generated code
+- See [Emitter Usage](docs/emitter.md) for details on how to use the emitter.
+- File issues or provide feedback in [TypeSpec Issues](https://github.com/microsoft/typespec/issues/new/choose)
+- Get information about Typespec on the [TypeSpec website](https://typespec.io)

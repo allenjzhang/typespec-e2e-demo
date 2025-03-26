@@ -1,7 +1,7 @@
 import express from "express";
 
 import morgan from "morgan";
-import { createPetStoreRouter } from "../tsp-output/@typespec/http-server-javascript/http/router.js";
+import { createPetStoreRouter } from "../tsp-output/@typespec/http-server-js/http/router.js";
 import { CheckupsImpl } from "./impl/Checkups.js";
 import { OwnerCheckupsImpl } from "./impl/OwnerCheckups.js";
 import { OwnerInsuranceImpl } from "./impl/OwnerInsurance.js";

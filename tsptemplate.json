@@ -20,7 +20,7 @@
         },
         "message": "Please ensure dotnet SDK has been installed. Download from https://dotnet.microsoft.com/download"
       },
-      "@azure-tools/typespec-ts": {
+      "@typespec/http-client-js": {
         "description": "Client: generate TypeScript client",
         "options": {
           "emitter-output-dir": "{project-root}/clients/javascript"
@@ -46,10 +46,10 @@
         },
         "message": "Please ensure dotnet SDK has been installed. Download from https://dotnet.microsoft.com/download"
       },
-      "@typespec/http-server-javascript": {
+      "@typespec/http-server-js": {
         "description": "Server: generate Node/Express server",
         "options": {
-          "emitter-output-dir": "{project-root}/servers/node/tsp-output/@typespec/http-server-javascript"
+          "emitter-output-dir": "{project-root}/servers/node/tsp-output/@typespec/http-server-js"
         }
       }      
     }

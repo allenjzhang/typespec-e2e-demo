@@ -5,7 +5,7 @@ import morgan from "morgan";
 const app = express();
 app.use(morgan("dev"));
 
-import { createDemoServiceRouter } from "../tsp-output/@typespec/http-server-javascript/http/router.js";
+import { createDemoServiceRouter } from "../tsp-output/@typespec/http-server-js/http/router.js";
 import { WidgetServiceImpl } from "./WidgetService.js";
 
 const router = createDemoServiceRouter(new WidgetServiceImpl());

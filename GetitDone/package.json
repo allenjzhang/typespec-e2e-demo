@@ -9,7 +9,7 @@
     "@typespec/openapi3": "latest",
     "@typespec/http-client-csharp": "latest",
     "@typespec/http-server-csharp": "latest",
-    "@azure-tools/typespec-ts": "latest"
+    "@typespec/http-client-js": "latest"
   },
   "devDependencies": {
     "@typespec/compiler": "latest",

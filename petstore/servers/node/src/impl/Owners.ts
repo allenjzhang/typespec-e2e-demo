@@ -1,16 +1,16 @@
-import { HttpContext } from "../../tsp-output/@typespec/http-server-javascript/helpers/router.js";
+import { HttpContext } from "../../tsp-output/@typespec/http-server-js/helpers/router.js";
 import {
   Owner,
   Owners,
   PetStoreError,
-} from "../../tsp-output/@typespec/http-server-javascript/models/all/pet-store.js";
+} from "../../tsp-output/@typespec/http-server-js/models/all/pet-store.js";
 import {
   OwnerUpdate,
   ResourceDeletedResponse,
   OwnerCreate,
   OwnerResourceCreatedResponse,
   OwnerCollectionWithNextLink,
-} from "../../tsp-output/@typespec/http-server-javascript/models/all/typespec/rest/resource.js";
+} from "../../tsp-output/@typespec/http-server-js/models/all/typespec/rest/resource.js";
 
 export class OwnersImpl implements Owners<HttpContext> {
   get(ctx: HttpContext, ownerId: bigint): Promise<Owner | PetStoreError> {

@@ -1,0 +1,3106 @@
+{
+ "$id": "1",
+ "name": "Todo",
+ "apiVersions": [],
+ "enums": [
+  {
+   "$id": "2",
+   "kind": "enum",
+   "name": "TodoItemStatus",
+   "crossLanguageDefinitionId": "Todo.TodoItem.status.anonymous",
+   "valueType": {
+    "$id": "3",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "4",
+     "kind": "enumvalue",
+     "name": "NotStarted",
+     "value": "NotStarted",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "6",
+     "kind": "enumvalue",
+     "name": "InProgress",
+     "value": "InProgress",
+     "valueType": {
+      "$id": "7",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "8",
+     "kind": "enumvalue",
+     "name": "Completed",
+     "value": "Completed",
+     "valueType": {
+      "$id": "9",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
+    }
+   ],
+   "namespace": "",
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "Input,Output,Json",
+   "decorators": []
+  },
+  {
+   "$id": "10",
+   "kind": "enum",
+   "name": "NotFoundErrorResponse_code",
+   "valueType": {
+    "$id": "11",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "12",
+     "kind": "enumvalue",
+     "name": "not-found",
+     "value": "not-found",
+     "doc": "not-found",
+     "valueType": {
+      "$ref": "11"
+     },
+     "enumType": {
+      "$ref": "10"
+     }
+    }
+   ],
+   "crossLanguageDefinitionId": "",
+   "namespace": "Todo.TodoItems",
+   "doc": "The NotFoundErrorResponse_code",
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Error,Json,Exception",
+   "decorators": []
+  },
+  {
+   "$id": "13",
+   "kind": "enum",
+   "name": "TodoItemPatchStatus",
+   "crossLanguageDefinitionId": "Todo.TodoItems.TodoItemPatch.status.anonymous",
+   "valueType": {
+    "$id": "14",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "15",
+     "kind": "enumvalue",
+     "name": "NotStarted",
+     "value": "NotStarted",
+     "valueType": {
+      "$id": "16",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "13"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "17",
+     "kind": "enumvalue",
+     "name": "InProgress",
+     "value": "InProgress",
+     "valueType": {
+      "$id": "18",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "13"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "19",
+     "kind": "enumvalue",
+     "name": "Completed",
+     "value": "Completed",
+     "valueType": {
+      "$id": "20",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "13"
+     },
+     "decorators": []
+    }
+   ],
+   "namespace": "",
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "Input,JsonMergePatch,Json",
+   "decorators": []
+  },
+  {
+   "$id": "21",
+   "kind": "enum",
+   "name": "UserExistsResponse_code",
+   "valueType": {
+    "$id": "22",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "23",
+     "kind": "enumvalue",
+     "name": "user-exists",
+     "value": "user-exists",
+     "doc": "user-exists",
+     "valueType": {
+      "$ref": "22"
+     },
+     "enumType": {
+      "$ref": "21"
+     }
+    }
+   ],
+   "crossLanguageDefinitionId": "",
+   "namespace": "Todo.Users",
+   "doc": "The UserExistsResponse_code",
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Error,Json,Exception",
+   "decorators": []
+  },
+  {
+   "$id": "24",
+   "kind": "enum",
+   "name": "InvalidUserResponse_code",
+   "valueType": {
+    "$id": "25",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "26",
+     "kind": "enumvalue",
+     "name": "invalid-user",
+     "value": "invalid-user",
+     "doc": "invalid-user",
+     "valueType": {
+      "$ref": "25"
+     },
+     "enumType": {
+      "$ref": "24"
+     }
+    }
+   ],
+   "crossLanguageDefinitionId": "",
+   "namespace": "Todo.Users",
+   "doc": "The InvalidUserResponse_code",
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Error,Json,Exception",
+   "decorators": []
+  }
+ ],
+ "models": [
+  {
+   "$id": "27",
+   "kind": "model",
+   "name": "TodoPage",
+   "namespace": "Todo.TodoItems",
+   "crossLanguageDefinitionId": "Todo.TodoItems.TodoPage",
+   "usage": "Output,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "28",
+     "kind": "property",
+     "name": "items",
+     "serializedName": "items",
+     "doc": "The items in the page",
+     "type": {
+      "$id": "29",
+      "kind": "array",
+      "name": "ArrayTodoItem",
+      "valueType": {
+       "$id": "30",
+       "kind": "model",
+       "name": "TodoItem",
+       "namespace": "Todo",
+       "crossLanguageDefinitionId": "Todo.TodoItem",
+       "usage": "Input,Output,Json",
+       "decorators": [],
+       "properties": [
+        {
+         "$id": "31",
+         "kind": "property",
+         "name": "id",
+         "serializedName": "id",
+         "doc": "The item's unique id",
+         "type": {
+          "$id": "32",
+          "kind": "safeint",
+          "name": "safeint",
+          "crossLanguageDefinitionId": "TypeSpec.safeint",
+          "decorators": []
+         },
+         "optional": false,
+         "readOnly": true,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.id",
+         "serializationOptions": {
+          "$id": "33",
+          "json": {
+           "$id": "34",
+           "name": "id"
+          }
+         }
+        },
+        {
+         "$id": "35",
+         "kind": "property",
+         "name": "title",
+         "serializedName": "title",
+         "doc": "The item's title",
+         "type": {
+          "$id": "36",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "optional": false,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.title",
+         "serializationOptions": {
+          "$id": "37",
+          "json": {
+           "$id": "38",
+           "name": "title"
+          }
+         }
+        },
+        {
+         "$id": "39",
+         "kind": "property",
+         "name": "createdBy",
+         "serializedName": "createdBy",
+         "doc": "User that created the todo",
+         "type": {
+          "$id": "40",
+          "kind": "safeint",
+          "name": "safeint",
+          "crossLanguageDefinitionId": "TypeSpec.safeint",
+          "decorators": []
+         },
+         "optional": false,
+         "readOnly": true,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.createdBy",
+         "serializationOptions": {
+          "$id": "41",
+          "json": {
+           "$id": "42",
+           "name": "createdBy"
+          }
+         }
+        },
+        {
+         "$id": "43",
+         "kind": "property",
+         "name": "assignedTo",
+         "serializedName": "assignedTo",
+         "doc": "User that the todo is assigned to",
+         "type": {
+          "$id": "44",
+          "kind": "safeint",
+          "name": "safeint",
+          "crossLanguageDefinitionId": "TypeSpec.safeint",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.assignedTo",
+         "serializationOptions": {
+          "$id": "45",
+          "json": {
+           "$id": "46",
+           "name": "assignedTo"
+          }
+         }
+        },
+        {
+         "$id": "47",
+         "kind": "property",
+         "name": "description",
+         "serializedName": "description",
+         "doc": "A longer description of the todo item in markdown format",
+         "type": {
+          "$id": "48",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.description",
+         "serializationOptions": {
+          "$id": "49",
+          "json": {
+           "$id": "50",
+           "name": "description"
+          }
+         }
+        },
+        {
+         "$id": "51",
+         "kind": "property",
+         "name": "status",
+         "serializedName": "status",
+         "doc": "The status of the todo item",
+         "type": {
+          "$ref": "2"
+         },
+         "optional": false,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.status",
+         "serializationOptions": {
+          "$id": "52",
+          "json": {
+           "$id": "53",
+           "name": "status"
+          }
+         }
+        },
+        {
+         "$id": "54",
+         "kind": "property",
+         "name": "createdAt",
+         "serializedName": "createdAt",
+         "doc": "When the todo item was created.",
+         "type": {
+          "$id": "55",
+          "kind": "utcDateTime",
+          "name": "utcDateTime",
+          "encode": "rfc3339",
+          "wireType": {
+           "$id": "56",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+          "decorators": []
+         },
+         "optional": false,
+         "readOnly": true,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.createdAt",
+         "serializationOptions": {
+          "$id": "57",
+          "json": {
+           "$id": "58",
+           "name": "createdAt"
+          }
+         }
+        },
+        {
+         "$id": "59",
+         "kind": "property",
+         "name": "updatedAt",
+         "serializedName": "updatedAt",
+         "doc": "When the todo item was last updated",
+         "type": {
+          "$id": "60",
+          "kind": "utcDateTime",
+          "name": "utcDateTime",
+          "encode": "rfc3339",
+          "wireType": {
+           "$id": "61",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+          "decorators": []
+         },
+         "optional": false,
+         "readOnly": true,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.updatedAt",
+         "serializationOptions": {
+          "$id": "62",
+          "json": {
+           "$id": "63",
+           "name": "updatedAt"
+          }
+         }
+        },
+        {
+         "$id": "64",
+         "kind": "property",
+         "name": "completedAt",
+         "serializedName": "completedAt",
+         "doc": "When the todo item was makred as completed",
+         "type": {
+          "$id": "65",
+          "kind": "utcDateTime",
+          "name": "utcDateTime",
+          "encode": "rfc3339",
+          "wireType": {
+           "$id": "66",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": true,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.completedAt",
+         "serializationOptions": {
+          "$id": "67",
+          "json": {
+           "$id": "68",
+           "name": "completedAt"
+          }
+         }
+        },
+        {
+         "$id": "69",
+         "kind": "property",
+         "name": "labels",
+         "serializedName": "labels",
+         "type": {
+          "$id": "70",
+          "kind": "union",
+          "name": "TodoLabels",
+          "variantTypes": [
+           {
+            "$id": "71",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+           },
+           {
+            "$id": "72",
+            "kind": "array",
+            "name": "Array",
+            "valueType": {
+             "$id": "73",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "crossLanguageDefinitionId": "TypeSpec.Array",
+            "decorators": []
+           },
+           {
+            "$id": "74",
+            "kind": "model",
+            "name": "TodoLabelRecord",
+            "namespace": "Todo",
+            "crossLanguageDefinitionId": "Todo.TodoLabelRecord",
+            "usage": "Input,Output,Json",
+            "decorators": [],
+            "properties": [
+             {
+              "$id": "75",
+              "kind": "property",
+              "name": "name",
+              "serializedName": "name",
+              "type": {
+               "$id": "76",
+               "kind": "string",
+               "name": "string",
+               "crossLanguageDefinitionId": "TypeSpec.string",
+               "decorators": []
+              },
+              "optional": false,
+              "readOnly": false,
+              "discriminator": false,
+              "flatten": false,
+              "decorators": [],
+              "crossLanguageDefinitionId": "Todo.TodoLabelRecord.name",
+              "serializationOptions": {
+               "$id": "77",
+               "json": {
+                "$id": "78",
+                "name": "name"
+               }
+              }
+             },
+             {
+              "$id": "79",
+              "kind": "property",
+              "name": "color",
+              "serializedName": "color",
+              "type": {
+               "$id": "80",
+               "kind": "string",
+               "name": "string",
+               "crossLanguageDefinitionId": "TypeSpec.string",
+               "decorators": []
+              },
+              "optional": true,
+              "readOnly": false,
+              "discriminator": false,
+              "flatten": false,
+              "decorators": [],
+              "crossLanguageDefinitionId": "Todo.TodoLabelRecord.color",
+              "serializationOptions": {
+               "$id": "81",
+               "json": {
+                "$id": "82",
+                "name": "color"
+               }
+              }
+             }
+            ]
+           },
+           {
+            "$id": "83",
+            "kind": "array",
+            "name": "ArrayTodoLabelRecord",
+            "valueType": {
+             "$ref": "74"
+            },
+            "crossLanguageDefinitionId": "TypeSpec.Array",
+            "decorators": []
+           }
+          ],
+          "namespace": "Todo",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem.labels",
+         "serializationOptions": {
+          "$id": "84",
+          "json": {
+           "$id": "85",
+           "name": "labels"
+          }
+         }
+        },
+        {
+         "$id": "86",
+         "kind": "property",
+         "name": "_dummy",
+         "serializedName": "_dummy",
+         "type": {
+          "$id": "87",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Todo.TodoItem._dummy",
+         "serializationOptions": {
+          "$id": "88",
+          "json": {
+           "$id": "89",
+           "name": "_dummy"
+          }
+         }
+        }
+       ]
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoPage.items",
+     "serializationOptions": {
+      "$id": "90",
+      "json": {
+       "$id": "91",
+       "name": "items"
+      }
+     }
+    },
+    {
+     "$id": "92",
+     "kind": "property",
+     "name": "pageSize",
+     "serializedName": "pageSize",
+     "doc": "The number of items returned in this page",
+     "type": {
+      "$id": "93",
+      "kind": "int32",
+      "name": "int32",
+      "crossLanguageDefinitionId": "TypeSpec.int32",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoPage.pageSize",
+     "serializationOptions": {
+      "$id": "94",
+      "json": {
+       "$id": "95",
+       "name": "pageSize"
+      }
+     }
+    },
+    {
+     "$id": "96",
+     "kind": "property",
+     "name": "totalSize",
+     "serializedName": "totalSize",
+     "doc": "The total number of items",
+     "type": {
+      "$id": "97",
+      "kind": "int32",
+      "name": "int32",
+      "crossLanguageDefinitionId": "TypeSpec.int32",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoPage.totalSize",
+     "serializationOptions": {
+      "$id": "98",
+      "json": {
+       "$id": "99",
+       "name": "totalSize"
+      }
+     }
+    },
+    {
+     "$id": "100",
+     "kind": "property",
+     "name": "prevLink",
+     "serializedName": "prevLink",
+     "doc": "A link to the previous page, if it exists",
+     "type": {
+      "$id": "101",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoPage.prevLink",
+     "serializationOptions": {
+      "$id": "102",
+      "json": {
+       "$id": "103",
+       "name": "prevLink"
+      }
+     }
+    },
+    {
+     "$id": "104",
+     "kind": "property",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "doc": "A link to the next page, if it exists",
+     "type": {
+      "$id": "105",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoPage.nextLink",
+     "serializationOptions": {
+      "$id": "106",
+      "json": {
+       "$id": "107",
+       "name": "nextLink"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$ref": "30"
+  },
+  {
+   "$ref": "74"
+  },
+  {
+   "$id": "108",
+   "kind": "model",
+   "name": "Standard4XXResponse",
+   "namespace": "Todo",
+   "crossLanguageDefinitionId": "Todo.Standard4XXResponse",
+   "usage": "Error,Json,Exception",
+   "doc": "Something is wrong with you.",
+   "decorators": [],
+   "baseModel": {
+    "$id": "109",
+    "kind": "model",
+    "name": "ApiError",
+    "namespace": "Todo",
+    "crossLanguageDefinitionId": "Todo.ApiError",
+    "usage": "Error,Json,Exception",
+    "decorators": [],
+    "properties": [
+     {
+      "$id": "110",
+      "kind": "property",
+      "name": "code",
+      "serializedName": "code",
+      "doc": "A machine readable error code",
+      "type": {
+       "$id": "111",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "optional": false,
+      "readOnly": false,
+      "discriminator": false,
+      "flatten": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Todo.ApiError.code",
+      "serializationOptions": {
+       "$id": "112",
+       "json": {
+        "$id": "113",
+        "name": "code"
+       }
+      }
+     },
+     {
+      "$id": "114",
+      "kind": "property",
+      "name": "message",
+      "serializedName": "message",
+      "doc": "A human readable message",
+      "type": {
+       "$id": "115",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "optional": false,
+      "readOnly": false,
+      "discriminator": false,
+      "flatten": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Todo.ApiError.message",
+      "serializationOptions": {
+       "$id": "116",
+       "json": {
+        "$id": "117",
+        "name": "message"
+       }
+      }
+     }
+    ]
+   },
+   "properties": []
+  },
+  {
+   "$ref": "109"
+  },
+  {
+   "$id": "118",
+   "kind": "model",
+   "name": "Standard5XXResponse",
+   "namespace": "Todo",
+   "crossLanguageDefinitionId": "Todo.Standard5XXResponse",
+   "usage": "Error,Json,Exception",
+   "doc": "Something is wrong with me.",
+   "decorators": [],
+   "baseModel": {
+    "$ref": "109"
+   },
+   "properties": []
+  },
+  {
+   "$id": "119",
+   "kind": "model",
+   "name": "TodoAttachment",
+   "namespace": "Todo",
+   "crossLanguageDefinitionId": "Todo.TodoAttachment",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "120",
+     "kind": "property",
+     "name": "filename",
+     "serializedName": "filename",
+     "doc": "The file name of the attachment",
+     "type": {
+      "$id": "121",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoAttachment.filename",
+     "serializationOptions": {
+      "$id": "122",
+      "json": {
+       "$id": "123",
+       "name": "filename"
+      }
+     }
+    },
+    {
+     "$id": "124",
+     "kind": "property",
+     "name": "mediaType",
+     "serializedName": "mediaType",
+     "doc": "The media type of the attachment",
+     "type": {
+      "$id": "125",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoAttachment.mediaType",
+     "serializationOptions": {
+      "$id": "126",
+      "json": {
+       "$id": "127",
+       "name": "mediaType"
+      }
+     }
+    },
+    {
+     "$id": "128",
+     "kind": "property",
+     "name": "contents",
+     "serializedName": "contents",
+     "doc": "The contents of the file",
+     "type": {
+      "$id": "129",
+      "kind": "bytes",
+      "name": "bytes",
+      "encode": "base64",
+      "crossLanguageDefinitionId": "TypeSpec.bytes",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoAttachment.contents",
+     "serializationOptions": {
+      "$id": "130",
+      "json": {
+       "$id": "131",
+       "name": "contents"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "132",
+   "kind": "model",
+   "name": "CreateJsonRequest",
+   "namespace": "",
+   "crossLanguageDefinitionId": "Todo.TodoItems.createJson.Request.anonymous",
+   "usage": "Spread,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "133",
+     "kind": "property",
+     "name": "item",
+     "serializedName": "item",
+     "type": {
+      "$ref": "30"
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "createJson.Request.anonymous.item",
+     "serializationOptions": {
+      "$id": "134",
+      "json": {
+       "$id": "135",
+       "name": "item"
+      }
+     }
+    },
+    {
+     "$id": "136",
+     "kind": "property",
+     "name": "attachments",
+     "serializedName": "attachments",
+     "type": {
+      "$id": "137",
+      "kind": "array",
+      "name": "ArrayTodoAttachment",
+      "valueType": {
+       "$ref": "119"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "createJson.Request.anonymous.attachments",
+     "serializationOptions": {
+      "$id": "138",
+      "json": {
+       "$id": "139",
+       "name": "attachments"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "140",
+   "kind": "model",
+   "name": "InvalidTodoItem",
+   "namespace": "Todo.TodoItems",
+   "crossLanguageDefinitionId": "Todo.TodoItems.InvalidTodoItem",
+   "usage": "Error,Json,Exception",
+   "decorators": [],
+   "baseModel": {
+    "$ref": "109"
+   },
+   "properties": []
+  },
+  {
+   "$id": "141",
+   "kind": "model",
+   "name": "ToDoItemMultipartRequest",
+   "namespace": "Todo",
+   "crossLanguageDefinitionId": "Todo.ToDoItemMultipartRequest",
+   "usage": "Input,MultipartFormData",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "142",
+     "kind": "property",
+     "name": "item",
+     "serializedName": "item",
+     "type": {
+      "$ref": "30"
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.ToDoItemMultipartRequest.item",
+     "serializationOptions": {
+      "$id": "143",
+      "multipart": {
+       "$id": "144",
+       "isFilePart": false,
+       "isMulti": false,
+       "defaultContentTypes": [
+        "application/json"
+       ],
+       "name": "item"
+      }
+     }
+    },
+    {
+     "$id": "145",
+     "kind": "property",
+     "name": "attachments",
+     "serializedName": "attachments",
+     "type": {
+      "$id": "146",
+      "kind": "array",
+      "name": "ArrayHttpPart",
+      "valueType": {
+       "$id": "147",
+       "kind": "model",
+       "name": "File",
+       "namespace": "TypeSpec.Http",
+       "crossLanguageDefinitionId": "TypeSpec.Http.File",
+       "usage": "Input",
+       "decorators": [],
+       "properties": [
+        {
+         "$id": "148",
+         "kind": "property",
+         "name": "contentType",
+         "serializedName": "contentType",
+         "type": {
+          "$id": "149",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "TypeSpec.Http.File.contentType",
+         "serializationOptions": {
+          "$id": "150"
+         }
+        },
+        {
+         "$id": "151",
+         "kind": "property",
+         "name": "filename",
+         "serializedName": "filename",
+         "type": {
+          "$id": "152",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "TypeSpec.Http.File.filename",
+         "serializationOptions": {
+          "$id": "153"
+         }
+        },
+        {
+         "$id": "154",
+         "kind": "property",
+         "name": "contents",
+         "serializedName": "contents",
+         "type": {
+          "$id": "155",
+          "kind": "bytes",
+          "name": "bytes",
+          "encode": "base64",
+          "crossLanguageDefinitionId": "TypeSpec.bytes",
+          "decorators": []
+         },
+         "optional": false,
+         "readOnly": false,
+         "discriminator": false,
+         "flatten": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "TypeSpec.Http.File.contents",
+         "serializationOptions": {
+          "$id": "156"
+         }
+        }
+       ]
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.ToDoItemMultipartRequest.attachments",
+     "serializationOptions": {
+      "$id": "157",
+      "multipart": {
+       "$id": "158",
+       "isFilePart": true,
+       "isMulti": true,
+       "filename": {
+        "$id": "159",
+        "apiVersions": [],
+        "type": {
+         "$id": "7024",
+         "kind": "string",
+         "decorators": [],
+         "name": "string",
+         "doc": "A sequence of textual characters.",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "name": "filename",
+        "isGeneratedName": false,
+        "optional": true,
+        "isApiVersionParam": false,
+        "onClient": false,
+        "crossLanguageDefinitionId": "TypeSpec.Http.File.filename",
+        "decorators": [],
+        "visibility": [
+         1,
+         2,
+         4,
+         8,
+         16
+        ],
+        "access": "public",
+        "kind": "property",
+        "discriminator": false,
+        "serializedName": "filename",
+        "isMultipartFileInput": false,
+        "flatten": false,
+        "serializationOptions": {
+         "$ref": "153"
+        }
+       },
+       "contentType": {
+        "$id": "7025",
+        "apiVersions": [],
+        "type": {
+         "$id": "7027",
+         "kind": "string",
+         "decorators": [],
+         "name": "string",
+         "doc": "A sequence of textual characters.",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "name": "contentType",
+        "isGeneratedName": false,
+        "optional": true,
+        "isApiVersionParam": false,
+        "onClient": false,
+        "crossLanguageDefinitionId": "TypeSpec.Http.File.contentType",
+        "decorators": [],
+        "visibility": [
+         1,
+         2,
+         4,
+         8,
+         16
+        ],
+        "access": "public",
+        "kind": "property",
+        "discriminator": false,
+        "serializedName": "contentType",
+        "isMultipartFileInput": false,
+        "flatten": false,
+        "serializationOptions": {
+         "$ref": "150"
+        }
+       },
+       "defaultContentTypes": [
+        "*/*"
+       ],
+       "name": "attachments"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$ref": "147"
+  },
+  {
+   "$id": "7028",
+   "kind": "model",
+   "name": "NotFoundErrorResponse",
+   "namespace": "Todo.TodoItems",
+   "crossLanguageDefinitionId": "Todo.TodoItems.NotFoundErrorResponse",
+   "usage": "Error,Json,Exception",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "7029",
+     "kind": "property",
+     "name": "code",
+     "serializedName": "code",
+     "type": {
+      "$id": "7030",
+      "kind": "constant",
+      "valueType": {
+       "$ref": "10"
+      },
+      "value": "not-found",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.NotFoundErrorResponse.code",
+     "serializationOptions": {
+      "$id": "7031",
+      "json": {
+       "$id": "7032",
+       "name": "code"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "7033",
+   "kind": "model",
+   "name": "TodoItemPatch",
+   "namespace": "Todo.TodoItems",
+   "crossLanguageDefinitionId": "Todo.TodoItems.TodoItemPatch",
+   "usage": "Input,JsonMergePatch,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "7034",
+     "kind": "property",
+     "name": "title",
+     "serializedName": "title",
+     "doc": "The item's title",
+     "type": {
+      "$id": "7035",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoItemPatch.title",
+     "serializationOptions": {
+      "$id": "7036",
+      "json": {
+       "$id": "7037",
+       "name": "title"
+      }
+     }
+    },
+    {
+     "$id": "7038",
+     "kind": "property",
+     "name": "assignedTo",
+     "serializedName": "assignedTo",
+     "doc": "User that the todo is assigned to",
+     "type": {
+      "$id": "7039",
+      "kind": "nullable",
+      "type": {
+       "$id": "7040",
+       "kind": "safeint",
+       "name": "safeint",
+       "crossLanguageDefinitionId": "TypeSpec.safeint",
+       "decorators": []
+      },
+      "namespace": ""
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoItemPatch.assignedTo",
+     "serializationOptions": {
+      "$id": "7041",
+      "json": {
+       "$id": "7042",
+       "name": "assignedTo"
+      }
+     }
+    },
+    {
+     "$id": "7043",
+     "kind": "property",
+     "name": "description",
+     "serializedName": "description",
+     "doc": "A longer description of the todo item in markdown format",
+     "type": {
+      "$id": "7044",
+      "kind": "nullable",
+      "type": {
+       "$id": "7045",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "namespace": ""
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoItemPatch.description",
+     "serializationOptions": {
+      "$id": "7046",
+      "json": {
+       "$id": "7047",
+       "name": "description"
+      }
+     }
+    },
+    {
+     "$id": "7048",
+     "kind": "property",
+     "name": "status",
+     "serializedName": "status",
+     "doc": "The status of the todo item",
+     "type": {
+      "$ref": "13"
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.TodoItemPatch.status",
+     "serializationOptions": {
+      "$id": "7049",
+      "json": {
+       "$id": "7050",
+       "name": "status"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "7051",
+   "kind": "model",
+   "name": "PageTodoAttachment",
+   "namespace": "Todo.TodoItems",
+   "crossLanguageDefinitionId": "Todo.TodoItems.Page",
+   "usage": "Output,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "7052",
+     "kind": "property",
+     "name": "items",
+     "serializedName": "items",
+     "type": {
+      "$id": "7053",
+      "kind": "array",
+      "name": "ArrayTodoAttachment",
+      "valueType": {
+       "$ref": "119"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems.Page.items",
+     "serializationOptions": {
+      "$id": "7054",
+      "json": {
+       "$id": "7055",
+       "name": "items"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "7056",
+   "kind": "model",
+   "name": "FileAttachmentMultipartRequest",
+   "namespace": "Todo",
+   "crossLanguageDefinitionId": "Todo.FileAttachmentMultipartRequest",
+   "usage": "Input,MultipartFormData",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "7057",
+     "kind": "property",
+     "name": "contents",
+     "serializedName": "contents",
+     "type": {
+      "$ref": "147"
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.FileAttachmentMultipartRequest.contents",
+     "serializationOptions": {
+      "$id": "7058",
+      "multipart": {
+       "$id": "7059",
+       "isFilePart": true,
+       "isMulti": false,
+       "filename": {
+        "$ref": "159"
+       },
+       "contentType": {
+        "$ref": "7025"
+       },
+       "defaultContentTypes": [
+        "*/*"
+       ],
+       "name": "contents"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "7060",
+   "kind": "model",
+   "name": "User",
+   "namespace": "Todo",
+   "crossLanguageDefinitionId": "Todo.User",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "7061",
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "doc": "An autogenerated unique id for the user",
+     "type": {
+      "$id": "7062",
+      "kind": "safeint",
+      "name": "safeint",
+      "crossLanguageDefinitionId": "TypeSpec.safeint",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.User.id",
+     "serializationOptions": {
+      "$id": "7063",
+      "json": {
+       "$id": "7064",
+       "name": "id"
+      }
+     }
+    },
+    {
+     "$id": "7065",
+     "kind": "property",
+     "name": "username",
+     "serializedName": "username",
+     "doc": "The user's username",
+     "type": {
+      "$id": "7066",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.User.username",
+     "serializationOptions": {
+      "$id": "7067",
+      "json": {
+       "$id": "7068",
+       "name": "username"
+      }
+     }
+    },
+    {
+     "$id": "7069",
+     "kind": "property",
+     "name": "email",
+     "serializedName": "email",
+     "doc": "The user's email address",
+     "type": {
+      "$id": "7070",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.User.email",
+     "serializationOptions": {
+      "$id": "7071",
+      "json": {
+       "$id": "7072",
+       "name": "email"
+      }
+     }
+    },
+    {
+     "$id": "7073",
+     "kind": "property",
+     "name": "password",
+     "serializedName": "password",
+     "doc": "The user's password, provided when creating a user\nbut is otherwise not visible (and hashed by the backend)",
+     "type": {
+      "$id": "7074",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.User.password",
+     "serializationOptions": {
+      "$id": "7075",
+      "json": {
+       "$id": "7076",
+       "name": "password"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "7077",
+   "kind": "model",
+   "name": "UserCreatedResponse",
+   "namespace": "Todo.Users",
+   "crossLanguageDefinitionId": "Todo.Users.UserCreatedResponse",
+   "usage": "Output,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "7078",
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "doc": "An autogenerated unique id for the user",
+     "type": {
+      "$id": "7079",
+      "kind": "safeint",
+      "name": "safeint",
+      "crossLanguageDefinitionId": "TypeSpec.safeint",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.Users.UserCreatedResponse.id",
+     "serializationOptions": {
+      "$id": "7080",
+      "json": {
+       "$id": "7081",
+       "name": "id"
+      }
+     }
+    },
+    {
+     "$id": "7082",
+     "kind": "property",
+     "name": "username",
+     "serializedName": "username",
+     "doc": "The user's username",
+     "type": {
+      "$id": "7083",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.Users.UserCreatedResponse.username",
+     "serializationOptions": {
+      "$id": "7084",
+      "json": {
+       "$id": "7085",
+       "name": "username"
+      }
+     }
+    },
+    {
+     "$id": "7086",
+     "kind": "property",
+     "name": "email",
+     "serializedName": "email",
+     "doc": "The user's email address",
+     "type": {
+      "$id": "7087",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.Users.UserCreatedResponse.email",
+     "serializationOptions": {
+      "$id": "7088",
+      "json": {
+       "$id": "7089",
+       "name": "email"
+      }
+     }
+    },
+    {
+     "$id": "7090",
+     "kind": "property",
+     "name": "password",
+     "serializedName": "password",
+     "doc": "The user's password, provided when creating a user\nbut is otherwise not visible (and hashed by the backend)",
+     "type": {
+      "$id": "7091",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.Users.UserCreatedResponse.password",
+     "serializationOptions": {
+      "$id": "7092",
+      "json": {
+       "$id": "7093",
+       "name": "password"
+      }
+     }
+    },
+    {
+     "$id": "7094",
+     "kind": "property",
+     "name": "token",
+     "serializedName": "token",
+     "doc": "The token to use to construct the validate email address url",
+     "type": {
+      "$id": "7095",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.Users.UserCreatedResponse.token",
+     "serializationOptions": {
+      "$id": "7096",
+      "json": {
+       "$id": "7097",
+       "name": "token"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "7098",
+   "kind": "model",
+   "name": "UserExistsResponse",
+   "namespace": "Todo.Users",
+   "crossLanguageDefinitionId": "Todo.Users.UserExistsResponse",
+   "usage": "Error,Json,Exception",
+   "doc": "The user already exists",
+   "decorators": [],
+   "baseModel": {
+    "$ref": "109"
+   },
+   "properties": [
+    {
+     "$id": "7099",
+     "kind": "property",
+     "name": "code",
+     "serializedName": "code",
+     "type": {
+      "$id": "7100",
+      "kind": "constant",
+      "valueType": {
+       "$ref": "21"
+      },
+      "value": "user-exists",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.Users.UserExistsResponse.code",
+     "serializationOptions": {
+      "$id": "7101",
+      "json": {
+       "$id": "7102",
+       "name": "code"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "$id": "7103",
+   "kind": "model",
+   "name": "InvalidUserResponse",
+   "namespace": "Todo.Users",
+   "crossLanguageDefinitionId": "Todo.Users.InvalidUserResponse",
+   "usage": "Error,Json,Exception",
+   "doc": "The user is invalid (e.g. forgot to enter email address)",
+   "decorators": [],
+   "baseModel": {
+    "$ref": "109"
+   },
+   "properties": [
+    {
+     "$id": "7104",
+     "kind": "property",
+     "name": "code",
+     "serializedName": "code",
+     "type": {
+      "$id": "7105",
+      "kind": "constant",
+      "valueType": {
+       "$ref": "24"
+      },
+      "value": "invalid-user",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.Users.InvalidUserResponse.code",
+     "serializationOptions": {
+      "$id": "7106",
+      "json": {
+       "$id": "7107",
+       "name": "code"
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "clients": [
+  {
+   "$id": "7108",
+   "kind": "client",
+   "name": "TodoClient",
+   "namespace": "Todo",
+   "operations": [],
+   "parameters": [
+    {
+     "$id": "7109",
+     "name": "endpoint",
+     "nameInRequest": "endpoint",
+     "doc": "Service host",
+     "type": {
+      "$id": "7110",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "location": "Uri",
+     "isApiVersion": false,
+     "isContentType": false,
+     "isRequired": true,
+     "isEndpoint": true,
+     "skipUrlEncoding": false,
+     "explode": false,
+     "kind": "Client"
+    }
+   ],
+   "decorators": [],
+   "crossLanguageDefinitionId": "Todo",
+   "apiVersions": [],
+   "children": [
+    {
+     "$id": "7111",
+     "kind": "client",
+     "name": "Users",
+     "namespace": "Todo.Users",
+     "operations": [
+      {
+       "$id": "7112",
+       "name": "create",
+       "resourceName": "Users",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "7113",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "doc": "Body parameter's content type. Known values are application/json",
+         "type": {
+          "$id": "7114",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7115",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7116",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "7117",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7118",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7119",
+         "name": "user",
+         "nameInRequest": "user",
+         "type": {
+          "$ref": "7060"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "7120",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "7077"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/users",
+       "requestMediaTypes": [
+        "application/json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "Todo.Users.create",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "7121",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "7122",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client"
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.Users",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "7108"
+     }
+    },
+    {
+     "$id": "7123",
+     "kind": "client",
+     "name": "TodoItems",
+     "namespace": "Todo.TodoItems",
+     "operations": [
+      {
+       "$id": "7124",
+       "name": "list",
+       "resourceName": "TodoItems",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "7125",
+         "name": "limit",
+         "nameInRequest": "limit",
+         "doc": "The limit to the number of items",
+         "type": {
+          "$id": "7126",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": false,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7127",
+         "name": "offset",
+         "nameInRequest": "offset",
+         "doc": "The offset to start paginating at",
+         "type": {
+          "$id": "7128",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
+         },
+         "location": "Query",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": false,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7129",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "7130",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7131",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "7132",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "27"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/items",
+       "bufferResponse": true,
+       "paging": {
+        "$id": "7133",
+        "itemPropertySegments": [
+         "items"
+        ],
+        "nextLink": {
+         "$id": "7134",
+         "responseSegments": [
+          "nextLink"
+         ],
+         "responseLocation": "Body"
+        }
+       },
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "Todo.TodoItems.list",
+       "decorators": []
+      },
+      {
+       "$id": "7135",
+       "name": "createJson",
+       "resourceName": "TodoItems",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "7136",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "type": {
+          "$id": "7137",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7138",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7139",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "7140",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7141",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7142",
+         "name": "createJsonRequest",
+         "nameInRequest": "createJsonRequest",
+         "type": {
+          "$ref": "132"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Spread",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "7143",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "30"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/items",
+       "requestMediaTypes": [
+        "application/json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "Todo.TodoItems.createJson",
+       "decorators": []
+      },
+      {
+       "$id": "7144",
+       "name": "createForm",
+       "resourceName": "TodoItems",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "7145",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "type": {
+          "$id": "7146",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7147",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "multipart/form-data",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7148",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "7149",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7150",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7151",
+         "name": "body",
+         "nameInRequest": "body",
+         "type": {
+          "$ref": "141"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "7152",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "30"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "POST",
+       "uri": "{endpoint}",
+       "path": "/items",
+       "requestMediaTypes": [
+        "multipart/form-data"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "Todo.TodoItems.createForm",
+       "decorators": []
+      },
+      {
+       "$id": "7153",
+       "name": "get",
+       "resourceName": "TodoItems",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "7154",
+         "name": "id",
+         "nameInRequest": "id",
+         "type": {
+          "$id": "7155",
+          "kind": "safeint",
+          "name": "safeint",
+          "crossLanguageDefinitionId": "TypeSpec.safeint",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7156",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "7157",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7158",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "7159",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "30"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "GET",
+       "uri": "{endpoint}",
+       "path": "/items/{id}",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "Todo.TodoItems.get",
+       "decorators": []
+      },
+      {
+       "$id": "7160",
+       "name": "update",
+       "resourceName": "TodoItems",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "7161",
+         "name": "contentType",
+         "nameInRequest": "Content-Type",
+         "type": {
+          "$id": "7162",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7163",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/merge-patch+json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": true,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7164",
+         "name": "id",
+         "nameInRequest": "id",
+         "type": {
+          "$id": "7165",
+          "kind": "safeint",
+          "name": "safeint",
+          "crossLanguageDefinitionId": "TypeSpec.safeint",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7166",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "7167",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7168",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7169",
+         "name": "patch",
+         "nameInRequest": "patch",
+         "type": {
+          "$ref": "7033"
+         },
+         "location": "Body",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "7170",
+         "statusCodes": [
+          200
+         ],
+         "bodyType": {
+          "$ref": "30"
+         },
+         "headers": [],
+         "isErrorResponse": false,
+         "contentTypes": [
+          "application/json"
+         ]
+        }
+       ],
+       "httpMethod": "PATCH",
+       "uri": "{endpoint}",
+       "path": "/items/{id}",
+       "requestMediaTypes": [
+        "application/merge-patch+json"
+       ],
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": false,
+       "crossLanguageDefinitionId": "Todo.TodoItems.update",
+       "decorators": []
+      },
+      {
+       "$id": "7171",
+       "name": "delete",
+       "resourceName": "TodoItems",
+       "accessibility": "public",
+       "parameters": [
+        {
+         "$id": "7172",
+         "name": "id",
+         "nameInRequest": "id",
+         "type": {
+          "$id": "7173",
+          "kind": "safeint",
+          "name": "safeint",
+          "crossLanguageDefinitionId": "TypeSpec.safeint",
+          "decorators": []
+         },
+         "location": "Path",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Method",
+         "decorators": [],
+         "skipUrlEncoding": false
+        },
+        {
+         "$id": "7174",
+         "name": "accept",
+         "nameInRequest": "Accept",
+         "type": {
+          "$id": "7175",
+          "kind": "constant",
+          "valueType": {
+           "$id": "7176",
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
+          },
+          "value": "application/json",
+          "decorators": []
+         },
+         "location": "Header",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isEndpoint": false,
+         "explode": false,
+         "isRequired": true,
+         "kind": "Constant",
+         "decorators": [],
+         "skipUrlEncoding": false
+        }
+       ],
+       "responses": [
+        {
+         "$id": "7177",
+         "statusCodes": [
+          204
+         ],
+         "headers": [],
+         "isErrorResponse": false
+        }
+       ],
+       "httpMethod": "DELETE",
+       "uri": "{endpoint}",
+       "path": "/items/{id}",
+       "bufferResponse": true,
+       "generateProtocolMethod": true,
+       "generateConvenienceMethod": true,
+       "crossLanguageDefinitionId": "Todo.TodoItems.delete",
+       "decorators": []
+      }
+     ],
+     "parameters": [
+      {
+       "$id": "7178",
+       "name": "endpoint",
+       "nameInRequest": "endpoint",
+       "doc": "Service host",
+       "type": {
+        "$id": "7179",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "location": "Uri",
+       "isApiVersion": false,
+       "isContentType": false,
+       "isRequired": true,
+       "isEndpoint": true,
+       "skipUrlEncoding": false,
+       "explode": false,
+       "kind": "Client"
+      }
+     ],
+     "decorators": [],
+     "crossLanguageDefinitionId": "Todo.TodoItems",
+     "apiVersions": [],
+     "parent": {
+      "$ref": "7108"
+     },
+     "children": [
+      {
+       "$id": "7180",
+       "kind": "client",
+       "name": "Attachments",
+       "namespace": "Todo.TodoItems.Attachments",
+       "operations": [
+        {
+         "$id": "7181",
+         "name": "list",
+         "resourceName": "Attachments",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "7182",
+           "name": "itemId",
+           "nameInRequest": "itemId",
+           "type": {
+            "$id": "7183",
+            "kind": "safeint",
+            "name": "safeint",
+            "crossLanguageDefinitionId": "TypeSpec.safeint",
+            "decorators": []
+           },
+           "location": "Path",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "7184",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "7185",
+            "kind": "constant",
+            "valueType": {
+             "$id": "7186",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "7187",
+           "statusCodes": [
+            200
+           ],
+           "bodyType": {
+            "$ref": "7051"
+           },
+           "headers": [],
+           "isErrorResponse": false,
+           "contentTypes": [
+            "application/json"
+           ]
+          }
+         ],
+         "httpMethod": "GET",
+         "uri": "{endpoint}",
+         "path": "/items/{itemId}/attachments",
+         "bufferResponse": true,
+         "paging": {
+          "$id": "7188",
+          "itemPropertySegments": [
+           "items"
+          ]
+         },
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "Todo.TodoItems.Attachments.list",
+         "decorators": []
+        },
+        {
+         "$id": "7189",
+         "name": "createJsonAttachment",
+         "resourceName": "Attachments",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "7190",
+           "name": "contentType",
+           "nameInRequest": "Content-Type",
+           "type": {
+            "$id": "7191",
+            "kind": "constant",
+            "valueType": {
+             "$id": "7192",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": true,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "7193",
+           "name": "itemId",
+           "nameInRequest": "itemId",
+           "type": {
+            "$id": "7194",
+            "kind": "safeint",
+            "name": "safeint",
+            "crossLanguageDefinitionId": "TypeSpec.safeint",
+            "decorators": []
+           },
+           "location": "Path",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "7195",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "7196",
+            "kind": "constant",
+            "valueType": {
+             "$id": "7197",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "7198",
+           "name": "contents",
+           "nameInRequest": "contents",
+           "type": {
+            "$ref": "119"
+           },
+           "location": "Body",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "7199",
+           "statusCodes": [
+            204
+           ],
+           "headers": [],
+           "isErrorResponse": false
+          }
+         ],
+         "httpMethod": "POST",
+         "uri": "{endpoint}",
+         "path": "/items/{itemId}/attachments",
+         "requestMediaTypes": [
+          "application/json"
+         ],
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "Todo.TodoItems.Attachments.createJsonAttachment",
+         "decorators": []
+        },
+        {
+         "$id": "7200",
+         "name": "createFileAttachment",
+         "resourceName": "Attachments",
+         "accessibility": "public",
+         "parameters": [
+          {
+           "$id": "7201",
+           "name": "contentType",
+           "nameInRequest": "Content-Type",
+           "type": {
+            "$id": "7202",
+            "kind": "constant",
+            "valueType": {
+             "$id": "7203",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "multipart/form-data",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": true,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "7204",
+           "name": "itemId",
+           "nameInRequest": "itemId",
+           "type": {
+            "$id": "7205",
+            "kind": "safeint",
+            "name": "safeint",
+            "crossLanguageDefinitionId": "TypeSpec.safeint",
+            "decorators": []
+           },
+           "location": "Path",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "7206",
+           "name": "accept",
+           "nameInRequest": "Accept",
+           "type": {
+            "$id": "7207",
+            "kind": "constant",
+            "valueType": {
+             "$id": "7208",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "value": "application/json",
+            "decorators": []
+           },
+           "location": "Header",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Constant",
+           "decorators": [],
+           "skipUrlEncoding": false
+          },
+          {
+           "$id": "7209",
+           "name": "body",
+           "nameInRequest": "body",
+           "type": {
+            "$ref": "7056"
+           },
+           "location": "Body",
+           "isApiVersion": false,
+           "isContentType": false,
+           "isEndpoint": false,
+           "explode": false,
+           "isRequired": true,
+           "kind": "Method",
+           "decorators": [],
+           "skipUrlEncoding": false
+          }
+         ],
+         "responses": [
+          {
+           "$id": "7210",
+           "statusCodes": [
+            204
+           ],
+           "headers": [],
+           "isErrorResponse": false
+          }
+         ],
+         "httpMethod": "POST",
+         "uri": "{endpoint}",
+         "path": "/items/{itemId}/attachments",
+         "requestMediaTypes": [
+          "multipart/form-data"
+         ],
+         "bufferResponse": true,
+         "generateProtocolMethod": true,
+         "generateConvenienceMethod": true,
+         "crossLanguageDefinitionId": "Todo.TodoItems.Attachments.createFileAttachment",
+         "decorators": []
+        }
+       ],
+       "parameters": [
+        {
+         "$id": "7211",
+         "name": "endpoint",
+         "nameInRequest": "endpoint",
+         "doc": "Service host",
+         "type": {
+          "$id": "7212",
+          "kind": "url",
+          "name": "url",
+          "crossLanguageDefinitionId": "TypeSpec.url"
+         },
+         "location": "Uri",
+         "isApiVersion": false,
+         "isContentType": false,
+         "isRequired": true,
+         "isEndpoint": true,
+         "skipUrlEncoding": false,
+         "explode": false,
+         "kind": "Client"
+        }
+       ],
+       "decorators": [],
+       "crossLanguageDefinitionId": "Todo.TodoItems.Attachments",
+       "apiVersions": [],
+       "parent": {
+        "$ref": "7123"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "auth": {
+  "$id": "7213",
+  "apiKey": {
+   "$id": "7214",
+   "name": "Authorization",
+   "in": "header",
+   "prefix": "Bearer"
+  }
+ }
+}

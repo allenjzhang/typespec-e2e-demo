@@ -5,8 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PetStore;
 
-namespace PetStore.Models
+namespace TypeSpec.Rest.Resource
 {
     /// <summary> Paged response of Owner items. </summary>
     public partial class OwnerCollectionWithNextLink

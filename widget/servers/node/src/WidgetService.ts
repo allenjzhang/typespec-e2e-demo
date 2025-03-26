@@ -1,16 +1,16 @@
-import { HttpContext } from "../tsp-output/@typespec/http-server-javascript/helpers/router.js";
+import { HttpContext } from "../tsp-output/@typespec/http-server-js/helpers/router.js";
 import {
   Error as WidgetServiceError,
   Widget,
   WidgetService,
-} from "../tsp-output/@typespec/http-server-javascript/models/all/demo-service.js";
+} from "../tsp-output/@typespec/http-server-js/models/all/demo-service.js";
 import {
   ResourceDeletedResponse,
   WidgetCollectionWithNextLink,
   WidgetCreate,
   WidgetResourceCreatedResponse,
   WidgetUpdate,
-} from "../tsp-output/@typespec/http-server-javascript/models/all/typespec/rest/resource.js";
+} from "../tsp-output/@typespec/http-server-js/models/all/typespec/rest/resource.js";
 
 export class WidgetServiceImpl implements WidgetService<HttpContext> {
   #next_id = 1;

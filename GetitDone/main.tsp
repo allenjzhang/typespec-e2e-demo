@@ -4,7 +4,7 @@ import "@typespec/rest";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-@service({ title: "Getitdone API" })
+@service(#{ title: "Getitdone API" })
 @server("https://api.Getitdone.com", "Production server")
 namespace Getitdone {
   model Project {

@@ -1,31 +1,26 @@
-# PetStore ASP.NET WebAPI project
+---
+title: Next Steps
+---
 
-The current folder contains Widget ASP.NET core basic project with basic service stub code for out of box run-ability.
+# Next Steps
 
-## Testing the server code
+- Use the SwaggerUI endpoint to test out the running service
+- Update business logic mocks with real business logic
+  - `mocks/Pets.cs`
+  - `mocks/PetCheckups.cs`
+  - `mocks/PetInsurance.cs`
+  - `mocks/Toys.cs`
+  - `mocks/ToyInsurance.cs`
+  - `mocks/Checkups.cs`
+  - `mocks/Owners.cs`
+  - `mocks/OwnerCheckups.cs`
+  - `mocks/OwnerInsurance.cs`
+- Update `mocks/MockRegistration.cs` if you update the constructor of business logic implementations.
+- Update development and production configuration to suit your needs
 
-[Follow these steps](../../../how-to-test-server-api.md)
+## More Information
 
-## Steps to re-create the executable server project
-
-If you would like to recreate the server folder from scratch, please follow these steps.
-
-1. First follow the [basic ASP.NET project setup steps](../README.md#steps-to-create-basic-aspnet-webapi-projects).
-
-1. Add service stub classes to provide service implementation for each of the operations interfaces under `generated/operations`. We placed them under `ServiceStubs` folder but you are free to organize your actual server code.
-
-1. Create `Controllers` folder and add controller classes `XXXServiceController.cs`. These bare bone controller extends emitter ControllerBase code and links to the service stub code in previous step.
-
-```csharp
-using Microsoft.AspNetCore.Mvc;
-
-// Replace `XXX` with the name of the controller
-namespace PetStore.Service.Controllers
-{
-    [ApiController]
-    public class `XXX`Controller : `XXX`ControllerBase
-    {
-        internal override I`XXX` `XXX`Impl => new `XXX`();
-    }
-}
-```
+- See [Code Layout](docs/usage.md) for information about the generated code
+- See [Emitter Usage](docs/emitter.md) for details on how to use the emitter.
+- File issues or provide feedback in [TypeSpec Issues](https://github.com/microsoft/typespec/issues/new/choose)
+- Get information about Typespec on the [TypeSpec website](https://typespec.io)

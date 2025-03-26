@@ -3,9 +3,9 @@ emit:
  - "@typespec/http-server-csharp"
  - "@typespec/http-client-csharp"
  - "@typespec/http-client-java"
-#  - "@typespec/http-server-javascript" # js server gen throws error: Error: Unimplemented: new form of multipart requests
+#  - "@typespec/http-server-js" # js server gen throws error: Error: Unimplemented: new form of multipart requests
  - "@typespec/http-client-python"
- - "@azure-tools/typespec-ts"
+ - "@typespec/http-client-js"
 options:
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}/../openapi3"
@@ -13,14 +13,14 @@ options:
     emitter-output-dir: "{project-root}/../clients/dotnet"
   "@typespec/http-server-csharp":
     emitter-output-dir: "{project-root}/../servers/aspnet/generated"
-  "@typespec/http-server-javascript":
-    emitter-output-dir: "{project-root}/../servers/node/tsp-output/@typespec/http-server-javascript"
+  "@typespec/http-server-js":
+    emitter-output-dir: "{project-root}/../servers/node/tsp-output/@typespec/http-server-js"
     express: true
   "@typespec/http-client-java":
     emitter-output-dir: "{project-root}/../clients/java"
   "@typespec/http-client-python":
     emitter-output-dir: "{project-root}/../clients/python"
-  "@azure-tools/typespec-ts":
+  "@typespec/http-client-js":
     "emitter-output-dir": "{project-root}/../clients/javascript"
     packageDetails:
       name: "@notabrand/todo-non-branded"
