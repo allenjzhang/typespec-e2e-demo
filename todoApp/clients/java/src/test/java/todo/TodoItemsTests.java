@@ -1,13 +1,12 @@
 package todo;
 
 import io.clientcore.core.http.models.PagedIterable;
-import io.clientcore.core.util.binarydata.BinaryData;
+import io.clientcore.core.models.binarydata.BinaryData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import todo.todoitems.TodoItemPatch;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TodoItemsTests {
 
@@ -18,18 +17,18 @@ public class TodoItemsTests {
     @Test
     public void test() {
         // create item
-        CreateJsonResponse createTodoItemResponse = client.createJson(
+        TodoItem createTodoItemResponse = client.createJson(
             new TodoItem("Buy milk", TodoItemStatus.IN_PROGRESS).setDescription("Need to buy milk").setAssignedTo(1L));
         long todoItemId = createTodoItemResponse.getId();
         Assertions.assertEquals("Buy milk", createTodoItemResponse.getTitle());
         Assertions.assertEquals(TodoItemStatus.IN_PROGRESS, createTodoItemResponse.getStatus());
 
         // get item
-        GetResponse getTodoItemResponse = client.get(todoItemId);
+        TodoItem getTodoItemResponse = client.get(todoItemId);
         Assertions.assertEquals(1L, getTodoItemResponse.getAssignedTo());
 
         // update item
-        UpdateResponse updateTodoItemResponse
+        TodoItem updateTodoItemResponse
             = client.update(todoItemId, new TodoItemPatch().setStatus(TodoItemPatchStatus.COMPLETED));
         Assertions.assertEquals(TodoItemStatus.COMPLETED, updateTodoItemResponse.getStatus());
 
@@ -47,7 +46,7 @@ public class TodoItemsTests {
     public void testAttachment() {
         final BinaryData javaFileContent = BinaryData.fromString("public class Main {}");
 
-        CreateFormResponse createTodoItemResponse
+        TodoItem createTodoItemResponse
             = client.createForm(new ToDoItemMultipartRequest(new TodoItem("Read code", TodoItemStatus.NOT_STARTED))
                 .setAttachments(List.of(new FileDetails(javaFileContent).setFilename("code1.java"))));
         long todoItemId = createTodoItemResponse.getId();
