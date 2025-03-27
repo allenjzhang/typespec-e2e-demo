@@ -2,12 +2,8 @@
   "flavor": "generic", 
   "CrossLanguageDefinitionId": {
     "todo.ApiError": "Todo.ApiError",
-    "todo.CreateFormResponse": "Todo.TodoItems.createForm.Response.anonymous",
-    "todo.CreateJsonResponse": "Todo.TodoItems.createJson.Response.anonymous",
-    "todo.CreateResponse": "Todo.Users.create.Response.anonymous",
     "todo.FileAttachmentMultipartRequest": "Todo.FileAttachmentMultipartRequest",
     "todo.FileDetails": "TypeSpec.Http.File",
-    "todo.GetResponse": "Todo.TodoItems.get.Response.anonymous",
     "todo.Standard4XXResponse": "Todo.Standard4XXResponse",
     "todo.Standard5XXResponse": "Todo.Standard5XXResponse",
     "todo.ToDoItemMultipartRequest": "Todo.ToDoItemMultipartRequest",
@@ -35,7 +31,6 @@
     "todo.TodoItemsClient.update": "Todo.TodoItems.update",
     "todo.TodoItemsClient.updateWithResponse": "Todo.TodoItems.update",
     "todo.TodoLabelRecord": "Todo.TodoLabelRecord",
-    "todo.UpdateResponse": "Todo.TodoItems.update.Response.anonymous",
     "todo.User": "Todo.User",
     "todo.UsersClient": "Todo.Users",
     "todo.UsersClient.create": "Todo.Users.create",
@@ -47,6 +42,7 @@
     "todo.todoitems.implementation.PageTodoAttachment": "Todo.TodoItems.Page",
     "todo.todoitems.implementation.TodoPage": "Todo.TodoItems.TodoPage",
     "todo.users.InvalidUserResponse": "Todo.Users.InvalidUserResponse",
+    "todo.users.UserCreatedResponse": "Todo.Users.UserCreatedResponse",
     "todo.users.UserExistsResponse": "Todo.Users.UserExistsResponse"
   }
 }

@@ -1,8 +1,9 @@
 package todo;
 
 import io.clientcore.core.http.models.PagedIterable;
-import io.clientcore.core.util.binarydata.BinaryData;
+import io.clientcore.core.models.binarydata.BinaryData;
 import todo.todoitems.TodoItemPatch;
+import todo.users.UserCreatedResponse;
 
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -21,22 +22,22 @@ public final class TodoSample {
         TodoItemsAttachmentsClient todoItemsAttachmentsClient = builder.buildTodoItemsAttachmentsClient();
 
         // create user
-        CreateResponse createUserResponse
+        UserCreatedResponse createUserResponse
             = usersClient.create(new User("John Doe", "test@example.com", randomString()));
         System.out.println("user created, id=" + createUserResponse.getId());
 
         // create item
-        CreateJsonResponse createTodoItemResponse = todoItemsClient.createJson(
+        TodoItem createTodoItemResponse = todoItemsClient.createJson(
             new TodoItem("Buy milk", TodoItemStatus.IN_PROGRESS).setDescription("Need to buy milk").setAssignedTo(1L));
         long todoItemId = createTodoItemResponse.getId();
         System.out.println("todo item created, id=" + todoItemId);
 
         // get item
-        GetResponse getTodoItemResponse = todoItemsClient.get(todoItemId);
+        TodoItem getTodoItemResponse = todoItemsClient.get(todoItemId);
         System.out.println("todo item queried, title=" + getTodoItemResponse.getTitle());
 
         // update item
-        UpdateResponse updateTodoItemResponse
+        TodoItem updateTodoItemResponse
             = todoItemsClient.update(todoItemId, new TodoItemPatch().setStatus(TodoItemPatchStatus.COMPLETED));
         System.out.println("todo item updated, status=" + updateTodoItemResponse.getStatus());
 
@@ -49,7 +50,7 @@ public final class TodoSample {
         System.out.println("todo item deleted, id=" + todoItemId);
 
         // create item via multipart/form-data
-        CreateFormResponse createTodoItemFormResponse = todoItemsClient.createForm(
+        TodoItem createTodoItemFormResponse = todoItemsClient.createForm(
             new ToDoItemMultipartRequest(new TodoItem("Read code", TodoItemStatus.NOT_STARTED)).setAttachments(List
                 .of(new FileDetails(BinaryData.fromFile(Path.of(TodoSample.class.getResource("/code1.java").toURI())))
                     .setFilename("code1.java")

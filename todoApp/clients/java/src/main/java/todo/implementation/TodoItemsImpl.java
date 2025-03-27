@@ -2,29 +2,26 @@
 
 package todo.implementation;
 
-import io.clientcore.core.annotation.ServiceInterface;
+import io.clientcore.core.annotations.ServiceInterface;
 import io.clientcore.core.http.RestProxy;
-import io.clientcore.core.http.annotation.BodyParam;
-import io.clientcore.core.http.annotation.HeaderParam;
-import io.clientcore.core.http.annotation.HostParam;
-import io.clientcore.core.http.annotation.HttpRequestInformation;
-import io.clientcore.core.http.annotation.PathParam;
-import io.clientcore.core.http.annotation.UnexpectedResponseExceptionDetail;
-import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.http.annotations.BodyParam;
+import io.clientcore.core.http.annotations.HeaderParam;
+import io.clientcore.core.http.annotations.HostParam;
+import io.clientcore.core.http.annotations.HttpRequestInformation;
+import io.clientcore.core.http.annotations.PathParam;
+import io.clientcore.core.http.annotations.UnexpectedResponseExceptionDetail;
+import io.clientcore.core.http.exceptions.HttpResponseException;
 import io.clientcore.core.http.models.HttpMethod;
 import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.http.models.PagedResponse;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
-import io.clientcore.core.util.Context;
-import io.clientcore.core.util.binarydata.BinaryData;
-import todo.CreateFormResponse;
-import todo.CreateJsonResponse;
-import todo.GetResponse;
+import io.clientcore.core.instrumentation.logging.ClientLogger;
+import io.clientcore.core.models.binarydata.BinaryData;
+import io.clientcore.core.utils.Context;
 import todo.Standard4XXResponse;
 import todo.Standard5XXResponse;
 import todo.TodoItem;
-import todo.UpdateResponse;
 import todo.todoitems.InvalidTodoItem;
 import todo.todoitems.NotFoundErrorResponse;
 import todo.todoitems.implementation.TodoPage;
@@ -478,7 +475,7 @@ public final class TodoItemsImpl {
                 599 },
             exceptionBodyClass = Standard5XXResponse.class)
         @UnexpectedResponseExceptionDetail
-        Response<CreateJsonResponse> createJsonSync(@HostParam("endpoint") String endpoint,
+        Response<TodoItem> createJsonSync(@HostParam("endpoint") String endpoint,
             @HeaderParam("content-type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData createJsonRequest, RequestOptions requestOptions);
 
@@ -691,19 +688,19 @@ public final class TodoItemsImpl {
                 599 },
             exceptionBodyClass = Standard5XXResponse.class)
         @UnexpectedResponseExceptionDetail
-        Response<CreateFormResponse> createFormSync(@HostParam("endpoint") String endpoint,
+        Response<TodoItem> createFormSync(@HostParam("endpoint") String endpoint,
             @HeaderParam("content-type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions);
 
         @HttpRequestInformation(method = HttpMethod.GET, path = "/items/{id}", expectedStatusCodes = { 200 })
         @UnexpectedResponseExceptionDetail(statusCode = { 404 }, exceptionBodyClass = NotFoundErrorResponse.class)
         @UnexpectedResponseExceptionDetail
-        Response<GetResponse> getSync(@HostParam("endpoint") String endpoint, @PathParam("id") long id,
+        Response<TodoItem> getSync(@HostParam("endpoint") String endpoint, @PathParam("id") long id,
             @HeaderParam("Accept") String accept, RequestOptions requestOptions);
 
         @HttpRequestInformation(method = HttpMethod.PATCH, path = "/items/{id}", expectedStatusCodes = { 200 })
         @UnexpectedResponseExceptionDetail
-        Response<UpdateResponse> updateSync(@HostParam("endpoint") String endpoint,
+        Response<TodoItem> updateSync(@HostParam("endpoint") String endpoint,
             @HeaderParam("content-type") String contentType, @PathParam("id") long id,
             @HeaderParam("Accept") String accept, @BodyParam("application/merge-patch+json") BinaryData patch,
             RequestOptions requestOptions);
@@ -1228,8 +1225,43 @@ public final class TodoItemsImpl {
         requestOptionsForNextPage.setContext(requestOptions != null && requestOptions.getContext() != null
             ? requestOptions.getContext()
             : Context.none());
-        return new PagedIterable<>((pagingOptions) -> listSinglePage(requestOptions),
-            (pagingOptions, nextLink) -> listNextSinglePage(nextLink, requestOptionsForNextPage));
+        return new PagedIterable<>(pagingOptions -> {
+            if (pagingOptions.getOffset() != null) {
+                throw LOGGER.logThrowableAsError(
+                    new IllegalArgumentException("'offset' in PagingOptions is not supported in API 'list'."));
+            }
+            if (pagingOptions.getPageSize() != null) {
+                throw LOGGER.logThrowableAsError(
+                    new IllegalArgumentException("'pageSize' in PagingOptions is not supported in API 'list'."));
+            }
+            if (pagingOptions.getPageIndex() != null) {
+                throw LOGGER.logThrowableAsError(
+                    new IllegalArgumentException("'pageIndex' in PagingOptions is not supported in API 'list'."));
+            }
+            if (pagingOptions.getContinuationToken() != null) {
+                throw LOGGER.logThrowableAsError(new IllegalArgumentException(
+                    "'continuationToken' in PagingOptions is not supported in API 'list'."));
+            }
+            return listSinglePage(requestOptions);
+        }, (pagingOptions, nextLink) -> {
+            if (pagingOptions.getOffset() != null) {
+                throw LOGGER.logThrowableAsError(
+                    new IllegalArgumentException("'offset' in PagingOptions is not supported in API 'list'."));
+            }
+            if (pagingOptions.getPageSize() != null) {
+                throw LOGGER.logThrowableAsError(
+                    new IllegalArgumentException("'pageSize' in PagingOptions is not supported in API 'list'."));
+            }
+            if (pagingOptions.getPageIndex() != null) {
+                throw LOGGER.logThrowableAsError(
+                    new IllegalArgumentException("'pageIndex' in PagingOptions is not supported in API 'list'."));
+            }
+            if (pagingOptions.getContinuationToken() != null) {
+                throw LOGGER.logThrowableAsError(new IllegalArgumentException(
+                    "'continuationToken' in PagingOptions is not supported in API 'list'."));
+            }
+            return listNextSinglePage(nextLink, requestOptionsForNextPage);
+        });
     }
 
     /**
@@ -1278,6 +1310,7 @@ public final class TodoItemsImpl {
      *     updatedAt: OffsetDateTime (Required)
      *     completedAt: OffsetDateTime (Optional)
      *     labels: BinaryData (Optional)
+     *     _dummy: String (Optional)
      * }
      * }
      * </pre>
@@ -1287,8 +1320,7 @@ public final class TodoItemsImpl {
      * @throws HttpResponseException thrown if the service returns an error.
      * @return the response.
      */
-    public Response<CreateJsonResponse> createJsonWithResponse(BinaryData createJsonRequest,
-        RequestOptions requestOptions) {
+    public Response<TodoItem> createJsonWithResponse(BinaryData createJsonRequest, RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
         return service.createJsonSync(this.client.getEndpoint(), contentType, accept, createJsonRequest,
@@ -1312,6 +1344,7 @@ public final class TodoItemsImpl {
      *     updatedAt: OffsetDateTime (Required)
      *     completedAt: OffsetDateTime (Optional)
      *     labels: BinaryData (Optional)
+     *     _dummy: String (Optional)
      * }
      * }
      * </pre>
@@ -1321,7 +1354,7 @@ public final class TodoItemsImpl {
      * @throws HttpResponseException thrown if the service returns an error.
      * @return the response.
      */
-    public Response<CreateFormResponse> createFormWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<TodoItem> createFormWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
         final String accept = "application/json";
         return service.createFormSync(this.client.getEndpoint(), contentType, accept, body, requestOptions);
@@ -1344,6 +1377,7 @@ public final class TodoItemsImpl {
      *     updatedAt: OffsetDateTime (Required)
      *     completedAt: OffsetDateTime (Optional)
      *     labels: BinaryData (Optional)
+     *     _dummy: String (Optional)
      * }
      * }
      * </pre>
@@ -1353,7 +1387,7 @@ public final class TodoItemsImpl {
      * @throws HttpResponseException thrown if the service returns an error.
      * @return the response.
      */
-    public Response<GetResponse> getWithResponse(long id, RequestOptions requestOptions) {
+    public Response<TodoItem> getWithResponse(long id, RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getSync(this.client.getEndpoint(), id, accept, requestOptions);
     }
@@ -1388,6 +1422,7 @@ public final class TodoItemsImpl {
      *     updatedAt: OffsetDateTime (Required)
      *     completedAt: OffsetDateTime (Optional)
      *     labels: BinaryData (Optional)
+     *     _dummy: String (Optional)
      * }
      * }
      * </pre>
@@ -1398,7 +1433,7 @@ public final class TodoItemsImpl {
      * @throws HttpResponseException thrown if the service returns an error.
      * @return the response.
      */
-    public Response<UpdateResponse> updateWithResponse(long id, BinaryData patch, RequestOptions requestOptions) {
+    public Response<TodoItem> updateWithResponse(long id, BinaryData patch, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
         return service.updateSync(this.client.getEndpoint(), contentType, id, accept, patch, requestOptions);
@@ -1458,4 +1493,6 @@ public final class TodoItemsImpl {
         return new PagedResponse<>(res.getRequest(), res.getStatusCode(), res.getHeaders(), res.getBody(),
             res.getValue().getItems(), null, res.getValue().getNextLink(), null, null, null);
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(TodoItemsImpl.class);
 }
