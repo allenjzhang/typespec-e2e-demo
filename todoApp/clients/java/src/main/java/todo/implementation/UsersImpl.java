@@ -2,22 +2,22 @@
 
 package todo.implementation;
 
-import io.clientcore.core.annotation.ServiceInterface;
+import io.clientcore.core.annotations.ServiceInterface;
 import io.clientcore.core.http.RestProxy;
-import io.clientcore.core.http.annotation.BodyParam;
-import io.clientcore.core.http.annotation.HeaderParam;
-import io.clientcore.core.http.annotation.HostParam;
-import io.clientcore.core.http.annotation.HttpRequestInformation;
-import io.clientcore.core.http.annotation.UnexpectedResponseExceptionDetail;
-import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.http.annotations.BodyParam;
+import io.clientcore.core.http.annotations.HeaderParam;
+import io.clientcore.core.http.annotations.HostParam;
+import io.clientcore.core.http.annotations.HttpRequestInformation;
+import io.clientcore.core.http.annotations.UnexpectedResponseExceptionDetail;
+import io.clientcore.core.http.exceptions.HttpResponseException;
 import io.clientcore.core.http.models.HttpMethod;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
-import io.clientcore.core.util.binarydata.BinaryData;
-import todo.CreateResponse;
+import io.clientcore.core.models.binarydata.BinaryData;
 import todo.Standard4XXResponse;
 import todo.Standard5XXResponse;
 import todo.users.InvalidUserResponse;
+import todo.users.UserCreatedResponse;
 import todo.users.UserExistsResponse;
 
 /**
@@ -258,7 +258,7 @@ public final class UsersImpl {
                 599 },
             exceptionBodyClass = Standard5XXResponse.class)
         @UnexpectedResponseExceptionDetail
-        Response<CreateResponse> createSync(@HostParam("endpoint") String endpoint,
+        Response<UserCreatedResponse> createSync(@HostParam("endpoint") String endpoint,
             @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData user, RequestOptions requestOptions);
     }
@@ -286,6 +286,7 @@ public final class UsersImpl {
      *     id: long (Required)
      *     username: String (Required)
      *     email: String (Required)
+     *     password: String (Required)
      *     token: String (Required)
      * }
      * }
@@ -296,7 +297,7 @@ public final class UsersImpl {
      * @throws HttpResponseException thrown if the service returns an error.
      * @return the response.
      */
-    public Response<CreateResponse> createWithResponse(BinaryData user, RequestOptions requestOptions) {
+    public Response<UserCreatedResponse> createWithResponse(BinaryData user, RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
         return service.createSync(this.client.getEndpoint(), contentType, accept, user, requestOptions);

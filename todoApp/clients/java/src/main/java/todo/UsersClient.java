@@ -2,13 +2,14 @@
 
 package todo;
 
-import io.clientcore.core.annotation.Metadata;
-import io.clientcore.core.annotation.ServiceClient;
-import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.annotations.Metadata;
+import io.clientcore.core.annotations.ServiceClient;
+import io.clientcore.core.http.exceptions.HttpResponseException;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
-import io.clientcore.core.util.binarydata.BinaryData;
+import io.clientcore.core.models.binarydata.BinaryData;
 import todo.implementation.UsersImpl;
+import todo.users.UserCreatedResponse;
 
 /**
  * Initializes a new instance of the synchronous TodoClient type.
@@ -51,6 +52,7 @@ public final class UsersClient {
      *     id: long (Required)
      *     username: String (Required)
      *     email: String (Required)
+     *     password: String (Required)
      *     token: String (Required)
      * }
      * }
@@ -62,7 +64,7 @@ public final class UsersClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public Response<CreateResponse> createWithResponse(BinaryData user, RequestOptions requestOptions) {
+    public Response<UserCreatedResponse> createWithResponse(BinaryData user, RequestOptions requestOptions) {
         return this.serviceClient.createWithResponse(user, requestOptions);
     }
 
@@ -76,7 +78,7 @@ public final class UsersClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public CreateResponse create(User user) {
+    public UserCreatedResponse create(User user) {
         // Generated convenience method for createWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createWithResponse(BinaryData.fromObject(user), requestOptions).getValue();

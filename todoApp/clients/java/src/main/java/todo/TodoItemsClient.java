@@ -2,15 +2,15 @@
 
 package todo;
 
-import io.clientcore.core.annotation.Metadata;
-import io.clientcore.core.annotation.ReturnType;
-import io.clientcore.core.annotation.ServiceClient;
-import io.clientcore.core.annotation.ServiceMethod;
-import io.clientcore.core.http.exception.HttpResponseException;
+import io.clientcore.core.annotations.Metadata;
+import io.clientcore.core.annotations.ReturnType;
+import io.clientcore.core.annotations.ServiceClient;
+import io.clientcore.core.annotations.ServiceMethod;
+import io.clientcore.core.http.exceptions.HttpResponseException;
 import io.clientcore.core.http.models.PagedIterable;
 import io.clientcore.core.http.models.RequestOptions;
 import io.clientcore.core.http.models.Response;
-import io.clientcore.core.util.binarydata.BinaryData;
+import io.clientcore.core.models.binarydata.BinaryData;
 import java.util.List;
 import java.util.stream.Collectors;
 import todo.implementation.CreateJsonRequest;
@@ -131,6 +131,7 @@ public final class TodoItemsClient {
      *     updatedAt: OffsetDateTime (Required)
      *     completedAt: OffsetDateTime (Optional)
      *     labels: BinaryData (Optional)
+     *     _dummy: String (Optional)
      * }
      * }
      * </pre>
@@ -141,8 +142,7 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public Response<CreateJsonResponse> createJsonWithResponse(BinaryData createJsonRequest,
-        RequestOptions requestOptions) {
+    public Response<TodoItem> createJsonWithResponse(BinaryData createJsonRequest, RequestOptions requestOptions) {
         return this.serviceClient.createJsonWithResponse(createJsonRequest, requestOptions);
     }
 
@@ -163,6 +163,7 @@ public final class TodoItemsClient {
      *     updatedAt: OffsetDateTime (Required)
      *     completedAt: OffsetDateTime (Optional)
      *     labels: BinaryData (Optional)
+     *     _dummy: String (Optional)
      * }
      * }
      * </pre>
@@ -173,9 +174,9 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    Response<CreateFormResponse> createFormWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'createForm' is
-        // 'multipart/form-data'
+    Response<TodoItem> createFormWithResponse(BinaryData body, RequestOptions requestOptions) {
+        // Operation 'createForm' is of content-type 'multipart/form-data'. Protocol API is not usable and hence not
+        // generated.
         return this.serviceClient.createFormWithResponse(body, requestOptions);
     }
 
@@ -196,6 +197,7 @@ public final class TodoItemsClient {
      *     updatedAt: OffsetDateTime (Required)
      *     completedAt: OffsetDateTime (Optional)
      *     labels: BinaryData (Optional)
+     *     _dummy: String (Optional)
      * }
      * }
      * </pre>
@@ -206,7 +208,7 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public Response<GetResponse> getWithResponse(long id, RequestOptions requestOptions) {
+    public Response<TodoItem> getWithResponse(long id, RequestOptions requestOptions) {
         return this.serviceClient.getWithResponse(id, requestOptions);
     }
 
@@ -240,6 +242,7 @@ public final class TodoItemsClient {
      *     updatedAt: OffsetDateTime (Required)
      *     completedAt: OffsetDateTime (Optional)
      *     labels: BinaryData (Optional)
+     *     _dummy: String (Optional)
      * }
      * }
      * </pre>
@@ -251,7 +254,7 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public Response<UpdateResponse> updateWithResponse(long id, BinaryData patch, RequestOptions requestOptions) {
+    public Response<TodoItem> updateWithResponse(long id, BinaryData patch, RequestOptions requestOptions) {
         return this.serviceClient.updateWithResponse(id, patch, requestOptions);
     }
 
@@ -318,7 +321,7 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public CreateJsonResponse createJson(TodoItem item, List<TodoAttachment> attachments) {
+    public TodoItem createJson(TodoItem item, List<TodoAttachment> attachments) {
         // Generated convenience method for createJsonWithResponse
         RequestOptions requestOptions = new RequestOptions();
         CreateJsonRequest createJsonRequestObj = new CreateJsonRequest(item).setAttachments(attachments);
@@ -336,7 +339,7 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public CreateJsonResponse createJson(TodoItem item) {
+    public TodoItem createJson(TodoItem item) {
         // Generated convenience method for createJsonWithResponse
         RequestOptions requestOptions = new RequestOptions();
         CreateJsonRequest createJsonRequestObj = new CreateJsonRequest(item);
@@ -354,7 +357,7 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public CreateFormResponse createForm(ToDoItemMultipartRequest body) {
+    public TodoItem createForm(ToDoItemMultipartRequest body) {
         // Generated convenience method for createFormWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return createFormWithResponse(
@@ -384,7 +387,7 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public GetResponse get(long id) {
+    public TodoItem get(long id) {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(id, requestOptions).getValue();
@@ -401,7 +404,7 @@ public final class TodoItemsClient {
      * @return the response.
      */
     @Metadata(generated = true)
-    public UpdateResponse update(long id, TodoItemPatch patch) {
+    public TodoItem update(long id, TodoItemPatch patch) {
         // Generated convenience method for updateWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getTodoItemPatchAccessor().prepareModelForJsonMergePatch(patch, true);
