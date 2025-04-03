@@ -1,0 +1,23 @@
+{
+  "flavor": "generic", 
+  "CrossLanguageDefinitionId": {
+    "demoservice.DemoServiceClient": "DemoService.WidgetService",
+    "demoservice.DemoServiceClient.create": "TypeSpec.Rest.Resource.WidgetService.create",
+    "demoservice.DemoServiceClient.createWithResponse": "TypeSpec.Rest.Resource.WidgetService.create",
+    "demoservice.DemoServiceClient.delete": "TypeSpec.Rest.Resource.WidgetService.delete",
+    "demoservice.DemoServiceClient.deleteWithResponse": "TypeSpec.Rest.Resource.WidgetService.delete",
+    "demoservice.DemoServiceClient.get": "TypeSpec.Rest.Resource.WidgetService.get",
+    "demoservice.DemoServiceClient.getWithResponse": "TypeSpec.Rest.Resource.WidgetService.get",
+    "demoservice.DemoServiceClient.list": "TypeSpec.Rest.Resource.WidgetService.list",
+    "demoservice.DemoServiceClient.listWithResponse": "TypeSpec.Rest.Resource.WidgetService.list",
+    "demoservice.DemoServiceClient.update": "TypeSpec.Rest.Resource.WidgetService.update",
+    "demoservice.DemoServiceClient.updateWithResponse": "TypeSpec.Rest.Resource.WidgetService.update",
+    "demoservice.DemoServiceClientBuilder": "DemoService",
+    "demoservice.Error": "DemoService.Error",
+    "demoservice.Widget": "DemoService.Widget",
+    "demoservice.WidgetCollectionWithNextLink": "TypeSpec.Rest.Resource.CollectionWithNextLink",
+    "demoservice.WidgetColor": "DemoService.Widget.color.anonymous",
+    "demoservice.WidgetCreate": "TypeSpec.Rest.Resource.ResourceCreateModel",
+    "demoservice.WidgetUpdate": "TypeSpec.Rest.Resource.ResourceCreateOrUpdateModel"
+  }
+}
