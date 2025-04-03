@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Todo.Models
+namespace Todo
 {
     /// <summary></summary>
     public enum TodoItemStatus

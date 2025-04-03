@@ -5,9 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using Todo;
 
-namespace Todo.Models
+namespace Todo
 {
     /// <summary> The TodoItem. </summary>
     public partial class TodoItem

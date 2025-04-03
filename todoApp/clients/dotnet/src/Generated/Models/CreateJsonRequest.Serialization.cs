@@ -7,9 +7,8 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
-using Todo;
 
-namespace Todo.Models
+namespace Todo
 {
     /// <summary></summary>
     internal partial class CreateJsonRequest : IJsonModel<CreateJsonRequest>

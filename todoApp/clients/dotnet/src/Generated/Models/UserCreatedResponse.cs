@@ -5,26 +5,28 @@
 using System;
 using System.Collections.Generic;
 
-namespace Todo.Models
+namespace Todo._Users
 {
-    /// <summary> The CreateResponse. </summary>
-    public partial class CreateResponse
+    /// <summary> The UserCreatedResponse. </summary>
+    public partial class UserCreatedResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private protected readonly IDictionary<string, BinaryData> _additionalBinaryDataProperties;
 
-        internal CreateResponse(string username, string email, string token)
+        internal UserCreatedResponse(string username, string email, string password, string token)
         {
             Username = username;
             Email = email;
+            Password = password;
             Token = token;
         }
 
-        internal CreateResponse(long id, string username, string email, string token, IDictionary<string, BinaryData> additionalBinaryDataProperties)
+        internal UserCreatedResponse(long id, string username, string email, string password, string token, IDictionary<string, BinaryData> additionalBinaryDataProperties)
         {
             Id = id;
             Username = username;
             Email = email;
+            Password = password;
             Token = token;
             _additionalBinaryDataProperties = additionalBinaryDataProperties;
         }
@@ -37,6 +39,12 @@ namespace Todo.Models
 
         /// <summary> The user's email address. </summary>
         public string Email { get; }
+
+        /// <summary>
+        /// The user's password, provided when creating a user
+        /// but is otherwise not visible (and hashed by the backend)
+        /// </summary>
+        public string Password { get; }
 
         /// <summary> The token to use to construct the validate email address url. </summary>
         public string Token { get; }

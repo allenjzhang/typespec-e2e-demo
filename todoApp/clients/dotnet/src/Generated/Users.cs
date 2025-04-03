@@ -7,9 +7,9 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
-using Todo.Models;
+using Todo;
 
-namespace Todo
+namespace Todo._Users
 {
     /// <summary></summary>
     public partial class Users
@@ -77,12 +77,12 @@ namespace Todo
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual ClientResult<CreateResponse> Create(User user, CancellationToken cancellationToken = default)
+        public virtual ClientResult<UserCreatedResponse> Create(User user, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(user, nameof(user));
 
             ClientResult result = Create(user, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
-            return ClientResult.FromValue((CreateResponse)result, result.GetRawResponse());
+            return ClientResult.FromValue((UserCreatedResponse)result, result.GetRawResponse());
         }
 
         /// <summary> create. </summary>
@@ -90,12 +90,12 @@ namespace Todo
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async Task<ClientResult<CreateResponse>> CreateAsync(User user, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<UserCreatedResponse>> CreateAsync(User user, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(user, nameof(user));
 
             ClientResult result = await CreateAsync(user, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null).ConfigureAwait(false);
-            return ClientResult.FromValue((CreateResponse)result, result.GetRawResponse());
+            return ClientResult.FromValue((UserCreatedResponse)result, result.GetRawResponse());
         }
     }
 }
