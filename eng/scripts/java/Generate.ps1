@@ -29,7 +29,7 @@ mvn --no-transfer-progress clean spotless:apply install -DskipTests
 Pop-Location
 
 Push-Location ./widget/clients/java
-mvn --no-transfer-progress clean spotless:apply install -DskipTests
+mvn --no-transfer-progress clean install -DskipTests
 Pop-Location
 
 # Build samples
