@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@typespec/openapi3";
 import "@typespec/openapi";
 import "@typespec/json-schema";
 using Http;
