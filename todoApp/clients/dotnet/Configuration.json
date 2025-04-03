@@ -1,4 +1,5 @@
 {
   "output-folder": ".",
-  "package-name": "Todo"
+  "package-name": "Todo",
+  "unreferenced-types-handling": "internalize"
 }

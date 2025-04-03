@@ -2,10 +2,12 @@
 
 #nullable disable
 
+using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using Todo;
 
-namespace Todo
+namespace Todo._TodoItems
 {
     /// <summary></summary>
     public partial class TodoItems
@@ -17,15 +19,18 @@ namespace Todo
 
         private static PipelineMessageClassifier PipelineMessageClassifier204 => _pipelineMessageClassifier204 = PipelineMessageClassifier.Create(stackalloc ushort[] { 204 });
 
-        internal PipelineMessage CreateListRequest(int? limit, int? offset, RequestOptions options)
+        internal PipelineMessage CreateListRequest(Uri nextPage, int? limit, int? offset, RequestOptions options)
         {
             PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
             PipelineRequest request = message.Request;
             request.Method = "GET";
             ClientUriBuilder uri = new ClientUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/items", false);
+            uri.Reset(nextPage ?? _endpoint);
+            if (nextPage == null)
+            {
+                uri.AppendPath("/items", false);
+            }
             if (limit != null)
             {
                 uri.AppendQuery("limit", TypeFormatters.ConvertToString(limit, null), true);

@@ -4,9 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using Todo;
 
-namespace Todo.Models
+namespace Todo
 {
     /// <summary> The TodoAttachment. </summary>
     public partial class TodoAttachment

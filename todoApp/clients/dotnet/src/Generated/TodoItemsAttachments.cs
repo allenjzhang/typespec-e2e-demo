@@ -7,9 +7,9 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading;
 using System.Threading.Tasks;
-using Todo.Models;
+using Todo;
 
-namespace Todo
+namespace Todo._TodoItems.Attachments
 {
     /// <summary></summary>
     public partial class TodoItemsAttachments
@@ -42,10 +42,9 @@ namespace Todo
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult List(long itemId, RequestOptions options)
+        public virtual CollectionResult List(long itemId, RequestOptions options)
         {
-            using PipelineMessage message = CreateListRequest(itemId, options);
-            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            return new ListCollectionResult(this, itemId, options);
         }
 
         /// <summary>
@@ -60,30 +59,27 @@ namespace Todo
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> ListAsync(long itemId, RequestOptions options)
+        public virtual AsyncCollectionResult ListAsync(long itemId, RequestOptions options)
         {
-            using PipelineMessage message = CreateListRequest(itemId, options);
-            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            return new ListAsyncCollectionResult(this, itemId, options);
         }
 
         /// <summary> list. </summary>
         /// <param name="itemId"></param>
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual ClientResult<PageTodoAttachment> List(long itemId, CancellationToken cancellationToken = default)
+        public virtual CollectionResult<TodoAttachment> List(long itemId, CancellationToken cancellationToken = default)
         {
-            ClientResult result = List(itemId, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
-            return ClientResult.FromValue((PageTodoAttachment)result, result.GetRawResponse());
+            return new ListCollectionResultOfT(this, itemId, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
         }
 
         /// <summary> list. </summary>
         /// <param name="itemId"></param>
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async Task<ClientResult<PageTodoAttachment>> ListAsync(long itemId, CancellationToken cancellationToken = default)
+        public virtual AsyncCollectionResult<TodoAttachment> ListAsync(long itemId, CancellationToken cancellationToken = default)
         {
-            ClientResult result = await ListAsync(itemId, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null).ConfigureAwait(false);
-            return ClientResult.FromValue((PageTodoAttachment)result, result.GetRawResponse());
+            return new ListAsyncCollectionResultOfT(this, itemId, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
         }
 
         /// <summary>
