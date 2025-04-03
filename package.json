@@ -6,7 +6,7 @@
     "@azure-tools/typespec-client-generator-core": "^0.54.0",
     "@typespec/compiler": "^1.0.0-0",
     "@typespec/http": "^1.0.0-0",
-    "@typespec/http-client-csharp": "^1.0.0-alpha.20250402.1",
+    "@typespec/http-client-csharp": "^1.0.0-alpha.20250403.1",
     "@typespec/http-client-java": "^0.3.0",    
     "@typespec/http-client-js": "^0.3.0",
     "@typespec/http-client-python": "^0.9.1",
