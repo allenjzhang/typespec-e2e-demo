@@ -14,6 +14,11 @@ Push-Location ./todoApp/spec
 npx --no-install tsp compile . --emit "@typespec/http-client-java"
 Pop-Location
 
+Remove-Item ./widget/clients/java/src/main -Recurse -Force
+Push-Location ./widget/spec
+npx --no-install tsp compile . --emit "@typespec/http-client-java"
+Pop-Location
+
 # Build and install SDK
 Push-Location ./petstore/clients/java
 mvn --no-transfer-progress clean spotless:apply install -DskipTests
@@ -21,6 +26,10 @@ Pop-Location
 
 Push-Location ./todoApp/clients/java
 mvn --no-transfer-progress clean spotless:apply install -DskipTests
+Pop-Location
+
+Push-Location ./widget/clients/java
+mvn --no-transfer-progress clean install -DskipTests
 Pop-Location
 
 # Build samples

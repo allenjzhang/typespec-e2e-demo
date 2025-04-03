@@ -1,14 +1,15 @@
 package petstore;
 
-import io.clientcore.core.http.exception.HttpResponseException;
-import io.clientcore.core.http.models.HttpLogOptions;
+import io.clientcore.core.http.exceptions.HttpResponseException;
+import io.clientcore.core.http.pipeline.HttpInstrumentationOptions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public final class PetsTests {
 
     private final PetsClient client = new PetStoreClientBuilder().endpoint("http://localhost:5118/")
-        .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogOptions.HttpLogDetailLevel.BODY_AND_HEADERS))
+        .httpInstrumentationOptions(
+            new HttpInstrumentationOptions().setHttpLogLevel(HttpInstrumentationOptions.HttpLogLevel.BODY_AND_HEADERS))
         .buildPetsClient();
 
     @Test

@@ -7,3 +7,5 @@ options:
   "@typespec/http-server-js":
     emitter-output-dir: "{project-root}/../servers/node/tsp-output/@typespec/http-server-js"  
     express: true
+  "@typespec/http-client-java":
+    emitter-output-dir: "{project-root}/../clients/java"
