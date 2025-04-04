@@ -1,5 +1,4 @@
 # coding=utf-8
-
 # pylint: disable=useless-super-delegation
 
 import datetime
@@ -16,17 +15,15 @@ if TYPE_CHECKING:
 class ApiError(_model_base.Model):
     """ApiError.
 
-    All required parameters must be populated in order to send to server.
-
     :ivar code: A machine readable error code. Required.
     :vartype code: str
     :ivar message: A human readable message. Required.
     :vartype message: str
     """
 
-    code: str = rest_field()
+    code: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """A machine readable error code. Required."""
-    message: str = rest_field()
+    message: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """A human readable message. Required."""
 
     @overload
@@ -48,209 +45,16 @@ class ApiError(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class CreateFormResponse(_model_base.Model):
-    """CreateFormResponse.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-
-    :ivar id: The item's unique id. Required.
-    :vartype id: int
-    :ivar title: The item's title. Required.
-    :vartype title: str
-    :ivar created_by: User that created the todo. Required.
-    :vartype created_by: int
-    :ivar assigned_to: User that the todo is assigned to.
-    :vartype assigned_to: int
-    :ivar description: A longer description of the todo item in markdown format.
-    :vartype description: str
-    :ivar status: The status of the todo item. Required. Is one of the following types:
-     Literal["NotStarted"], Literal["InProgress"], Literal["Completed"]
-    :vartype status: str or str or str
-    :ivar created_at: When the todo item was created. Required.
-    :vartype created_at: ~datetime.datetime
-    :ivar updated_at: When the todo item was last updated. Required.
-    :vartype updated_at: ~datetime.datetime
-    :ivar completed_at: When the todo item was makred as completed.
-    :vartype completed_at: ~datetime.datetime
-    :ivar labels: Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]
-    :vartype labels: str or list[str] or ~todo.models.TodoLabelRecord or
-     list[~todo.models.TodoLabelRecord]
-    """
-
-    id: int = rest_field(visibility=["read"])
-    """The item's unique id. Required."""
-    title: str = rest_field()
-    """The item's title. Required."""
-    created_by: int = rest_field(name="createdBy", visibility=["read"])
-    """User that created the todo. Required."""
-    assigned_to: Optional[int] = rest_field(name="assignedTo")
-    """User that the todo is assigned to."""
-    description: Optional[str] = rest_field()
-    """A longer description of the todo item in markdown format."""
-    status: Literal["NotStarted", "InProgress", "Completed"] = rest_field()
-    """The status of the todo item. Required. Is one of the following types: Literal[\"NotStarted\"],
-     Literal[\"InProgress\"], Literal[\"Completed\"]"""
-    created_at: datetime.datetime = rest_field(name="createdAt", visibility=["read"], format="rfc3339")
-    """When the todo item was created. Required."""
-    updated_at: datetime.datetime = rest_field(name="updatedAt", visibility=["read"], format="rfc3339")
-    """When the todo item was last updated. Required."""
-    completed_at: Optional[datetime.datetime] = rest_field(name="completedAt", visibility=["read"], format="rfc3339")
-    """When the todo item was makred as completed."""
-    labels: Optional["_types.TodoLabels"] = rest_field()
-    """Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]"""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        title: str,
-        status: Literal["NotStarted", "InProgress", "Completed"],
-        assigned_to: Optional[int] = None,
-        description: Optional[str] = None,
-        labels: Optional["_types.TodoLabels"] = None,
-    ) -> None: ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]) -> None:
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-
-
-class CreateJsonResponse(_model_base.Model):
-    """CreateJsonResponse.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-
-    :ivar id: The item's unique id. Required.
-    :vartype id: int
-    :ivar title: The item's title. Required.
-    :vartype title: str
-    :ivar created_by: User that created the todo. Required.
-    :vartype created_by: int
-    :ivar assigned_to: User that the todo is assigned to.
-    :vartype assigned_to: int
-    :ivar description: A longer description of the todo item in markdown format.
-    :vartype description: str
-    :ivar status: The status of the todo item. Required. Is one of the following types:
-     Literal["NotStarted"], Literal["InProgress"], Literal["Completed"]
-    :vartype status: str or str or str
-    :ivar created_at: When the todo item was created. Required.
-    :vartype created_at: ~datetime.datetime
-    :ivar updated_at: When the todo item was last updated. Required.
-    :vartype updated_at: ~datetime.datetime
-    :ivar completed_at: When the todo item was makred as completed.
-    :vartype completed_at: ~datetime.datetime
-    :ivar labels: Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]
-    :vartype labels: str or list[str] or ~todo.models.TodoLabelRecord or
-     list[~todo.models.TodoLabelRecord]
-    """
-
-    id: int = rest_field(visibility=["read"])
-    """The item's unique id. Required."""
-    title: str = rest_field()
-    """The item's title. Required."""
-    created_by: int = rest_field(name="createdBy", visibility=["read"])
-    """User that created the todo. Required."""
-    assigned_to: Optional[int] = rest_field(name="assignedTo")
-    """User that the todo is assigned to."""
-    description: Optional[str] = rest_field()
-    """A longer description of the todo item in markdown format."""
-    status: Literal["NotStarted", "InProgress", "Completed"] = rest_field()
-    """The status of the todo item. Required. Is one of the following types: Literal[\"NotStarted\"],
-     Literal[\"InProgress\"], Literal[\"Completed\"]"""
-    created_at: datetime.datetime = rest_field(name="createdAt", visibility=["read"], format="rfc3339")
-    """When the todo item was created. Required."""
-    updated_at: datetime.datetime = rest_field(name="updatedAt", visibility=["read"], format="rfc3339")
-    """When the todo item was last updated. Required."""
-    completed_at: Optional[datetime.datetime] = rest_field(name="completedAt", visibility=["read"], format="rfc3339")
-    """When the todo item was makred as completed."""
-    labels: Optional["_types.TodoLabels"] = rest_field()
-    """Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]"""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        title: str,
-        status: Literal["NotStarted", "InProgress", "Completed"],
-        assigned_to: Optional[int] = None,
-        description: Optional[str] = None,
-        labels: Optional["_types.TodoLabels"] = None,
-    ) -> None: ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]) -> None:
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-
-
-class CreateResponse(_model_base.Model):
-    """CreateResponse.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-
-    :ivar id: An autogenerated unique id for the user. Required.
-    :vartype id: int
-    :ivar username: The user's username. Required.
-    :vartype username: str
-    :ivar email: The user's email address. Required.
-    :vartype email: str
-    :ivar token: The token to use to construct the validate email address url. Required.
-    :vartype token: str
-    """
-
-    id: int = rest_field(visibility=["read"])
-    """An autogenerated unique id for the user. Required."""
-    username: str = rest_field()
-    """The user's username. Required."""
-    email: str = rest_field()
-    """The user's email address. Required."""
-    token: str = rest_field()
-    """The token to use to construct the validate email address url. Required."""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        username: str,
-        email: str,
-        token: str,
-    ) -> None: ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]) -> None:
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-
-
 class FileAttachmentMultipartRequest(_model_base.Model):
     """FileAttachmentMultipartRequest.
-
-    All required parameters must be populated in order to send to server.
 
     :ivar contents: Required.
     :vartype contents: ~todo._vendor.FileType
     """
 
-    contents: FileType = rest_field(is_multipart_file_input=True)
+    contents: FileType = rest_field(
+        visibility=["read", "create", "update", "delete", "query"], is_multipart_file_input=True
+    )
     """Required."""
 
     @overload
@@ -271,84 +75,8 @@ class FileAttachmentMultipartRequest(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class GetResponse(_model_base.Model):
-    """GetResponse.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-
-    :ivar id: The item's unique id. Required.
-    :vartype id: int
-    :ivar title: The item's title. Required.
-    :vartype title: str
-    :ivar created_by: User that created the todo. Required.
-    :vartype created_by: int
-    :ivar assigned_to: User that the todo is assigned to.
-    :vartype assigned_to: int
-    :ivar description: A longer description of the todo item in markdown format.
-    :vartype description: str
-    :ivar status: The status of the todo item. Required. Is one of the following types:
-     Literal["NotStarted"], Literal["InProgress"], Literal["Completed"]
-    :vartype status: str or str or str
-    :ivar created_at: When the todo item was created. Required.
-    :vartype created_at: ~datetime.datetime
-    :ivar updated_at: When the todo item was last updated. Required.
-    :vartype updated_at: ~datetime.datetime
-    :ivar completed_at: When the todo item was makred as completed.
-    :vartype completed_at: ~datetime.datetime
-    :ivar labels: Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]
-    :vartype labels: str or list[str] or ~todo.models.TodoLabelRecord or
-     list[~todo.models.TodoLabelRecord]
-    """
-
-    id: int = rest_field(visibility=["read"])
-    """The item's unique id. Required."""
-    title: str = rest_field()
-    """The item's title. Required."""
-    created_by: int = rest_field(name="createdBy", visibility=["read"])
-    """User that created the todo. Required."""
-    assigned_to: Optional[int] = rest_field(name="assignedTo")
-    """User that the todo is assigned to."""
-    description: Optional[str] = rest_field()
-    """A longer description of the todo item in markdown format."""
-    status: Literal["NotStarted", "InProgress", "Completed"] = rest_field()
-    """The status of the todo item. Required. Is one of the following types: Literal[\"NotStarted\"],
-     Literal[\"InProgress\"], Literal[\"Completed\"]"""
-    created_at: datetime.datetime = rest_field(name="createdAt", visibility=["read"], format="rfc3339")
-    """When the todo item was created. Required."""
-    updated_at: datetime.datetime = rest_field(name="updatedAt", visibility=["read"], format="rfc3339")
-    """When the todo item was last updated. Required."""
-    completed_at: Optional[datetime.datetime] = rest_field(name="completedAt", visibility=["read"], format="rfc3339")
-    """When the todo item was makred as completed."""
-    labels: Optional["_types.TodoLabels"] = rest_field()
-    """Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]"""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        title: str,
-        status: Literal["NotStarted", "InProgress", "Completed"],
-        assigned_to: Optional[int] = None,
-        description: Optional[str] = None,
-        labels: Optional["_types.TodoLabels"] = None,
-    ) -> None: ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]) -> None:
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-
-
 class Standard4XXResponse(ApiError):
     """Something is wrong with you.
-
-    All required parameters must be populated in order to send to server.
 
     :ivar code: A machine readable error code. Required.
     :vartype code: str
@@ -378,8 +106,6 @@ class Standard4XXResponse(ApiError):
 class Standard5XXResponse(ApiError):
     """Something is wrong with me.
 
-    All required parameters must be populated in order to send to server.
-
     :ivar code: A machine readable error code. Required.
     :vartype code: str
     :ivar message: A human readable message. Required.
@@ -408,7 +134,6 @@ class Standard5XXResponse(ApiError):
 class TodoAttachment(_model_base.Model):
     """TodoAttachment.
 
-
     :ivar filename: The file name of the attachment. Required.
     :vartype filename: str
     :ivar media_type: The media type of the attachment. Required.
@@ -417,11 +142,11 @@ class TodoAttachment(_model_base.Model):
     :vartype contents: bytes
     """
 
-    filename: str = rest_field()
+    filename: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The file name of the attachment. Required."""
-    media_type: str = rest_field(name="mediaType")
+    media_type: str = rest_field(name="mediaType", visibility=["read", "create", "update", "delete", "query"])
     """The media type of the attachment. Required."""
-    contents: bytes = rest_field(format="base64")
+    contents: bytes = rest_field(visibility=["read", "create", "update", "delete", "query"], format="base64")
     """The contents of the file. Required."""
 
     @overload
@@ -446,9 +171,6 @@ class TodoAttachment(_model_base.Model):
 
 class TodoItem(_model_base.Model):
     """TodoItem.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
 
     :ivar id: The item's unique id. Required.
     :vartype id: int
@@ -478,15 +200,19 @@ class TodoItem(_model_base.Model):
 
     id: int = rest_field(visibility=["read"])
     """The item's unique id. Required."""
-    title: str = rest_field()
+    title: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The item's title. Required."""
     created_by: int = rest_field(name="createdBy", visibility=["read"])
     """User that created the todo. Required."""
-    assigned_to: Optional[int] = rest_field(name="assignedTo")
+    assigned_to: Optional[int] = rest_field(
+        name="assignedTo", visibility=["read", "create", "update", "delete", "query"]
+    )
     """User that the todo is assigned to."""
-    description: Optional[str] = rest_field()
+    description: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """A longer description of the todo item in markdown format."""
-    status: Literal["NotStarted", "InProgress", "Completed"] = rest_field()
+    status: Literal["NotStarted", "InProgress", "Completed"] = rest_field(
+        visibility=["read", "create", "update", "delete", "query"]
+    )
     """The status of the todo item. Required. Is one of the following types: Literal[\"NotStarted\"],
      Literal[\"InProgress\"], Literal[\"Completed\"]"""
     created_at: datetime.datetime = rest_field(name="createdAt", visibility=["read"], format="rfc3339")
@@ -495,7 +221,7 @@ class TodoItem(_model_base.Model):
     """When the todo item was last updated. Required."""
     completed_at: Optional[datetime.datetime] = rest_field(name="completedAt", visibility=["read"], format="rfc3339")
     """When the todo item was makred as completed."""
-    labels: Optional["_types.TodoLabels"] = rest_field()
+    labels: Optional["_types.TodoLabels"] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]"""
     dummy: Optional[str] = rest_field(name="_dummy", visibility=["create"])
 
@@ -525,17 +251,17 @@ class TodoItem(_model_base.Model):
 class ToDoItemMultipartRequest(_model_base.Model):
     """ToDoItemMultipartRequest.
 
-    All required parameters must be populated in order to send to server.
-
     :ivar item: Required.
     :vartype item: ~todo.models.TodoItem
     :ivar attachments:
     :vartype attachments: list[~todo._vendor.FileType]
     """
 
-    item: "_models.TodoItem" = rest_field()
+    item: "_models.TodoItem" = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    attachments: Optional[List[FileType]] = rest_field(is_multipart_file_input=True)
+    attachments: Optional[List[FileType]] = rest_field(
+        visibility=["read", "create", "update", "delete", "query"], is_multipart_file_input=True
+    )
 
     @overload
     def __init__(
@@ -559,16 +285,15 @@ class ToDoItemMultipartRequest(_model_base.Model):
 class TodoLabelRecord(_model_base.Model):
     """TodoLabelRecord.
 
-
     :ivar name: Required.
     :vartype name: str
     :ivar color:
     :vartype color: str
     """
 
-    name: str = rest_field()
+    name: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """Required."""
-    color: Optional[str] = rest_field()
+    color: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
 
     @overload
     def __init__(
@@ -589,86 +314,8 @@ class TodoLabelRecord(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class UpdateResponse(_model_base.Model):
-    """UpdateResponse.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-
-    :ivar id: The item's unique id. Required.
-    :vartype id: int
-    :ivar title: The item's title. Required.
-    :vartype title: str
-    :ivar created_by: User that created the todo. Required.
-    :vartype created_by: int
-    :ivar assigned_to: User that the todo is assigned to.
-    :vartype assigned_to: int
-    :ivar description: A longer description of the todo item in markdown format.
-    :vartype description: str
-    :ivar status: The status of the todo item. Required. Is one of the following types:
-     Literal["NotStarted"], Literal["InProgress"], Literal["Completed"]
-    :vartype status: str or str or str
-    :ivar created_at: When the todo item was created. Required.
-    :vartype created_at: ~datetime.datetime
-    :ivar updated_at: When the todo item was last updated. Required.
-    :vartype updated_at: ~datetime.datetime
-    :ivar completed_at: When the todo item was makred as completed.
-    :vartype completed_at: ~datetime.datetime
-    :ivar labels: Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]
-    :vartype labels: str or list[str] or ~todo.models.TodoLabelRecord or
-     list[~todo.models.TodoLabelRecord]
-    """
-
-    id: int = rest_field(visibility=["read"])
-    """The item's unique id. Required."""
-    title: str = rest_field()
-    """The item's title. Required."""
-    created_by: int = rest_field(name="createdBy", visibility=["read"])
-    """User that created the todo. Required."""
-    assigned_to: Optional[int] = rest_field(name="assignedTo")
-    """User that the todo is assigned to."""
-    description: Optional[str] = rest_field()
-    """A longer description of the todo item in markdown format."""
-    status: Literal["NotStarted", "InProgress", "Completed"] = rest_field()
-    """The status of the todo item. Required. Is one of the following types: Literal[\"NotStarted\"],
-     Literal[\"InProgress\"], Literal[\"Completed\"]"""
-    created_at: datetime.datetime = rest_field(name="createdAt", visibility=["read"], format="rfc3339")
-    """When the todo item was created. Required."""
-    updated_at: datetime.datetime = rest_field(name="updatedAt", visibility=["read"], format="rfc3339")
-    """When the todo item was last updated. Required."""
-    completed_at: Optional[datetime.datetime] = rest_field(name="completedAt", visibility=["read"], format="rfc3339")
-    """When the todo item was makred as completed."""
-    labels: Optional["_types.TodoLabels"] = rest_field()
-    """Is one of the following types: str, [str], TodoLabelRecord, [TodoLabelRecord]"""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        title: str,
-        status: Literal["NotStarted", "InProgress", "Completed"],
-        assigned_to: Optional[int] = None,
-        description: Optional[str] = None,
-        labels: Optional["_types.TodoLabels"] = None,
-    ) -> None: ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]) -> None:
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-
-
 class User(_model_base.Model):
     """User.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to server.
 
     :ivar id: An autogenerated unique id for the user. Required.
     :vartype id: int
@@ -683,9 +330,9 @@ class User(_model_base.Model):
 
     id: int = rest_field(visibility=["read"])
     """An autogenerated unique id for the user. Required."""
-    username: str = rest_field()
+    username: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The user's username. Required."""
-    email: str = rest_field()
+    email: str = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The user's email address. Required."""
     password: str = rest_field(visibility=["create"])
     """The user's password, provided when creating a user
