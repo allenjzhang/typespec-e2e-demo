@@ -30,18 +30,17 @@ namespace Getitdone {
   }
 
   model Due {
-    date: string;
+    date: string; // ISO-8601 date format (YYYY-MM-DD)
     is_recurring: boolean;
-    datetime?: string;
-    string: string;
+    datetime?: string; // ISO-8601 datetime format with time
     timezone?: string;
   }
 
   model TodoItem {
     creator_id: string;
     created_at: string;
-    assignee_id: string;
-    assigner_id: string;
+    assignee_id?: string; // Make optional, tasks can be unassigned
+    assigner_id?: string; // Make optional
     comment_count: int32;
     is_completed: boolean;
     content: string;
@@ -82,11 +81,11 @@ namespace Getitdone {
     is_favorite: boolean;
   }
 
-  // Example error model. You can define more uses if needed.
   @error
   model ErrorResponse {
     error: string;
     status_code: int32;
+    details?: Record<string>;
   }
 
   model Collaborator {
@@ -111,58 +110,61 @@ namespace Getitdone {
     is_favorite?: boolean;
   }
 
+  model GetProjectsResponse {
+    @statusCode statusCode: 200;
+    @body projects: Project[];
+    @header total_count?: int32;
+    @header has_more?: boolean;
+  }
+
+  model CreateProjectResponse {
+    @statusCode statusCode: 201;
+    @body project: Project;
+  }
+
+  model GetProjectResponse {
+    @statusCode statusCode: 200;
+    @body project: Project;
+  }
+
+  model UpdateProjectResponse {
+    @statusCode statusCode: 200;
+    @body project: Project;
+  }
+
+  model GetCollaboratorsResponse {
+    @statusCode statusCode: 200;
+    @body collaborators: Collaborator[];
+  }
+
   @route("/projects")
-  namespace Projects {
-      @get
-      op getProjects(): GetProjectsResponse;
+  @friendlyName("ProjectsClient")
+  interface Projects {
+    @get getProjects(
+      @query limit?: int32 = 50,
+      @query offset?: int32 = 0
+    ): GetProjectsResponse;
 
-      model GetProjectsResponse {
-        @statusCode statusCode: 200;
-        @body projects: Project[];
-      }
+    @post createProject(@body body: CreateProjectRequest): CreateProjectResponse;
+  }
 
-      model CreateProjectResponse {
-        @statusCode statusCode: 201;
-        @body project: Project;
-      }
-      
-      @post
-      op createProject(@body body: CreateProjectRequest): CreateProjectResponse;
+  @route("/projects/{project_id}")
+  @friendlyName("ProjectOpsClient")
+  interface ProjectOps {
+    @get getProject(@path project_id: string):
+          | GetProjectResponse | ErrorResponse;
 
-      @route("/{project_id}")
-      namespace ProjectOps {
-        @get
-        op getProject(@path project_id: string):
-              | GetProjectResponse | ErrorResponse;;
-      
-      model GetProjectResponse {
-        @statusCode statusCode: 200;
-        @body project: Project;
-      }
+    @put updateProject(@path project_id: string, @body body: UpdateProjectRequest): UpdateProjectResponse;
 
+    @delete deleteProject(@path project_id: string): {
+      @statusCode statusCode: 204;
+    };
+  }
 
-      model UpdateProjectResponse {
-        @statusCode statusCode: 200;
-        @body project: Project;
-      }
-
-      @post
-      op updateProject(@path project_id: string, @body body: UpdateProjectRequest): UpdateProjectResponse;
-
-      @delete
-      op deleteProject(@path project_id: string): {
-        @statusCode statusCode: 204;
-      };
-
-      @route("/collaborators")
-      @get
-      op getCollaborators(@path project_id: string): GetCollaboratorsResponse;
-
-      model GetCollaboratorsResponse {
-        @statusCode statusCode: 200;
-        @body collaborators: Collaborator[];
-      }
-    }
+  @route("/projects/{project_id}/collaborators")
+  @friendlyName("ProjectCollaboratorsClient")
+  interface ProjectCollaborators {
+    @get getCollaborators(@path project_id: string): GetCollaboratorsResponse;
   }
 
   model CreateSectionRequest {
@@ -177,6 +179,7 @@ namespace Getitdone {
   }
 
   @route("/sections")
+  @friendlyName("SectionsClient")
   namespace Sections {
     @get
     op getSections(@query project_id: string): GetSectionsResponse;
@@ -204,7 +207,7 @@ namespace Getitdone {
         @body section: Section;
       }
 
-      @post
+      @put
       op updateSection(@path section_id: string, @body body: UpdateSectionRequest): UpdateSectionResponse;
 
       model UpdateSectionResponse {
@@ -248,13 +251,26 @@ namespace Getitdone {
   }
 
   @route("/todoitems")
+  @friendlyName("TodoItemsClient")
   namespace TodoItems {
     @get
-    op getTodoItems(): GetTodoItemsResponse;
+    op getTodoItems(
+      @query project_id?: string,
+      @query is_completed?: boolean,
+      @query section_id?: string,
+      @query priority?: int32,
+      @query assignee_id?: string,
+      @query due_before?: string,
+      @query due_after?: string,
+      @query limit?: int32 = 50,
+      @query offset?: int32 = 0
+    ): GetTodoItemsResponse;
 
     model GetTodoItemsResponse {
       @statusCode statusCode: 200;
       @body todoitems: TodoItem[];
+      @header total_count?: int32;
+      @header has_more?: boolean;
     }
 
     @post
@@ -268,15 +284,15 @@ namespace Getitdone {
     @route("/{todoitem_id}")
     namespace TodoItemOps {
       @get
-      op getTodoItem(@path todoitem_id: string): GetTodoItemResponse;
+      op getTodoItem(@path todoitem_id: string): GetTodoItemResponse | ErrorResponse;
 
       model GetTodoItemResponse {
         @statusCode statusCode: 200;
         @body todoitem: TodoItem;
       }
 
-      @post
-      op updateTodoItem(@path todoitem_id: string, @body body: UpdateTodoItemRequest): UpdateTodoItemResponse;
+      @put
+      op updateTodoItem(@path todoitem_id: string, @body body: UpdateTodoItemRequest): UpdateTodoItemResponse | ErrorResponse;
 
       model UpdateTodoItemResponse {
         @statusCode statusCode: 200;
@@ -302,6 +318,37 @@ namespace Getitdone {
     }
   }
 
+  @route("/todoitems/bulk")
+  @friendlyName("TodoItemsBulkOpsClient")
+  namespace TodoItemsBulk {
+    model BulkCompleteRequest {
+      todo_ids: string[];
+    }
+
+    model BulkMoveRequest {
+      todo_ids: string[];
+      project_id?: string;
+      section_id?: string;
+    }
+
+    model BulkUpdateResponseBody {
+      updated_count: int32;
+    }
+
+    model BulkUpdateResponse {
+      @statusCode statusCode: 200;
+      @body body: BulkUpdateResponseBody;
+    }
+
+    @post
+    @route("/complete")
+    op bulkCompleteTodos(@body body: BulkCompleteRequest): BulkUpdateResponse;
+
+    @post
+    @route("/move")
+    op bulkMoveTodos(@body body: BulkMoveRequest): BulkUpdateResponse;
+  }
+
   model CreateCommentRequest {
     content: string;
     todoitem_id?: string;
@@ -315,6 +362,7 @@ namespace Getitdone {
   }
 
   @route("/comments")
+  @friendlyName("CommentsClient")
   namespace Comments {
     @get
     op getComments(@query todoitem_id?: string, @query project_id?: string): GetCommentsResponse;
@@ -335,15 +383,15 @@ namespace Getitdone {
     @route("/{comment_id}")
     namespace CommentOps {
       @get
-      op getComment(@path comment_id: string): GetCommentResponse;
+      op getComment(@path comment_id: string): GetCommentResponse | ErrorResponse;
 
       model GetCommentResponse {
         @statusCode statusCode: 200;
         @body comment: Comment;
       }
 
-      @post
-      op updateComment(@path comment_id: string, @body body: UpdateCommentRequest): UpdateCommentResponse;
+      @put
+      op updateComment(@path comment_id: string, @body body: UpdateCommentRequest): UpdateCommentResponse | ErrorResponse;
 
       model UpdateCommentResponse {
         @statusCode statusCode: 200;
@@ -383,6 +431,7 @@ namespace Getitdone {
   }
 
   @route("/labels")
+  @friendlyName("LabelsClient")
   namespace Labels {
     @get
     op getPersonalLabels(): GetPersonalLabelsResponse;
@@ -403,15 +452,15 @@ namespace Getitdone {
     @route("/{label_id}")
     namespace LabelOps {
       @get
-      op getPersonalLabel(@path label_id: string): GetPersonalLabelResponse;
+      op getPersonalLabel(@path label_id: string): GetPersonalLabelResponse | ErrorResponse;
 
       model GetPersonalLabelResponse {
         @statusCode statusCode: 200;
         @body label: Label;
       }
 
-      @post
-      op updateLabel(@path label_id: string, @body body: UpdateLabelRequest): UpdateLabelResponse;
+      @put
+      op updateLabel(@path label_id: string, @body body: UpdateLabelRequest): UpdateLabelResponse | ErrorResponse;
 
       model UpdateLabelResponse {
         @statusCode statusCode: 200;
@@ -451,6 +500,37 @@ namespace Getitdone {
       model RemoveSharedLabelResponse {
         @statusCode statusCode: 204;
       }
+    }
+  }
+
+  @route("/search")
+  @friendlyName("SearchClient")
+  namespace Search {
+    @get
+    op search(
+      @query query: string,
+      @query include_projects: boolean = true,
+      @query include_todos: boolean = true,
+      @query include_comments: boolean = false,
+      @query limit?: int32 = 50
+    ): SearchResponse | ErrorResponse;
+
+    model SearchResultItem {
+      type: string; // "project", "todo", or "comment"
+      id: string;
+      title: string;
+      snippet: string;
+      url: string;
+    }
+
+    model SearchResults {
+      results: SearchResultItem[];
+      total_count: int32;
+    }
+
+    model SearchResponse {
+      @statusCode statusCode: 200;
+      @body body: SearchResults;
     }
   }
 }

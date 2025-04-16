@@ -61,7 +61,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Comment'
-    post:
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
       operationId: CommentOps_updateComment
       parameters:
         - name: comment_id
@@ -76,6 +82,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Comment'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       requestBody:
         required: true
         content:
@@ -177,7 +189,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Label'
-    post:
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
       operationId: LabelOps_updateLabel
       parameters:
         - name: label_id
@@ -192,6 +210,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Label'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       requestBody:
         required: true
         content:
@@ -212,10 +236,36 @@ paths:
   /projects:
     get:
       operationId: Projects_getProjects
-      parameters: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 50
+          explode: false
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            total_count:
+              required: false
+              schema:
+                type: integer
+                format: int32
+            has_more:
+              required: false
+              schema:
+                type: boolean
           content:
             application/json:
               schema:
@@ -260,7 +310,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-    post:
+    put:
       operationId: ProjectOps_updateProject
       parameters:
         - name: project_id
@@ -294,7 +344,7 @@ paths:
           description: 'There is no content to send for this request, but the headers may be useful. '
   /projects/{project_id}/collaborators:
     get:
-      operationId: ProjectOps_getCollaborators
+      operationId: ProjectCollaborators_getCollaborators
       parameters:
         - name: project_id
           in: path
@@ -310,6 +360,58 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Collaborator'
+  /search:
+    get:
+      operationId: Search_search
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+          explode: false
+        - name: include_projects
+          in: query
+          required: true
+          schema:
+            type: boolean
+            default: true
+          explode: false
+        - name: include_todos
+          in: query
+          required: true
+          schema:
+            type: boolean
+            default: true
+          explode: false
+        - name: include_comments
+          in: query
+          required: true
+          schema:
+            type: boolean
+            default: false
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 50
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search.SearchResults'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /sections:
     get:
       operationId: Sections_getSections
@@ -361,7 +463,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Section'
-    post:
+    put:
       operationId: SectionOps_updateSection
       parameters:
         - name: section_id
@@ -396,10 +498,79 @@ paths:
   /todoitems:
     get:
       operationId: TodoItems_getTodoItems
-      parameters: []
+      parameters:
+        - name: project_id
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: is_completed
+          in: query
+          required: false
+          schema:
+            type: boolean
+          explode: false
+        - name: section_id
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: priority
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+          explode: false
+        - name: assignee_id
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: due_before
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: due_after
+          in: query
+          required: false
+          schema:
+            type: string
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 50
+          explode: false
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            total_count:
+              required: false
+              schema:
+                type: integer
+                format: int32
+            has_more:
+              required: false
+              schema:
+                type: boolean
           content:
             application/json:
               schema:
@@ -422,6 +593,40 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateTodoItemRequest'
+  /todoitems/bulk/complete:
+    post:
+      operationId: TodoItemsBulk_bulkCompleteTodos
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoItemsBulk.BulkUpdateResponseBody'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoItemsBulk.BulkCompleteRequest'
+  /todoitems/bulk/move:
+    post:
+      operationId: TodoItemsBulk_bulkMoveTodos
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TodoItemsBulk.BulkUpdateResponseBody'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoItemsBulk.BulkMoveRequest'
   /todoitems/{todoitem_id}:
     get:
       operationId: TodoItemOps_getTodoItem
@@ -438,7 +643,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TodoItem'
-    post:
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
       operationId: TodoItemOps_updateTodoItem
       parameters:
         - name: todoitem_id
@@ -453,6 +664,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TodoItem'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       requestBody:
         required: true
         content:
@@ -634,15 +851,12 @@ components:
       required:
         - date
         - is_recurring
-        - string
       properties:
         date:
           type: string
         is_recurring:
           type: boolean
         datetime:
-          type: string
-        string:
           type: string
         timezone:
           type: string
@@ -657,6 +871,10 @@ components:
         status_code:
           type: integer
           format: int32
+        details:
+          type: object
+          additionalProperties:
+            type: string
     Label:
       type: object
       required:
@@ -735,6 +953,38 @@ components:
           type: string
         new_name:
           type: string
+    Search.SearchResultItem:
+      type: object
+      required:
+        - type
+        - id
+        - title
+        - snippet
+        - url
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        title:
+          type: string
+        snippet:
+          type: string
+        url:
+          type: string
+    Search.SearchResults:
+      type: object
+      required:
+        - results
+        - total_count
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Search.SearchResultItem'
+        total_count:
+          type: integer
+          format: int32
     Section:
       type: object
       required:
@@ -757,8 +1007,6 @@ components:
       required:
         - creator_id
         - created_at
-        - assignee_id
-        - assigner_id
         - comment_count
         - is_completed
         - content
@@ -811,6 +1059,36 @@ components:
           type: string
         url:
           type: string
+    TodoItemsBulk.BulkCompleteRequest:
+      type: object
+      required:
+        - todo_ids
+      properties:
+        todo_ids:
+          type: array
+          items:
+            type: string
+    TodoItemsBulk.BulkMoveRequest:
+      type: object
+      required:
+        - todo_ids
+      properties:
+        todo_ids:
+          type: array
+          items:
+            type: string
+        project_id:
+          type: string
+        section_id:
+          type: string
+    TodoItemsBulk.BulkUpdateResponseBody:
+      type: object
+      required:
+        - updated_count
+      properties:
+        updated_count:
+          type: integer
+          format: int32
     UpdateCommentRequest:
       type: object
       properties:
