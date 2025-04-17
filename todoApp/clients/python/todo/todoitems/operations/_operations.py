@@ -1,5 +1,4 @@
 # coding=utf-8
-
 from io import IOBase
 import json
 import sys
@@ -229,7 +228,7 @@ class TodoItemsOperations:
 
         def extract_data(pipeline_response):
             deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models2.TodoItem], deserialized["items"])
+            list_of_elem = _deserialize(List[_models2.TodoItem], deserialized.get("items", []))
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.get("nextLink") or None, iter(list_of_elem)
@@ -262,7 +261,7 @@ class TodoItemsOperations:
         content_type: str = "application/json",
         attachments: Optional[List[_models2.TodoAttachment]] = None,
         **kwargs: Any
-    ) -> _models2.CreateJsonResponse:
+    ) -> _models2.TodoItem:
         """create_json.
 
         :keyword item: Required.
@@ -272,15 +271,13 @@ class TodoItemsOperations:
         :paramtype content_type: str
         :keyword attachments: Default value is None.
         :paramtype attachments: list[~todo.models.TodoAttachment]
-        :return: CreateJsonResponse. The CreateJsonResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateJsonResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
     @overload
-    def create_json(
-        self, body: JSON, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models2.CreateJsonResponse:
+    def create_json(self, body: JSON, *, content_type: str = "application/json", **kwargs: Any) -> _models2.TodoItem:
         """create_json.
 
         :param body: Required.
@@ -288,15 +285,15 @@ class TodoItemsOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: CreateJsonResponse. The CreateJsonResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateJsonResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
     @overload
     def create_json(
         self, body: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models2.CreateJsonResponse:
+    ) -> _models2.TodoItem:
         """create_json.
 
         :param body: Required.
@@ -304,8 +301,8 @@ class TodoItemsOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: CreateJsonResponse. The CreateJsonResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateJsonResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
@@ -316,7 +313,7 @@ class TodoItemsOperations:
         item: _models2.TodoItem = _Unset,
         attachments: Optional[List[_models2.TodoAttachment]] = None,
         **kwargs: Any
-    ) -> _models2.CreateJsonResponse:
+    ) -> _models2.TodoItem:
         """create_json.
 
         :param body: Is either a JSON type or a IO[bytes] type. Required.
@@ -325,8 +322,8 @@ class TodoItemsOperations:
         :paramtype item: ~todo.models.TodoItem
         :keyword attachments: Default value is None.
         :paramtype attachments: list[~todo.models.TodoAttachment]
-        :return: CreateJsonResponse. The CreateJsonResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateJsonResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
         error_map: MutableMapping = {
@@ -338,7 +335,7 @@ class TodoItemsOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("content-type", None))
-        cls: ClsType[_models2.CreateJsonResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models2.TodoItem] = kwargs.pop("cls", None)
 
         if body is _Unset:
             if item is _Unset:
@@ -387,7 +384,7 @@ class TodoItemsOperations:
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models2.CreateJsonResponse, response.json())
+            deserialized = _deserialize(_models2.TodoItem, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -395,36 +392,34 @@ class TodoItemsOperations:
         return deserialized  # type: ignore
 
     @overload
-    def create_form(self, body: _models2.ToDoItemMultipartRequest, **kwargs: Any) -> _models2.CreateFormResponse:
+    def create_form(self, body: _models2.ToDoItemMultipartRequest, **kwargs: Any) -> _models2.TodoItem:
         """create_form.
 
         :param body: Required.
         :type body: ~todo.models.ToDoItemMultipartRequest
-        :return: CreateFormResponse. The CreateFormResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateFormResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
     @overload
-    def create_form(self, body: JSON, **kwargs: Any) -> _models2.CreateFormResponse:
+    def create_form(self, body: JSON, **kwargs: Any) -> _models2.TodoItem:
         """create_form.
 
         :param body: Required.
         :type body: JSON
-        :return: CreateFormResponse. The CreateFormResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateFormResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
-    def create_form(
-        self, body: Union[_models2.ToDoItemMultipartRequest, JSON], **kwargs: Any
-    ) -> _models2.CreateFormResponse:
+    def create_form(self, body: Union[_models2.ToDoItemMultipartRequest, JSON], **kwargs: Any) -> _models2.TodoItem:
         """create_form.
 
         :param body: Is either a ToDoItemMultipartRequest type or a JSON type. Required.
         :type body: ~todo.models.ToDoItemMultipartRequest or JSON
-        :return: CreateFormResponse. The CreateFormResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateFormResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
         error_map: MutableMapping = {
@@ -435,7 +430,7 @@ class TodoItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[_models2.CreateFormResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models2.TodoItem] = kwargs.pop("cls", None)
 
         _body = body.as_dict() if isinstance(body, _model_base.Model) else body
         _file_fields: List[str] = ["attachments"]
@@ -477,20 +472,20 @@ class TodoItemsOperations:
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models2.CreateFormResponse, response.json())
+            deserialized = _deserialize(_models2.TodoItem, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
 
         return deserialized  # type: ignore
 
-    def get(self, id: int, **kwargs: Any) -> _models2.GetResponse:
+    def get(self, id: int, **kwargs: Any) -> _models2.TodoItem:
         """get.
 
         :param id: Required.
         :type id: int
-        :return: GetResponse. The GetResponse is compatible with MutableMapping
-        :rtype: ~todo.models.GetResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
         error_map: MutableMapping = {
@@ -503,7 +498,7 @@ class TodoItemsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[_models2.GetResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models2.TodoItem] = kwargs.pop("cls", None)
 
         _request = build_todo_items_get_request(
             id=id,
@@ -536,7 +531,7 @@ class TodoItemsOperations:
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models2.GetResponse, response.json())
+            deserialized = _deserialize(_models2.TodoItem, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -551,7 +546,7 @@ class TodoItemsOperations:
         *,
         content_type: str = "application/merge-patch+json",
         **kwargs: Any
-    ) -> _models2.UpdateResponse:
+    ) -> _models2.TodoItem:
         """update.
 
         :param id: Required.
@@ -561,15 +556,15 @@ class TodoItemsOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/merge-patch+json".
         :paramtype content_type: str
-        :return: UpdateResponse. The UpdateResponse is compatible with MutableMapping
-        :rtype: ~todo.models.UpdateResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
     @overload
     def update(
         self, id: int, patch: JSON, *, content_type: str = "application/merge-patch+json", **kwargs: Any
-    ) -> _models2.UpdateResponse:
+    ) -> _models2.TodoItem:
         """update.
 
         :param id: Required.
@@ -579,15 +574,15 @@ class TodoItemsOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/merge-patch+json".
         :paramtype content_type: str
-        :return: UpdateResponse. The UpdateResponse is compatible with MutableMapping
-        :rtype: ~todo.models.UpdateResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
     @overload
     def update(
         self, id: int, patch: IO[bytes], *, content_type: str = "application/merge-patch+json", **kwargs: Any
-    ) -> _models2.UpdateResponse:
+    ) -> _models2.TodoItem:
         """update.
 
         :param id: Required.
@@ -597,22 +592,22 @@ class TodoItemsOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/merge-patch+json".
         :paramtype content_type: str
-        :return: UpdateResponse. The UpdateResponse is compatible with MutableMapping
-        :rtype: ~todo.models.UpdateResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
     def update(
         self, id: int, patch: Union[_models1.TodoItemPatch, JSON, IO[bytes]], **kwargs: Any
-    ) -> _models2.UpdateResponse:
+    ) -> _models2.TodoItem:
         """update.
 
         :param id: Required.
         :type id: int
         :param patch: Is one of the following types: TodoItemPatch, JSON, IO[bytes] Required.
         :type patch: ~todo.models.TodoItemPatch or JSON or IO[bytes]
-        :return: UpdateResponse. The UpdateResponse is compatible with MutableMapping
-        :rtype: ~todo.models.UpdateResponse
+        :return: TodoItem. The TodoItem is compatible with MutableMapping
+        :rtype: ~todo.models.TodoItem
         :raises ~corehttp.exceptions.HttpResponseError:
         """
         error_map: MutableMapping = {
@@ -627,7 +622,7 @@ class TodoItemsOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("content-type", None))
-        cls: ClsType[_models2.UpdateResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models2.TodoItem] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/merge-patch+json"
         _content = None
@@ -665,7 +660,7 @@ class TodoItemsOperations:
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models2.UpdateResponse, response.json())
+            deserialized = _deserialize(_models2.TodoItem, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -712,7 +707,7 @@ class TodoItemsOperations:
             if response.status_code == 404:
                 error = _failsafe_deserialize(_models1.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
-            elif 400 <= response.status_code <= 499:
+            if 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models2.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
                 error = _failsafe_deserialize(_models2.Standard5XXResponse, response.json())

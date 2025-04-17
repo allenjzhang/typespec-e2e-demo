@@ -1,6 +1,5 @@
 # coding=utf-8
 
-# coding: utf-8
 
 import os
 import re
@@ -28,7 +27,7 @@ setup(
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
     license="MIT License",
-    author=" Corporation",
+    author="",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Programming Language :: Python",

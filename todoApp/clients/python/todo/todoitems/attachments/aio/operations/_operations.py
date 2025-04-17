@@ -1,5 +1,4 @@
 # coding=utf-8
-
 from io import IOBase
 import json
 import sys
@@ -104,7 +103,7 @@ class TodoItemsAttachmentsOperations:
 
         async def extract_data(pipeline_response):
             deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models4.TodoAttachment], deserialized["items"])
+            list_of_elem = _deserialize(List[_models4.TodoAttachment], deserialized.get("items", []))
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
             return None, AsyncList(list_of_elem)
@@ -122,7 +121,7 @@ class TodoItemsAttachmentsOperations:
                 if response.status_code == 404:
                     error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                     raise ResourceNotFoundError(response=response, model=error)
-                elif 400 <= response.status_code <= 499:
+                if 400 <= response.status_code <= 499:
                     error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
                 elif 500 <= response.status_code <= 599:
                     error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())
@@ -240,7 +239,7 @@ class TodoItemsAttachmentsOperations:
             if response.status_code == 404:
                 error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
-            elif 400 <= response.status_code <= 499:
+            if 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
                 error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())
@@ -328,7 +327,7 @@ class TodoItemsAttachmentsOperations:
             if response.status_code == 404:
                 error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
-            elif 400 <= response.status_code <= 499:
+            if 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
                 error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())
