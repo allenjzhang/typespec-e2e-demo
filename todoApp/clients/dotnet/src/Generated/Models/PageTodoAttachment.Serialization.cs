@@ -9,10 +9,10 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Todo;
 
-namespace Todo.Models
+namespace Todo._TodoItems
 {
     /// <summary></summary>
-    public partial class PageTodoAttachment : IJsonModel<PageTodoAttachment>
+    internal partial class PageTodoAttachment : IJsonModel<PageTodoAttachment>
     {
         internal PageTodoAttachment()
         {

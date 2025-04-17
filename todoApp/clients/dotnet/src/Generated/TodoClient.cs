@@ -6,6 +6,8 @@ using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Threading;
+using Todo._TodoItems;
+using Todo._Users;
 
 namespace Todo
 {

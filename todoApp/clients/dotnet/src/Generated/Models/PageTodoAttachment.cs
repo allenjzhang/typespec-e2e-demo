@@ -5,11 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Todo;
 
-namespace Todo.Models
+namespace Todo._TodoItems
 {
     /// <summary> The PageTodoAttachment. </summary>
-    public partial class PageTodoAttachment
+    internal partial class PageTodoAttachment
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private protected readonly IDictionary<string, BinaryData> _additionalBinaryDataProperties;

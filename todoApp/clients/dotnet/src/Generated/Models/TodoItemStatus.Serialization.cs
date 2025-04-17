@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Todo.Models
+namespace Todo
 {
     internal static partial class TodoItemStatusExtensions
     {

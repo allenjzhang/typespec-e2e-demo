@@ -5,11 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Todo;
 
-namespace Todo.Models
+namespace Todo._TodoItems
 {
     /// <summary> The TodoPage. </summary>
-    public partial class TodoPage
+    internal partial class TodoPage
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private protected readonly IDictionary<string, BinaryData> _additionalBinaryDataProperties;
