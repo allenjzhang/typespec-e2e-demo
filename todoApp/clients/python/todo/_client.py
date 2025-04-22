@@ -1,6 +1,5 @@
 # coding=utf-8
 
-
 from copy import deepcopy
 from typing import Any
 from typing_extensions import Self
@@ -10,7 +9,7 @@ from corehttp.rest import HttpRequest, HttpResponse
 from corehttp.runtime import PipelineClient, policies
 
 from ._configuration import TodoClientConfiguration
-from ._serialization import Deserializer, Serializer
+from ._utils.serialization import Deserializer, Serializer
 from .todoitems.operations import TodoItemsOperations
 from .users.operations import UsersOperations
 
@@ -31,6 +30,7 @@ class TodoClient:  # pylint: disable=client-accepts-api-version-keyword
     def __init__(self, endpoint: str, credential: ServiceKeyCredential, **kwargs: Any) -> None:
         _endpoint = "{endpoint}"
         self._config = TodoClientConfiguration(endpoint=endpoint, credential=credential, **kwargs)
+
         _policies = kwargs.pop("policies", None)
         if _policies is None:
             _policies = [

@@ -1,8 +1,7 @@
 # coding=utf-8
-
+from collections.abc import MutableMapping
 from io import IOBase
 import json
-import sys
 from typing import Any, AsyncIterable, Callable, Dict, IO, List, Optional, TypeVar, Union, overload
 
 from corehttp.exceptions import (
@@ -20,10 +19,10 @@ from corehttp.runtime.pipeline import PipelineResponse
 from corehttp.utils import case_insensitive_dict
 
 from .... import models as _models3
-from ..... import _model_base, models as _models4
-from ....._model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
-from ....._serialization import Deserializer, Serializer
-from ....._vendor import prepare_multipart_form_data
+from ..... import models as _models4
+from ....._utils.model_base import Model as _Model, SdkJSONEncoder, _deserialize, _failsafe_deserialize
+from ....._utils.serialization import Deserializer, Serializer
+from ....._utils.utils import prepare_multipart_form_data
 from .....aio._configuration import TodoClientConfiguration
 from ...operations._operations import (
     build_todo_items_attachments_create_file_attachment_request,
@@ -31,11 +30,7 @@ from ...operations._operations import (
     build_todo_items_attachments_list_request,
 )
 
-if sys.version_info >= (3, 9):
-    from collections.abc import MutableMapping
-else:
-    from typing import MutableMapping  # type: ignore
-JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
+JSON = MutableMapping[str, Any]
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
@@ -104,7 +99,7 @@ class TodoItemsAttachmentsOperations:
 
         async def extract_data(pipeline_response):
             deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models4.TodoAttachment], deserialized["items"])
+            list_of_elem = _deserialize(List[_models4.TodoAttachment], deserialized.get("items", []))
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
             return None, AsyncList(list_of_elem)
@@ -122,7 +117,7 @@ class TodoItemsAttachmentsOperations:
                 if response.status_code == 404:
                     error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                     raise ResourceNotFoundError(response=response, model=error)
-                elif 400 <= response.status_code <= 499:
+                if 400 <= response.status_code <= 499:
                     error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
                 elif 500 <= response.status_code <= 599:
                     error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())
@@ -240,7 +235,7 @@ class TodoItemsAttachmentsOperations:
             if response.status_code == 404:
                 error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
-            elif 400 <= response.status_code <= 499:
+            if 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
                 error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())
@@ -300,7 +295,7 @@ class TodoItemsAttachmentsOperations:
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _body = body.as_dict() if isinstance(body, _model_base.Model) else body
+        _body = body.as_dict() if isinstance(body, _Model) else body
         _file_fields: List[str] = ["contents"]
         _data_fields: List[str] = []
         _files, _data = prepare_multipart_form_data(_body, _file_fields, _data_fields)
@@ -328,7 +323,7 @@ class TodoItemsAttachmentsOperations:
             if response.status_code == 404:
                 error = _failsafe_deserialize(_models3.NotFoundErrorResponse, response.json())
                 raise ResourceNotFoundError(response=response, model=error)
-            elif 400 <= response.status_code <= 499:
+            if 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models4.Standard4XXResponse, response.json())
             elif 500 <= response.status_code <= 599:
                 error = _failsafe_deserialize(_models4.Standard5XXResponse, response.json())

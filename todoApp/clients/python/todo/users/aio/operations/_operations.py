@@ -1,8 +1,7 @@
 # coding=utf-8
-
+from collections.abc import MutableMapping
 from io import IOBase
 import json
-import sys
 from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, overload
 
 from corehttp.exceptions import (
@@ -22,16 +21,12 @@ from corehttp.utils import case_insensitive_dict
 
 from ... import models as _models2
 from .... import models as _models3
-from ...._model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
-from ...._serialization import Deserializer, Serializer
+from ...._utils.model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
+from ...._utils.serialization import Deserializer, Serializer
 from ....aio._configuration import TodoClientConfiguration
 from ...operations._operations import build_users_create_request
 
-if sys.version_info >= (3, 9):
-    from collections.abc import MutableMapping
-else:
-    from typing import MutableMapping  # type: ignore
-JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
+JSON = MutableMapping[str, Any]
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
@@ -56,7 +51,7 @@ class UsersOperations:
     @overload
     async def create(
         self, user: _models3.User, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models3.CreateResponse:
+    ) -> _models2.UserCreatedResponse:
         """create.
 
         :param user: Required.
@@ -64,15 +59,15 @@ class UsersOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: CreateResponse. The CreateResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateResponse
+        :return: UserCreatedResponse. The UserCreatedResponse is compatible with MutableMapping
+        :rtype: ~todo.users.models.UserCreatedResponse
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
     @overload
     async def create(
         self, user: JSON, *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models3.CreateResponse:
+    ) -> _models2.UserCreatedResponse:
         """create.
 
         :param user: Required.
@@ -80,15 +75,15 @@ class UsersOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: CreateResponse. The CreateResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateResponse
+        :return: UserCreatedResponse. The UserCreatedResponse is compatible with MutableMapping
+        :rtype: ~todo.users.models.UserCreatedResponse
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
     @overload
     async def create(
         self, user: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
-    ) -> _models3.CreateResponse:
+    ) -> _models2.UserCreatedResponse:
         """create.
 
         :param user: Required.
@@ -96,18 +91,18 @@ class UsersOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: CreateResponse. The CreateResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateResponse
+        :return: UserCreatedResponse. The UserCreatedResponse is compatible with MutableMapping
+        :rtype: ~todo.users.models.UserCreatedResponse
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
-    async def create(self, user: Union[_models3.User, JSON, IO[bytes]], **kwargs: Any) -> _models3.CreateResponse:
+    async def create(self, user: Union[_models3.User, JSON, IO[bytes]], **kwargs: Any) -> _models2.UserCreatedResponse:
         """create.
 
         :param user: Is one of the following types: User, JSON, IO[bytes] Required.
         :type user: ~todo.models.User or JSON or IO[bytes]
-        :return: CreateResponse. The CreateResponse is compatible with MutableMapping
-        :rtype: ~todo.models.CreateResponse
+        :return: UserCreatedResponse. The UserCreatedResponse is compatible with MutableMapping
+        :rtype: ~todo.users.models.UserCreatedResponse
         :raises ~corehttp.exceptions.HttpResponseError:
         """
         error_map: MutableMapping = {
@@ -119,7 +114,7 @@ class UsersOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models3.CreateResponse] = kwargs.pop("cls", None)
+        cls: ClsType[_models2.UserCreatedResponse] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _content = None
@@ -155,7 +150,7 @@ class UsersOperations:
             if response.status_code == 409:
                 error = _failsafe_deserialize(_models2.UserExistsResponse, response.json())
                 raise ResourceExistsError(response=response, model=error)
-            elif response.status_code == 422:
+            if response.status_code == 422:
                 error = _failsafe_deserialize(_models2.InvalidUserResponse, response.json())
             elif 400 <= response.status_code <= 499:
                 error = _failsafe_deserialize(_models3.Standard4XXResponse, response.json())
@@ -166,7 +161,7 @@ class UsersOperations:
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models3.CreateResponse, response.json())
+            deserialized = _deserialize(_models2.UserCreatedResponse, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
