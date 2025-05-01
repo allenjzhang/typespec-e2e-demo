@@ -122,7 +122,7 @@
           <th>Issue</th>
           <th>Status</th>
           <th>Blocked By</th>
-          <th>Status</th>
+          <th>Actions Need</th>
         </tr>
       </thead>
       <tbody>
@@ -182,7 +182,7 @@
       const markdownTable = `
 | Area     | Task                                          | Assigned to | Due date | Completed |
 |----------|-----------------------------------------------|-------------|----------|-----------|
-| TypeSpec | Track PRs that need to go in and spec-next green | Allen       | 5/2      |  In progress         |
+| TypeSpec | Track PRs that need to go in and code freeze | Allen       | 5/2      |  In progress         |
 | TypeSpec | Verify typespec-next spec verification green  | Allen       | 5/6      |  In progress         |
 | SDK      | Verify SDK nightly build green                | Laurent     | 5/6      |  In progress         |
 | Release  | Prepare a blog post announcing 1.0 release    | Mario          | 5/6      |  In progress         |
@@ -260,8 +260,8 @@
           case 9:
             alert("Alright, alright, I'll stop running... or will I?");
             break;
-          case 10:
-            alert("Fine, you win! Resolving the issue now.");
+          case 12:
+            alert("Fine, Samer! You win, OK? Resolving the issue now.");
             const statusCell = prankBtn.parentElement.previousElementSibling.previousElementSibling;
             statusCell.innerHTML = '<span style="background-color: yellow;">Pending verification</span>';
             prankBtn.style.display = "none"; // Hide the button after resolving
