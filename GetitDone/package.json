@@ -9,7 +9,8 @@
     "@typespec/openapi3": "latest",
     "@typespec/http-client-csharp": "latest",
     "@typespec/http-server-csharp": "latest",
-    "@typespec/http-client-js": "latest"
+    "@typespec/http-client-js": "latest",
+    "@typespec/http-server-js": "latest"
   },
   "devDependencies": {
     "@typespec/compiler": "latest",

@@ -3,13 +3,15 @@ emit:
   - "@typespec/http-client-csharp"
   - "@typespec/http-server-csharp"
   - "@typespec/http-client-js"
+  - "@typespec/http-server-js"
 options:
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}/openapi/"
   "@typespec/http-client-csharp":
     emitter-output-dir: "{project-root}/clients/csharp"
-    namespace: "Getitdone.Client"
   "@typespec/http-client-js":
     emitter-output-dir: "{project-root}/clients/typescript"
   "@typespec/http-server-csharp":
     emitter-output-dir: "{project-root}/servers/aspnet/generated"
+  "@typespec/http-server-js":
+    emitter-output-dir: "{project-root}/servers/javascript/"  
