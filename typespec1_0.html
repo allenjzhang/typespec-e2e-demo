@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Release Countdown Ticker</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      font-family: monospace;
+      color: #fff;
+    }
+
+    .ticker-container {
+      width: 100vw;
+      height: 50px;
+      background-color: #111;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid #333;
+    }
+
+    .ticker-content {
+      display: flex;
+      white-space: nowrap;
+      font-size: 24px;
+      color: #0f0;
+      will-change: transform;
+      animation: scroll-left 60s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ticker-container">
+  <div class="ticker-content" id="ticker">
+    Loading release countdown...
+  </div>
+</div>
+
+<script>
+  const releaseDate = new Date("2025-05-10T15:00:00Z");
+
+  function getTimeRemaining(endTime) {
+    const total = Date.parse(endTime) - Date.now();
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+    const days = Math.floor(total / (1000 * 60 * 60 * 24));
+    return { total, days, hours, minutes, seconds };
+  }
+
+  function formatCountdown(time) {
+    return `🎉 Release in ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s 🎉`;
+  }
+
+  function updateTickerText() {
+    const ticker = document.getElementById("ticker");
+    const time = getTimeRemaining(releaseDate);
+
+    if (time.total <= 0) {
+      const message = "🚀 Release is live now! 🚀   ";
+      ticker.innerHTML = message.repeat(2);
+    } else {
+      const message = formatCountdown(time) + "        ";
+      ticker.innerHTML = message.repeat(2); // repeated once for seamless scrolling
+    }
+  }
+
+  updateTickerText();
+  setInterval(updateTickerText, 1000);
+</script>
+
+</body>
+</html>
