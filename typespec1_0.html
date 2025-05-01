@@ -1,89 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Release Countdown Ticker</title>
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-      font-family: monospace;
-      color: #fff;
-    }
-
-    .ticker-container {
-      width: 100vw;
-      height: 50px;
-      background-color: #111;
-      overflow: hidden;
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      border-bottom: 2px solid #333;
-    }
-
-    .ticker-content {
-      display: flex;
-      white-space: nowrap;
-      font-size: 24px;
-      color: #0f0;
-      will-change: transform;
-      animation: scroll-left 60s linear infinite;
-    }
-
-    @keyframes scroll-left {
-      0% {
-        transform: translateX(0%);
+  <head>
+    <meta charset="UTF-8" />
+    <title>TypeSpec 1.0 GA Tracking Page</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f9f9f9;
+        margin: 2em;
       }
-      100% {
-        transform: translateX(-50%);
+
+      /* Ticker Tape */
+      .ticker-container {
+        overflow: hidden;
+        white-space: nowrap;
+        box-shadow: 0 0 5px #aaa;
+        padding: 10px;
+        background: #222;
+        color: #fff;
+        font-size: 1.2em;
+        position: relative;
+        border: 2px solid #fff; /* Added border for better visibility */
       }
-    }
-  </style>
-</head>
-<body>
 
-<div class="ticker-container">
-  <div class="ticker-content" id="ticker">
-    Loading release countdown...
-  </div>
-</div>
+      .ticker-text {
+        display: inline-block;
+        padding-left: 100%;
+        animation: ticker 17.25s linear infinite; /* Slowed down by 15% */
+        font-size: 1.4em; /* Increased font size for clearer text */
+        line-height: 1.5; /* Improved line height for readability */
+      }
 
-<script>
-  const releaseDate = new Date("2025-05-10T15:00:00Z");
+      @keyframes ticker {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
 
-  function getTimeRemaining(endTime) {
-    const total = Date.parse(endTime) - Date.now();
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const days = Math.floor(total / (1000 * 60 * 60 * 24));
-    return { total, days, hours, minutes, seconds };
-  }
+      .ticker-message {
+        display: inline-block;
+        margin-right: 50px;
+      }
 
-  function formatCountdown(time) {
-    return `🎉 Release in ${time.days}d ${time.hours}h ${time.minutes}m ${time.seconds}s 🎉`;
-  }
+      .timer {
+        font-weight: bold;
+        margin-left: 10px;
+        color: #0f0;
+      }
 
-  function updateTickerText() {
-    const ticker = document.getElementById("ticker");
-    const time = getTimeRemaining(releaseDate);
+      /* Markdown table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2em;
+      }
 
-    if (time.total <= 0) {
-      const message = "🚀 Release is live now! 🚀   ";
-      ticker.innerHTML = message.repeat(2);
-    } else {
-      const message = formatCountdown(time) + "        ";
-      ticker.innerHTML = message.repeat(2); // repeated once for seamless scrolling
-    }
-  }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+      }
 
-  updateTickerText();
-  setInterval(updateTickerText, 1000);
-</script>
+      th {
+        background: #eee;
+      }
 
-</body>
+      /* Resolve prank table */
+      .prank-table {
+        margin-top: 2em;
+      }
+
+      .resolve-btn {
+        padding: 6px 12px;
+        border: none;
+        background: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        position: relative;
+      }
+
+      @keyframes flash {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Ticker -->
+    <div class="ticker-container">
+      <div class="ticker-text">
+        <span class="ticker-message"
+          >🚀 TypeSpec 1.0 GA Launching in <span class="timer" id="timer1"></span
+        ></span>
+        <span class="ticker-message"
+          >🎉 SDK Emitters Releasing in <span class="timer" id="timer2"></span
+        ></span>
+      </div>
+    </div>
+
+    <!-- Markdown Table Rendered -->
+    <h2>1.0 Release Checklist</h2>
+    <div id="markdownTableContainer"></div>
+
+    <!-- Prank Table -->
+    <h2>Critial GA Blocker</h2>
+    <table class="prank-table">
+      <thead>
+        <tr>
+          <th>Issue</th>
+          <th>Status</th>
+          <th>Blocked By</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Login Failure</td>
+          <td>
+            <span
+              style="
+                color: white;
+                background-color: red;
+                animation: flash 1s infinite;
+              "
+            >
+              &nbsp;&nbsp;Incomplete&nbsp;&nbsp;
+            </span>
+          </td>
+          <td>
+            <span style="color: red; font-weight: bold">Samer Alameer</span>
+          </td>
+          <td><button class="resolve-btn" id="prankBtn">Resolve</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      // Countdown timers
+      function startCountdown(id, targetDate) {
+        const timerEl = document.getElementById(id);
+        function update() {
+          const now = new Date();
+          const diff = targetDate.getTime() - now.getTime(); // Ensure correct comparison
+          if (diff > 0) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24)); // Use Math.floor to remove decimals
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            timerEl.textContent = `${days} days  ${hours
+              .toString()
+              .padStart(2, "0")} : ${minutes
+              .toString()
+              .padStart(2, "0")} : ${seconds.toString().padStart(2, "0")}`;
+            setTimeout(update, 1000);
+          } else {
+            timerEl.textContent = "Ended";
+          }
+        }
+        update();
+      }
+
+      const timer1Date = new Date("2025-05-06T12:00:00");
+      const timer2Date = new Date("2025-05-07T12:00:00");
+
+      startCountdown("timer1", timer1Date);
+      startCountdown("timer2", timer2Date);
+
+      // Render Markdown Table
+      const markdownTable = `
+| Area     | Task                                          | Assigned to | Due date | Completed |
+|----------|-----------------------------------------------|-------------|----------|-----------|
+| TypeSpec | Track PRs that need to go in and spec-next green | Allen       | 5/2      |  In progress         |
+| TypeSpec | Verify typespec-next spec verification green  | Allen       | 5/6      |  In progress         |
+| SDK      | Verify SDK nightly build green                | Laurent     | 5/6      |  In progress         |
+| Release  | Prepare a blog post announcing 1.0 release    | Mario          | 5/6      |  In progress         |
+| Release  | Prepare internal GA announcement email        | Allen/Mario    | 5/6      |  In progress         |
+| TypeSpec | 🚀 Release TypeSpec 1.0 packages              | Allen       | 5/6      |           |
+| SDK      | 🚀 Release Client Emitters packages           | Laurent     | 5/7      |           |
+    `;
+
+      function renderMarkdownTable(markdown) {
+        const rows = markdown.trim().split("\n");
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const tbody = document.createElement("tbody");
+
+        rows.forEach((row, index) => {
+          if (index === 1) return; // Skip the separator row
+          const cols = row
+            .split("|")
+            .slice(1, -1)
+            .map((col) => col.trim());
+          const tr = document.createElement("tr");
+          cols.forEach((col) => {
+            const cell = document.createElement(index === 0 ? "th" : "td");
+            cell.textContent = col;
+            tr.appendChild(cell);
+          });
+          if (index === 0) thead.appendChild(tr);
+          else tbody.appendChild(tr);
+        });
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        return table;
+      }
+
+      const markdownTableContainer = document.getElementById(
+        "markdownTableContainer"
+      );
+      markdownTableContainer.appendChild(renderMarkdownTable(markdownTable));
+
+      // Prank Button Logic
+      const prankBtn = document.getElementById("prankBtn");
+      const prankCell = prankBtn.parentElement;
+
+      prankCell.style.position = "relative";
+      prankBtn.style.position = "absolute";
+      prankBtn.style.left = "50%";
+      prankBtn.style.top = "50%";
+      prankBtn.style.transform = "translate(-50%, -50%)";
+
+      prankBtn.addEventListener("mouseover", () => {
+        const maxX = prankCell.clientWidth - prankBtn.offsetWidth;
+        const maxY = prankCell.clientHeight - prankBtn.offsetHeight;
+        const randX = Math.random() * maxX;
+        const randY = Math.random() * maxY;
+        prankBtn.style.left = `${randX}px`;
+        prankBtn.style.top = `${randY}px`;
+      });
+
+      let clickCount = 0;
+
+      prankBtn.addEventListener("click", () => {
+        clickCount++;
+        switch (clickCount) {
+          case 3:
+            alert("Are you trying to catch me? Nice try!");
+            break;
+          case 5:
+            alert("Oops! Almost got me. Try again!");
+            break;
+          case 7:
+            alert("Seriously? You're still clicking?");
+            break;
+          case 9:
+            alert("Alright, alright, I'll stop running... or will I?");
+            break;
+          case 10:
+            alert("Fine, you win! Resolving the issue now.");
+            const statusCell = prankBtn.parentElement.previousElementSibling.previousElementSibling;
+            statusCell.innerHTML = '<span style="background-color: yellow;">Pending verification</span>';
+            prankBtn.style.display = "none"; // Hide the button after resolving
+            clickCount = 0;
+            break;
+        }
+      });
+    </script>
+  </body>
 </html>
