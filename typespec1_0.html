@@ -193,13 +193,13 @@
       const markdownTable = `
 | Area     | Task                                          | Assigned to | Due date | Completed |
 |----------|-----------------------------------------------|-------------|----------|-----------|
-| TypeSpec | Track PRs that need to go in and code freeze | Allen       | 5/2      |  In progress         |
-| TypeSpec | Verify typespec-next spec verification green  | Allen       | 5/6      |  In progress         |
-| SDK      | Verify SDK nightly build green                | Laurent     | 5/6      |  In progress         |
-| Release  | Prepare a blog post announcing 1.0 release    | Mario          | 5/6      |  In progress         |
-| Release  | Prepare internal GA announcement email        | Allen/Mario    | 5/6      |  In progress         |
-| Release  | Review doc/blogs/repos for clear OSS messaging | Allen/Mario    | 5/6      |  In progress         |
-| TypeSpec | 🚀 Release TypeSpec 1.0 packages              | Allen       | 5/6      |           |
+| TypeSpec | Track PRs that need to go in and code freeze | Allen       | <del>5/2</del> 5/5      |  Delayed by MergePatch work         |
+| TypeSpec | Verify typespec-next spec verification green  | Allen       | 5/6      |  Green as of 5/5         |
+| SDK      | Verify SDK nightly build green                | Laurent     | 5/6      |  Nightly build has been failing. Renhe is having SH team to do investigations.         |
+| Release  | Prepare a blog post announcing 1.0 release    | Mario          | 5/6      |  In PR         |
+| Release  | Prepare internal GA announcement email        | Allen/Mario    | 5/6      |  In Draft         |
+| Release  | Review doc/blogs/repos for clear OSS messaging | Allen/Mario    | 5/6      |  Completed         |
+| TypeSpec | 🚀 Release TypeSpec 1.0 packages              | Allen       | 5/6      |  On track but Yellow          |
 | SDK      | 🚀 Release Client Emitters packages           | Laurent     | 5/7      |           |
     `;
 
@@ -218,7 +218,7 @@
           const tr = document.createElement("tr");
           cols.forEach((col) => {
             const cell = document.createElement(index === 0 ? "th" : "td");
-            cell.textContent = col;
+            cell.innerHTML = col;
             tr.appendChild(cell);
           });
           if (index === 0) thead.appendChild(tr);
