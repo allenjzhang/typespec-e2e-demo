@@ -50,6 +50,11 @@
         margin-left: 10px;
         color: #0f0;
       }
+    
+      .completedText {
+        font-weight: bold;
+        color: green;
+      }
 
       /* Markdown table */
       table {
@@ -102,10 +107,9 @@
     <div class="ticker-container">
       <div class="ticker-text">
         <span class="ticker-message"
-          >🚀 TypeSpec 1.0 GA Launching in <span class="timer" id="timer1"></span
-        ></span>
+          >🎉🎉 TypeSpec 1.0 Released! 🎉🎉</span>
         <span class="ticker-message"
-          >🎉 SDK Emitters Releasing in <span class="timer" id="timer2"></span
+          >🚀 SDK Emitters Releasing in <span class="timer" id="timer2"></span
         ></span>
       </div>
     </div>
@@ -113,50 +117,6 @@
     <!-- Markdown Table Rendered -->
     <h2>1.0 Release High-level Tracking list</h2>    <a href="https://microsoft.sharepoint.com/:fl:/s/4b8cd56b-6d40-4ab3-bea5-1744d4d73cdf/ES1Dp0pWtJJBnWEcVUZ6lLEBEHQD45Eg0mJKJFVFTqFLSw?e=s1tvgh&nav=cz0lMkZzaXRlcyUyRjRiOGNkNTZiLTZkNDAtNGFiMy1iZWE1LTE3NDRkNGQ3M2NkZiZkPWIhb3FlaTVDZFNqMFNCaDFCbi1RUE4ycUswWFZwT2lhRlBoc2dQVGhHUk50bzQzYzNSSzFNOVFwNE9WcWZVd29laSZmPTAxVVFXRVlQSk5JT1RVVVZWVVNKQVoyWUk0S1ZESFZGRlImYz0lMkYmZmx1aWQ9MSZhPUxvb3BBcHAmcD0lNDBmbHVpZHglMkZsb29wLXBhZ2UtY29udGFpbmVyJng9JTdCJTIydyUyMiUzQSUyMlQwUlRVSHh0YVdOeWIzTnZablF1YzJoaGNtVndiMmx1ZEM1amIyMThZaUZ2Y1dWcE5VTmtVMm93VTBKb01VSnVMVkZRVGpKeFN6QllWbkJQYVdGR1VHaHpaMUJVYUVkU1RuUnZORE5qTTFKTE1VMDVVWEEwVDFaeFpsVjNiMlZwZkRBeFZWRlhSVmxRVFVaSVQxZERORXhYVmxvMVFVbEZWemRNUzB0T1JFOU9UekklM0QlMjIlMkMlMjJpJTIyJTNBJTIyNWE0MTEyMzMtMGQwZC00NzQyLWFkZmMtYmNlZWEyZDhmNTg4JTIyJTdE">Detailed checklist</a>
     <div id="markdownTableContainer"></div>
-
-    <!-- Prank Table -->
-    <h2>Critial GA Blocker</h2>
-    <table class="prank-table">
-      <thead>
-        <tr>
-          <th>Issue</th>
-          <th>Status</th>
-          <th>Blocked By</th>
-          <th>Actions Need</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <b>TypeSpec Compiler Infinite Loop</b><br /><br />
-            <small>
-              When <b>Mayuri</b> attempted to compile a simple "Hello World" program, the TypeSpec
-              compiler enters an infinite loop, consuming 100% CPU and causing the
-              machine to overheat and started emitting smoke. This issue is <b>critical</b> as it not only blocks the GA
-              release but also poses a potential fire hazard. Early investigations
-              suggest the problem is related to a recursive dependency in the
-              "smoke-emitter" package, but further debugging is required.<br/> <b>Samer</b>, this
-              one has your name written all over it.
-            </small>
-          </td>
-          <td>
-            <span
-              style="
-                color: white;
-                background-color: red;
-                animation: flash 1s infinite;
-              "
-            >
-              &nbsp;&nbsp;Incomplete&nbsp;&nbsp;
-            </span>
-          </td>
-          <td>
-            <span style="color: red; font-weight: bold">Samer Alameer</span>
-          </td>
-          <td><button class="resolve-btn" id="prankBtn">Resolve</button></td>
-        </tr>
-      </tbody>
-    </table>
 
     <script>
       // Countdown timers
@@ -183,24 +143,23 @@
         update();
       }
 
-      const timer1Date = new Date("2025-05-06T12:00:00");
       const timer2Date = new Date("2025-05-07T12:00:00");
 
-      startCountdown("timer1", timer1Date);
       startCountdown("timer2", timer2Date);
 
       // Render Markdown Table
       const markdownTable = `
 | Area     | Task                                          | Assigned to | Due date | Completed |
 |----------|-----------------------------------------------|-------------|----------|-----------|
-| TypeSpec | Track PRs that need to go in and code freeze | Allen       | <del>5/2</del> 5/5      |  Delayed by MergePatch work         |
-| TypeSpec | Verify typespec-next spec verification green  | Allen       | 5/6      |  Green as of 5/5         |
-| SDK      | Verify SDK nightly build green                | Laurent     | 5/6      |  Nightly build has been failing. Renhe is having SH team to do investigations.         |
-| Release  | Prepare a blog post announcing 1.0 release    | Mario          | 5/6      |  In PR         |
-| Release  | Prepare internal GA announcement email        | Allen/Mario    | 5/6      |  In Draft         |
-| Release  | Review doc/blogs/repos for clear OSS messaging | Allen/Mario    | 5/6      |  Completed         |
-| TypeSpec | 🚀 Release TypeSpec 1.0 packages              | Allen       | 5/6      |  On track but Yellow          |
-| SDK      | 🚀 Release Client Emitters packages           | Laurent     | 5/7      |           |
+| TypeSpec | Track PRs that need to go in and code freeze | Allen       | <del>5/2</del> 5/5      |  <span class="completedText">Completed</span>        |
+| TypeSpec | Verify typespec-next spec verification green  | Allen       | 5/6      |   <span class="completedText">Completed</span>         |
+| SDK      | Verify SDK nightly build green                | Laurent     | 5/6      |   <span class="completedText">Completed</span>         |
+| Release  | Prepare a blog post announcing 1.0 release    | Mario          | 5/6      |  <span class="completedText">Ready</span>       |
+| Release  | Prepare internal GA announcement email        | Allen/Mario    | 5/6      |  <span class="completedText">Ready</span>         |
+| Release  | Review doc/blogs/repos for clear OSS messaging | Allen/Mario    | 5/6      |   <span class="completedText">Completed</span>         |
+| TypeSpec | 🎉 Release TypeSpec 1.0 packages              | Allen       | 5/6      |   <span class="completedText">Completed</span>          |
+| SDK      | 🚀 Release Client Emitters packages           | Laurent     | 5/7      |  In progress         |
+| Release  | Release blog post and announcement email. | Mario    | 5/7      |   Pending         |
     `;
 
       function renderMarkdownTable(markdown) {
