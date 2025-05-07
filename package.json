@@ -9,7 +9,7 @@
     "@typespec/http-client-csharp": "^1.0.0-alpha.20250403.1",
     "@typespec/http-client-java": "^0.3.0",    
     "@typespec/http-client-js": "^0.3.0",
-    "@typespec/http-client-python": "^0.9.1",
+    "@typespec/http-client-python": "^0.12.0-dev.1",
     "@typespec/http-server-csharp": "^0.58.0-alpha.13",
     "@typespec/http-server-js": "0.58.0-alpha.12",
     "@typespec/json-schema": "^1.0.0-0",
