@@ -9,9 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Todo.Models;
+using Todo;
+using Todo._TodoItems.Attachments;
 
-namespace Todo
+namespace Todo._TodoItems
 {
     /// <summary></summary>
     public partial class TodoItems
@@ -46,10 +47,9 @@ namespace Todo
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult List(int? limit, int? offset, RequestOptions options)
+        public virtual CollectionResult List(int? limit, int? offset, RequestOptions options)
         {
-            using PipelineMessage message = CreateListRequest(limit, offset, options);
-            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            return new ListCollectionResult(this, null, limit, offset, options);
         }
 
         /// <summary>
@@ -65,10 +65,9 @@ namespace Todo
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> ListAsync(int? limit, int? offset, RequestOptions options)
+        public virtual AsyncCollectionResult ListAsync(int? limit, int? offset, RequestOptions options)
         {
-            using PipelineMessage message = CreateListRequest(limit, offset, options);
-            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            return new ListAsyncCollectionResult(this, null, limit, offset, options);
         }
 
         /// <summary> list. </summary>
@@ -76,10 +75,9 @@ namespace Todo
         /// <param name="offset"> The offset to start paginating at. </param>
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual ClientResult<TodoPage> List(int? limit = null, int? offset = null, CancellationToken cancellationToken = default)
+        public virtual CollectionResult<TodoItem> List(int? limit = null, int? offset = null, CancellationToken cancellationToken = default)
         {
-            ClientResult result = List(limit, offset, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
-            return ClientResult.FromValue((TodoPage)result, result.GetRawResponse());
+            return new ListCollectionResultOfT(this, null, limit, offset, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
         }
 
         /// <summary> list. </summary>
@@ -87,10 +85,9 @@ namespace Todo
         /// <param name="offset"> The offset to start paginating at. </param>
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async Task<ClientResult<TodoPage>> ListAsync(int? limit = null, int? offset = null, CancellationToken cancellationToken = default)
+        public virtual AsyncCollectionResult<TodoItem> ListAsync(int? limit = null, int? offset = null, CancellationToken cancellationToken = default)
         {
-            ClientResult result = await ListAsync(limit, offset, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null).ConfigureAwait(false);
-            return ClientResult.FromValue((TodoPage)result, result.GetRawResponse());
+            return new ListAsyncCollectionResultOfT(this, null, limit, offset, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
         }
 
         /// <summary>
@@ -141,13 +138,13 @@ namespace Todo
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="item"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual ClientResult<CreateJsonResponse> CreateJson(TodoItem item, IEnumerable<TodoAttachment> attachments = default, CancellationToken cancellationToken = default)
+        public virtual ClientResult<TodoItem> CreateJson(TodoItem item, IEnumerable<TodoAttachment> attachments = default, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(item, nameof(item));
 
             CreateJsonRequest spreadModel = new CreateJsonRequest(item, attachments?.ToList() as IList<TodoAttachment> ?? new ChangeTrackingList<TodoAttachment>(), null);
             ClientResult result = CreateJson(spreadModel, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
-            return ClientResult.FromValue((CreateJsonResponse)result, result.GetRawResponse());
+            return ClientResult.FromValue((TodoItem)result, result.GetRawResponse());
         }
 
         /// <summary> createJson. </summary>
@@ -156,13 +153,13 @@ namespace Todo
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="item"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async Task<ClientResult<CreateJsonResponse>> CreateJsonAsync(TodoItem item, IEnumerable<TodoAttachment> attachments = default, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<TodoItem>> CreateJsonAsync(TodoItem item, IEnumerable<TodoAttachment> attachments = default, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(item, nameof(item));
 
             CreateJsonRequest spreadModel = new CreateJsonRequest(item, attachments?.ToList() as IList<TodoAttachment> ?? new ChangeTrackingList<TodoAttachment>(), null);
             ClientResult result = await CreateJsonAsync(spreadModel, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null).ConfigureAwait(false);
-            return ClientResult.FromValue((CreateJsonResponse)result, result.GetRawResponse());
+            return ClientResult.FromValue((TodoItem)result, result.GetRawResponse());
         }
 
         /// <summary>
@@ -249,20 +246,20 @@ namespace Todo
         /// <param name="id"></param>
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual ClientResult<GetResponse> Get(long id, CancellationToken cancellationToken = default)
+        public virtual ClientResult<TodoItem> Get(long id, CancellationToken cancellationToken = default)
         {
             ClientResult result = Get(id, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null);
-            return ClientResult.FromValue((GetResponse)result, result.GetRawResponse());
+            return ClientResult.FromValue((TodoItem)result, result.GetRawResponse());
         }
 
         /// <summary> get. </summary>
         /// <param name="id"></param>
         /// <param name="cancellationToken"> The cancellation token that can be used to cancel the operation. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async Task<ClientResult<GetResponse>> GetAsync(long id, CancellationToken cancellationToken = default)
+        public virtual async Task<ClientResult<TodoItem>> GetAsync(long id, CancellationToken cancellationToken = default)
         {
             ClientResult result = await GetAsync(id, cancellationToken.CanBeCanceled ? new RequestOptions { CancellationToken = cancellationToken } : null).ConfigureAwait(false);
-            return ClientResult.FromValue((GetResponse)result, result.GetRawResponse());
+            return ClientResult.FromValue((TodoItem)result, result.GetRawResponse());
         }
 
         /// <summary>

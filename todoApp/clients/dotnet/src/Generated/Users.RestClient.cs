@@ -4,8 +4,9 @@
 
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using Todo;
 
-namespace Todo
+namespace Todo._Users
 {
     /// <summary></summary>
     public partial class Users

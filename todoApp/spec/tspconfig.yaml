@@ -11,6 +11,8 @@ options:
     emitter-output-dir: "{project-root}/../openapi3"
   "@typespec/http-client-csharp":
     emitter-output-dir: "{project-root}/../clients/dotnet"
+    unreferenced-types-handling: internalize # this is a workaround for a bug in the generator
+    save-inputs: true
   "@typespec/http-server-csharp":
     emitter-output-dir: "{project-root}/../servers/aspnet/generated"
   "@typespec/http-server-js":
